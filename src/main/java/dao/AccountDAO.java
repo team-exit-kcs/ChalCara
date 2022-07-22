@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import model.Account;
 import model.User;
 
-public class UserDAO extends Database {
+public class AccountDAO extends Database {
 	
 	final private String table = "UserTBL";
 	final private String UserID = "User_ID";
