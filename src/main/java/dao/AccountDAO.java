@@ -11,9 +11,9 @@ import model.User;
 
 public class AccountDAO extends Database {
 	
-	final private String table = "UserTBL";
-	final private String UserID = "User_ID";
-	final private String PASS = "PASS";
+	final private String table = "Account";
+	final private String UserID = "UserID";
+	final private String PASS = "Password";
 	
 	public User findByLogin(Account account) {
 		User user = null;
