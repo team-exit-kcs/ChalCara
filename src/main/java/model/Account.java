@@ -9,7 +9,7 @@ public class Account {
 		this.PASS = PASS;
 	}
 
-	public String getUSER_ID() {
+	public String getUserID() {
 		return USER_ID;
 	}
 

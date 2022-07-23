@@ -2,27 +2,27 @@ package model;
 
 public class User {
 	final private String USER_ID;
-	private boolean LOGIN_STS;
+	private boolean loginSts;
 	
-	public User(String UserID, boolean LoginSts) {
+	public User(String UserID, boolean loginSts) {
 		this.USER_ID = UserID;
-		this.setLOGIN_STS(LoginSts);
+		this.loginSts=loginSts;
 	}
 	
 	public User(String UserID) {
 		this.USER_ID = UserID;
-		this.setLOGIN_STS(false);
+		this.loginSts=false;
 	}
 
-	public String getUSER_ID() {
+	public String getUserID() {
 		return USER_ID;
 	}
 
-	public boolean isLOGIN_STS() {
-		return LOGIN_STS;
+	public boolean isLoginSts() {
+		return this.loginSts;
 	}
 
-	public void setLOGIN_STS(boolean lOGIN_STS) {
-		LOGIN_STS = lOGIN_STS;
+	public void setLoginSts(boolean loginSts) {
+		this.loginSts = loginSts;
 	}
 }
