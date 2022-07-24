@@ -61,7 +61,7 @@ public class AccountDAO extends Database {
 		boolean resultSts=false;
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
-			String sql = "INSERT INTO " + table + "";
+			String sql = "INSERT INTO " + table + "VALUES(?,?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, login.getUserID());
 			pStmt.setString(2, login.getPASS());
