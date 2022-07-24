@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import model.Account;
+import model.Login;
 
 public class AccountDAO extends Database {
 	
@@ -14,14 +14,14 @@ public class AccountDAO extends Database {
 	final private String UserID = "UserID";
 	final private String PASS = "Password";
 	
-	public boolean isLogin(Account account) {
+	public boolean isLogin(Login login) {
 		boolean resultSts=false;
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
 			String sql = "SELECT " + UserID + " FROM " + table + " WHERE " + UserID + " = ? AND " + PASS + " = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setString(1, account.getUserID());
-			pStmt.setString(2, account.getPASS());
+			pStmt.setString(1, login.getUserID());
+			pStmt.setString(2, login.getPASS());
 			
 			ResultSet rs = pStmt.executeQuery();
 			
@@ -57,14 +57,14 @@ public class AccountDAO extends Database {
 		return resultSts;
 	}
 	
-	public boolean setAccount(Account account) {
+	public boolean setAccount(Login login) {
 		boolean resultSts=false;
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
 			String sql = "INSERT INTO " + table + "";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setString(1, account.getUserID());
-			pStmt.setString(2, account.getPASS());
+			pStmt.setString(1, login.getUserID());
+			pStmt.setString(2, login.getPASS());
 			
 			int result = pStmt.executeUpdate();
 			if(result>0) {

@@ -1,10 +1,10 @@
 package model;
 
-public class Account {
+public class Login {
 	final private String USER_ID;
 	final private String PASS;
 	
-	public Account(String UserID, String PASS) {
+	public Login(String UserID, String PASS) {
 		this.USER_ID = UserID;
 		this.PASS = PASS;
 	}
