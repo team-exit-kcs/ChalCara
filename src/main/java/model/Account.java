@@ -1,9 +1,9 @@
 package model;
 
 public class Account {
-	final private String USER_ID;
-	final private String PROFILE;
-	final private String ICON;
+	final private String USER_ID;	//ユーザID
+	final private String PROFILE;	//ユーザプロフィール文
+	final private String ICON;		//ユーザアイコンパス
 	
 	public Account(String userID,String profile,String icon) {
 		this.USER_ID=userID;

@@ -16,7 +16,7 @@ public class BookmarkDAO extends Database{
 	final private String EXAM_ID = "ExamID";
 	final private String USER_ID = "UserID";
 	
-	public Bookmark findByBookmark(String userID) {
+	public Bookmark findBookmark(String userID) {
 		Bookmark bookmark = null;
 		List<String> examIDList = new ArrayList<>();
 		
@@ -38,5 +38,47 @@ public class BookmarkDAO extends Database{
 		}
 		
 		return bookmark;
+	}
+	
+	public int getUserCount(String examID) {
+		int cnt=0;
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "SELECT COUNT("+ EXAM_ID + ") AS cnt FROM " + TABLE + " WHERE " + EXAM_ID + " = ? GROUP BY " + EXAM_ID;
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, examID);
+			
+			ResultSet rs = pStmt.executeQuery();
+			
+			if(rs.next()) {
+				cnt = rs.getInt("cnt");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return cnt;
+		}
+		
+		return cnt;
+	}
+	
+	public int getExamCount(String userID) {
+		int cnt=0;
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "SELECT COUNT("+ USER_ID + ") AS cnt FROM " + TABLE + " WHERE " + USER_ID + " = ? GROUP BY " + USER_ID;
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, userID);
+			
+			ResultSet rs = pStmt.executeQuery();
+			
+			if(rs.next()) {
+				cnt = rs.getInt("cnt");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return cnt;
+		}
+		
+		return cnt;
 	}
 }

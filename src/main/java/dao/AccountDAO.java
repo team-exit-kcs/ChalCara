@@ -17,7 +17,7 @@ public class AccountDAO extends Database {
 	final private String PROFILE = "Profile";
 	final private String ICON = "Icon";
 	
-	public Account findByLogin(Login login) {
+	public Account findByAccount(Login login) {
 		Account account = null;
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
