@@ -1,23 +1,23 @@
 package model;
 
 public class Account {
-	final private String USER_ID;	//ユーザID
-	final private String PROFILE;	//ユーザプロフィール文
-	final private String ICON;		//ユーザアイコンパス
+	final private String userID;	//ユーザID
+	final private String profile;	//ユーザプロフィール文
+	final private String icon;		//ユーザアイコンパス
 	
 	public Account(String userID,String profile,String icon) {
-		this.USER_ID=userID;
-		this.PROFILE=profile;
-		this.ICON=icon;
+		this.userID=userID;
+		this.profile=profile;
+		this.icon=icon;
 	}
 	
 	public String getUserID() {
-		return USER_ID;
+		return userID;
 	}
 	public String getProfile() {
-		return PROFILE;
+		return profile;
 	}
 	public String getIcon() {
-		return ICON;
+		return icon;
 	}
 }

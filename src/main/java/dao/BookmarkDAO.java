@@ -27,7 +27,7 @@ public class BookmarkDAO extends Database{
 			
 			ResultSet rs = pStmt.executeQuery();
 			
-			if(rs.next()) {
+			while(rs.next()) {
 				String examID = rs.getString(EXAM_ID);
 				examIDList.add(examID);
 			}

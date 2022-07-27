@@ -19,88 +19,90 @@ public class Exam {
 	 * 実行回数
 	 * ブックマーク数
 	 */
-	final private String EXAM_ID;
-	final private String USER_ID;
-	final private String GENRE_NAME;
-	final private String EXAM_NAME;
-	final private Date CREATE_DATE;
-	final private Date UPDATE_DATE;
-	final private int PASSING_SCORE;
-	final private int EXAM_TIME;
-	final private String EXAM_EXPLANATION;
-	final private int DISCLOSURE_RANGE;
-	final private List<String> TAG;
-	final private int EXE_COUNT;
-	final private int BOOKMARK_COUNT;
+	final private String examID;
+	final private String userID;
+	final private String examName;
+	final private Date createDate;
+	final private Date updateDate;
+	final private int passingScore;
+	final private int examTime;
+	final private String examExplanation;
+	final private int disclosureRange;
+	final private String genreName;
+	final private List<String> tagList;
+	final private int exeCount;
+	final private int bookmarkCount;
 	
-	public Exam(String examID, String userID, String genreName, String examName, Date createDate, Date updateDate,
-			int passingScore, int examTime, String examExplanation, int disclosureRange,
-			List<String> tag, int exeCount, int bookmarkCount) {
-		EXAM_ID = examID;
-		USER_ID = userID;
-		GENRE_NAME = genreName;
-		EXAM_NAME = examName;
-		CREATE_DATE = createDate;
-		UPDATE_DATE = updateDate;
-		PASSING_SCORE = passingScore;
-		EXAM_TIME = examTime;
-		EXAM_EXPLANATION = examExplanation;
-		DISCLOSURE_RANGE = disclosureRange;
-		TAG = tag;
-		EXE_COUNT = exeCount;
-		BOOKMARK_COUNT = bookmarkCount;
+	public Exam(String examID, String userID, String examName, Date createDate, Date updateDate, int passingScore,
+			int examTime, String examExplanation, int disclosureRange, String genreName, List<String> tagList,
+			int exeCount, int bookmarkCount) {
+		
+		this.examID = examID;
+		this.userID = userID;
+		this.examName = examName;
+		this.createDate = createDate;
+		this.updateDate = updateDate;
+		this.passingScore = passingScore;
+		this.examTime = examTime;
+		this.examExplanation = examExplanation;
+		this.disclosureRange = disclosureRange;
+		this.genreName = genreName;
+		this.tagList = tagList;
+		this.exeCount = exeCount;
+		this.bookmarkCount = bookmarkCount;
 	}
 
 	public String getExamID() {
-		return EXAM_ID;
+		return examID;
 	}
 
 	public String getUserID() {
-		return USER_ID;
-	}
-
-	public String getGenreName() {
-		return GENRE_NAME;
+		return userID;
 	}
 
 	public String getExamName() {
-		return EXAM_NAME;
+		return examName;
 	}
 
 	public Date getCreateDate() {
-		return CREATE_DATE;
+		return createDate;
 	}
 
 	public Date getUpdateDate() {
-		return UPDATE_DATE;
+		return updateDate;
 	}
 
 	public int getPassingScore() {
-		return PASSING_SCORE;
+		return passingScore;
 	}
 
 	public int getExamTime() {
-		return EXAM_TIME;
+		return examTime;
 	}
 
 	public String getExamExplanation() {
-		return EXAM_EXPLANATION;
+		return examExplanation;
 	}
 
 	public int getDisclosureRange() {
-		return DISCLOSURE_RANGE;
+		return disclosureRange;
 	}
 
-	public List<String> getTag() {
-		return TAG;
+	public String getGenreName() {
+		return genreName;
+	}
+
+	public List<String> getTagList() {
+		return tagList;
 	}
 
 	public int getExeCount() {
-		return EXE_COUNT;
+		return exeCount;
 	}
 
 	public int getBookmarkCount() {
-		return BOOKMARK_COUNT;
+		return bookmarkCount;
 	}
+	
 
 }
