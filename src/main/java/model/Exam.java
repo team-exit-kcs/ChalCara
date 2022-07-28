@@ -3,11 +3,11 @@ package model;
 import java.util.Date;
 import java.util.List;
 
-public class Exam {
+public class Exam extends BaseExam {
 	/*要素
 	 * 試験ID
 	 * 製作者ユーザID
-	 * ジャンル
+	 * ジャンルID
 	 * 試験名
 	 * 制作日
 	 * 更新日
@@ -16,106 +16,26 @@ public class Exam {
 	 * 試験概要
 	 * 公開範囲
 	 * タグリスト
+	 * ジャンル名
 	 * 実行回数
 	 * ブックマーク数
 	 */
-	final private String examID;
-	final private String userID;
-	final private String examName;
-	final private Date createDate;
-	final private Date updateDate;
-	final private int passingScore;
-	final private int examTime;
-	final private String examExplanation;
-	final private int disclosureRange;
-	final private int genreID;
 	final private String genreName;
-	final private List<String> tagList;
 	final private int exeCount;
 	final private int bookmarkCount;
 	
-	public Exam(String examID, String userID, String examName, Date createDate, Date updateDate, int passingScore,
-			int examTime, String examExplanation, int disclosureRange, int genreID, String genreName,
-			List<String> tagList, int exeCount, int bookmarkCount) {
-		super();
-		this.examID = examID;
-		this.userID = userID;
-		this.examName = examName;
-		this.createDate = createDate;
-		this.updateDate = updateDate;
-		this.passingScore = passingScore;
-		this.examTime = examTime;
-		this.examExplanation = examExplanation;
-		this.disclosureRange = disclosureRange;
-		this.genreID = genreID;
+	public Exam(String examID, String userID, int genreID, String examName, Date createDate, Date updateDate,
+			int passingScore, int examTime, String examExplanation, int disclosureRange, List<String> tagList,
+			String genreName, int exeCount, int bookmarkCount) {
+		super(examID, userID, genreID, examName, createDate, updateDate, passingScore, examTime, examExplanation,
+				disclosureRange, tagList);
 		this.genreName = genreName;
-		this.tagList = tagList;
 		this.exeCount = exeCount;
 		this.bookmarkCount = bookmarkCount;
 	}
 
-	public Exam(String examID, String userID, String examName, Date createDate, Date updateDate, int passingScore,
-			int examTime, String examExplanation, int disclosureRange, int genreID, String genreName,
-			List<String> tagList) {
-		super();
-		this.examID = examID;
-		this.userID = userID;
-		this.examName = examName;
-		this.createDate = createDate;
-		this.updateDate = updateDate;
-		this.passingScore = passingScore;
-		this.examTime = examTime;
-		this.examExplanation = examExplanation;
-		this.disclosureRange = disclosureRange;
-		this.genreID = genreID;
-		this.genreName = genreName;
-		this.tagList = tagList;
-		this.exeCount = -1;
-		this.bookmarkCount = -1;
-	}
-
-	public String getExamID() {
-		return examID;
-	}
-
-	public String getUserID() {
-		return userID;
-	}
-
-	public String getExamName() {
-		return examName;
-	}
-
-	public Date getCreateDate() {
-		return createDate;
-	}
-
-	public Date getUpdateDate() {
-		return updateDate;
-	}
-
-	public int getPassingScore() {
-		return passingScore;
-	}
-
-	public int getExamTime() {
-		return examTime;
-	}
-
-	public String getExamExplanation() {
-		return examExplanation;
-	}
-
-	public int getDisclosureRange() {
-		return disclosureRange;
-	}
-
 	public String getGenreName() {
 		return genreName;
-	}
-
-	public List<String> getTagList() {
-		return tagList;
 	}
 
 	public int getExeCount() {
@@ -125,9 +45,5 @@ public class Exam {
 	public int getBookmarkCount() {
 		return bookmarkCount;
 	}
-
-	public int getGenreID() {
-		return genreID;
-	}
-
+	
 }
