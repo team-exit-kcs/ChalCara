@@ -28,15 +28,16 @@ public class Exam {
 	final private int examTime;
 	final private String examExplanation;
 	final private int disclosureRange;
+	final private int genreID;
 	final private String genreName;
 	final private List<String> tagList;
 	final private int exeCount;
 	final private int bookmarkCount;
 	
 	public Exam(String examID, String userID, String examName, Date createDate, Date updateDate, int passingScore,
-			int examTime, String examExplanation, int disclosureRange, String genreName, List<String> tagList,
-			int exeCount, int bookmarkCount) {
-		
+			int examTime, String examExplanation, int disclosureRange, int genreID, String genreName,
+			List<String> tagList, int exeCount, int bookmarkCount) {
+		super();
 		this.examID = examID;
 		this.userID = userID;
 		this.examName = examName;
@@ -46,10 +47,31 @@ public class Exam {
 		this.examTime = examTime;
 		this.examExplanation = examExplanation;
 		this.disclosureRange = disclosureRange;
+		this.genreID = genreID;
 		this.genreName = genreName;
 		this.tagList = tagList;
 		this.exeCount = exeCount;
 		this.bookmarkCount = bookmarkCount;
+	}
+
+	public Exam(String examID, String userID, String examName, Date createDate, Date updateDate, int passingScore,
+			int examTime, String examExplanation, int disclosureRange, int genreID, String genreName,
+			List<String> tagList) {
+		super();
+		this.examID = examID;
+		this.userID = userID;
+		this.examName = examName;
+		this.createDate = createDate;
+		this.updateDate = updateDate;
+		this.passingScore = passingScore;
+		this.examTime = examTime;
+		this.examExplanation = examExplanation;
+		this.disclosureRange = disclosureRange;
+		this.genreID = genreID;
+		this.genreName = genreName;
+		this.tagList = tagList;
+		this.exeCount = -1;
+		this.bookmarkCount = -1;
 	}
 
 	public String getExamID() {
@@ -103,6 +125,9 @@ public class Exam {
 	public int getBookmarkCount() {
 		return bookmarkCount;
 	}
-	
+
+	public int getGenreID() {
+		return genreID;
+	}
 
 }

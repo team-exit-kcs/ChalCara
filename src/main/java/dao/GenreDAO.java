@@ -5,6 +5,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import model.Genre;
 
 public class GenreDAO extends Database {
 	final private String TABLE = "Genre";
@@ -29,5 +33,27 @@ public class GenreDAO extends Database {
 			return null;
 		}
 		return genreName;
+	}
+	
+	public List<Genre> findAll(){
+		List<Genre> genreList = new ArrayList<>();
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "SELECT * FROM " + TABLE;
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			ResultSet rs = pStmt.executeQuery();
+			
+			while(rs.next()) {
+				int genreID = rs.getInt(GENRE_ID);
+				String genreName = rs.getString(GENRE_NAME);
+				genreList.add(new Genre(genreID, genreName));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+		return genreList;
 	}
 }

@@ -48,14 +48,14 @@ public class ExamDAO extends Database {
 				int examTime = rs.getInt(EXAM_TIME);
 				String examExplanation = rs.getString(EXAM_EXPLANATION);
 				int disclosureRange = rs.getInt(DISCLOSURE_RANGE);
-				
-				String genreName = genreDAO.findGenreName(rs.getInt(GENRE_ID));
+				int genreID = rs.getInt(GENRE_ID);
+				String genreName = genreDAO.findGenreName(genreID);
 				List<String> tagList = tagDAO.findTag(examID);
 				int exeCount = reportDAO.getUserCount(examID);
 				int bookmarkCount = bookmarkDAO.getUserCount(examID);
 				
 				exam = new Exam(examID, userID, examName, createDate, updateDate, passingScore, examTime, examExplanation,
-						disclosureRange, genreName, tagList, exeCount, bookmarkCount);
+						disclosureRange, genreID, genreName, tagList, exeCount, bookmarkCount);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -63,5 +63,26 @@ public class ExamDAO extends Database {
 		}
 		
 		return exam;
+	}
+	
+	public boolean setExam(Exam exam) {
+boolean resultSts=false;
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "INSERT INTO " + TABLE + "VALUES(?,?)";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+//			pStmt.setString(1, );
+//			pStmt.setString(2, );
+			
+			int result = pStmt.executeUpdate();
+			if(result>0) {
+				resultSts=true;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return resultSts;
 	}
 }
