@@ -33,10 +33,45 @@
 
 <h2 class="mi_2">IBT作成一覧</h2>
 
-<div class="root_2">
-<div>
+<div class="box_1">
+ <div class = "exam">
+  <img src="./img/exam.png" height="70" width="70" alt="Create exam file">
+  <p><a href = "#">example</a></p>
+ </div>
+</div>
+
+<p class = "miru"><a href = "#">もっとみる</a></p>
+
+<div class = "mi_root">
+
+<div class = "book">
+<h2>ブックマーク一覧</h2>
+</div>
+<div class = "repo">
+<h2>レポート一覧</h2>
+</div>
 
 </div>
+
+<div class = "box_root">
+   <div class = "b_box">
+   <p class = "b_exam"><a href = "#">・example1</a></p>
+   <p class = "b_exam"><a href = "#">・example2</a></p>
+   <p class = "b_exam"><a href = "#">・example3</a></p>
+   <p class = "b_exam"><a href = "#">・example4</a></p>
+   <p class = "b_exam"><a href = "#">・example5</a></p>
+   </div>
+
+   <div class = "r_box">
+
+   </div>
+</div>
+
+<div class = "miru_br">
+
+<div class = "miru_b"><p class = "miru"><a href = "#">もっとみる</a></p></div>
+<div class = "miru_r"><p class = "miru"><a href = "#">もっとみる</a></p></div>
+
 </div>
 
 </main>
