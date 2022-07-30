@@ -33,4 +33,31 @@ public class TagDAO extends Database {
 		}
 		return tagList;
 	}
+	
+	public boolean setTag(String examID,List<String> tagList) {
+		boolean resultSts=false;
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			int result=0;
+			
+			String sql = "INSERT INTO " + TABLE + "VALUES(?, ?)";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			pStmt.setString(1, examID);
+			
+			for(String tag: tagList) {
+				pStmt.setString(2, tag);
+				result += pStmt.executeUpdate();
+			}
+			
+			if(result>=tagList.size()) {
+				resultSts=true;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return resultSts;
+	}
 }

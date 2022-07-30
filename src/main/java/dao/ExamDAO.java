@@ -5,9 +5,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import model.EntryExam;
 import model.Exam;
 
 public class ExamDAO extends Database {
@@ -54,8 +56,8 @@ public class ExamDAO extends Database {
 				int exeCount = reportDAO.getUserCount(examID);
 				int bookmarkCount = bookmarkDAO.getUserCount(examID);
 				
-				exam = new Exam(examID, userID, examName, createDate, updateDate, passingScore, examTime, examExplanation,
-						disclosureRange, genreID, genreName, tagList, exeCount, bookmarkCount);
+				exam = new Exam(examID, userID, genreID, examName, createDate, updateDate, passingScore, examTime, examExplanation,
+						disclosureRange,  tagList, genreName, exeCount, bookmarkCount);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -65,17 +67,51 @@ public class ExamDAO extends Database {
 		return exam;
 	}
 	
-	public boolean setExam(Exam exam) {
-boolean resultSts=false;
+	public List<String> findUserReport(String userID) {
+		List<String> examIDList = new ArrayList<>();
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
-			String sql = "INSERT INTO " + TABLE + "VALUES(?,?)";
+			String sql = "SELECT "+ EXAM_ID + " FROM " + TABLE + " WHERE " + USER_ID + " = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-//			pStmt.setString(1, );
-//			pStmt.setString(2, );
+			pStmt.setString(1, userID);
+			
+			ResultSet rs = pStmt.executeQuery();
+			
+			while(rs.next()) {
+				String examID = rs.getString(EXAM_ID);
+				examIDList.add(examID);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return examIDList;
+	}
+	
+	public boolean setExam(EntryExam exam) {
+		boolean resultSts=false;
+		TagDAO tagDAO = new TagDAO();
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "INSERT INTO " + TABLE + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, exam.getExamID());
+			pStmt.setString(2, exam.getUserID());
+			pStmt.setInt(3, exam.getGenreID());
+			pStmt.setString(4, exam.getExamName());
+			pStmt.setDate(5, new java.sql.Date(exam.getCreateDate().getTime()));
+			pStmt.setDate(5, new java.sql.Date(exam.getUpdateDate().getTime()));
+			pStmt.setInt(7, exam.getPassingScore());
+			pStmt.setInt(8, exam.getExamTime());
+			pStmt.setString(9, exam.getExamExplanation());
+			pStmt.setInt(10, exam.getDisclosureRange());
+			pStmt.setString(11, exam.getLimitedPassword());
 			
 			int result = pStmt.executeUpdate();
-			if(result>0) {
+			
+			boolean tagResult = tagDAO.setTag(exam.getExamID(),exam.getTagList());
+			
+			if(result>0 && tagResult) {
 				resultSts=true;
 			}
 		}catch(SQLException e) {
