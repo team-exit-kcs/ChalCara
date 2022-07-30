@@ -63,7 +63,7 @@
    </div>
 
    <div class = "r_box">
-
+   <p>日付・試験名・成績(レポート)</p>
    </div>
 </div>
 
