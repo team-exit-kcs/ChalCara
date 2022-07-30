@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+main {
+	grid-template-columns: 1fr 1fr 1fr
+}
+
+.mi_1 {
+    text-align: center;
+    font-family: serif;
+    margin: 0 25.5em;
+    border-bottom: 2px solid #000000;
+    font-weight: bold;
+    font-size: 26px;
+}
+
+/*プロフィ－ル設定*/
+
+.root_1 {
+    display: flex;
+    margin-left: 60px;
+    width: 100%;
+    margin-top: 3em;
+}
+
+.r1_item_1 {
+    font-family: serif;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 9.5em;
+    margin-right: 5em;
+}
+
+.r1_item_2 {
+    vertical-align: middle;
+    font-family: serif;
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 5em;
+}
+
+.r1_item_3 {
+    font-family: serif;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 5em;
+}
+
+.mi_2 {
+	text-align:right;
+    font-family: serif;
+    font-weight: bold;
+    font-size: 26px;
+    border-bottom: 2px solid #000000;
+    margin-left: 8em;
+    margin-right: 45em;
+    margin-top: 2.5em;
+}
+

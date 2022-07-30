@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+* {
+    box-sizing: border-box;
+}
+
+.header {
+    background-color: #00a0dc;
+    color: #fff;
+    font-family: serif;
+    text-align: center;
+    /* font-size: 28px; */
+    margin: 10;
+    
+}
