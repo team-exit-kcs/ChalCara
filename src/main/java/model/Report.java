@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Report {
+public class Report implements Serializable{
 	/*要素
 	 * レポートID
 	 * ユーザID

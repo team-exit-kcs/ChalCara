@@ -1,6 +1,8 @@
 package model;
 
-public class Login {
+import java.io.Serializable;
+
+public class Login implements Serializable{
 	final private String userID;	//ユーザID
 	final private String PASS;		//ハッシュ化されたパスワード
 	
