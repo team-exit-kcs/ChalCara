@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.data.Account;
-import model.data.Exam;
 import model.data.Report;
 
 /**
@@ -62,10 +61,8 @@ public class TestForwardServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("Account",new Account("testUsr","プロフィール","./img/kari.png"));
 		
-		List<Exam> examList = new ArrayList<>();
-		List<String> tagList = new ArrayList<>();
-		examList.add(new Exam("testExam","testUsr",128,"ExamTest",new Date(),new Date(),60,120,"試験概要",0,
-				tagList,"testG",53,13));
+		List<String> examList = new ArrayList<>();
+		examList.add("testExam1");
 		request.setAttribute("ExamList", examList);
 		
 		List<String> bmList = new ArrayList<>();
