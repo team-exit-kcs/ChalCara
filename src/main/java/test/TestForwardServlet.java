@@ -59,10 +59,18 @@ public class TestForwardServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		
+//Account
 		HttpSession session = request.getSession();
 		session.setAttribute("Account",new Account("testUsr","プロフィール","./img/kari.png"));
 		
+		
+//Mypage
 		List<String> examList = new ArrayList<>();
+		examList.add("testExam1");
+		examList.add("testExam2");
+		examList.add("testExam3");
+		examList.add("testExam4");
+		examList.add("testExam5");
 		
 		List<String> bmList = new ArrayList<>();
 		bmList.add("testExam1");
@@ -74,8 +82,11 @@ public class TestForwardServlet extends HttpServlet {
 		
 		List<Report> rpList = new ArrayList<>();
 		rpList.add(new Report(1,"testUsr","testExam",new Date(),new Date(), 95,0.95,"ExamTest",60));
+		rpList.add(new Report(2000,"testUsr","testExam2000",new Date(),new Date(), 95,0.95,"ExamTest",60));
 		
 		request.setAttribute("MypageData", new Mypage(examList,bmList,rpList));
+		
+		
 		
 		String URL = request.getParameter("url");
 		RequestDispatcher dispatcher = request.getRequestDispatcher(URL);
