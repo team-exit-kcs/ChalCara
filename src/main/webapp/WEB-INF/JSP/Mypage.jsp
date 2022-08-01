@@ -56,12 +56,12 @@
 
 <% int examListsize = examList.size();
 
-for (int i=0 ;i<5 || i < examListsize ;i++) { %>
+for (int i=0 ;i<5 && i < examListsize ;i++) { %>
  <div class = "exam">
   <img src="./img/exam.png" height="70" width="70" alt="Create exam file">
   <p><a href = "#"><%= examList.get(i)%></a></p>
  </div>
-<%-- } --%>
+<% }%>
 
 </div>
 
@@ -82,7 +82,7 @@ for (int i=0 ;i<5 || i < examListsize ;i++) { %>
 
    <div class = "b_box">
    <% int bmListsize = bmList.size();
-   for( int i=0; i<5 || i < bmListsize ; i++ ) { %>
+   for( int i=0; i<5 && i < bmListsize ; i++ ) { %>
    <p class = "b_exam"><a href = "#"><%= bmList.get(i)%></a></p>
    <% } %>
    </div>
@@ -90,10 +90,10 @@ for (int i=0 ;i<5 || i < examListsize ;i++) { %>
    <div class = "r_box">
    <% int rpListsize = rpList.size();
        SimpleDateFormat si = new SimpleDateFormat("yyyy/MM/dd");%>
-   <% for(int i=0; i<5 || i < rpListsize ; i++ ) { 
+   <% for(int i=0; i<5 && i < rpListsize ; i++ ) { 
 	   Report rp = rpList.get(i);
 	   Date ReportDate = rp.getExamDate();%>
-   <p><%= si.format(ReportDate)%><%= rp.getReportID()%><%= rp.getExamName()%></p>
+   <p class = "test"> 《<%= si.format(ReportDate)%>》 《<%= rp.getReportID()%>》 《<%= rp.getExamName()%>》</p>
    <% } %>
    </div>
    

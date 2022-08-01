@@ -151,6 +151,9 @@ main {
     margin-right: 12em;
     background-color:#ffffff;
     border-radius:10px;
+    white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .miru_br {
@@ -169,6 +172,16 @@ main {
 	width: 50%;
 	margin-left: 15em;
 	text-align: right;
+}
+
+.test::after {
+	content:"/";
+	padding-left:20px;
+	color:#000;
+}
+
+.test::last-child::after{
+	content:"";
 }
 
 
