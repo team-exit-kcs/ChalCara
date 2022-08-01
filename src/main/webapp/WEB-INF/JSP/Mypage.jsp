@@ -11,15 +11,15 @@
      --%>
      
      <%--
-     Exam exam = (Exam) request.getAttrivute("Exam");
+     List<Exam> examList = (List<Exam>) request.getAttrivute("ExamList");
       --%>
       
      <%--
-     Bookmark bm = (Bookmark) request.getAttrivute("Bookmark");
+     List<Bookmark> bmList = (List<Bookmark>) request.getAttrivute("BookmarkList");
       --%>
       
      <%--
-     Report rp = (Report) request.getAttrivute("Report");
+     List<Report> rp = (List<Report>) request.getAttrivute("ReportList");
       --%>
 
 
