@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ page import = "model.Account" %>
-<%@ page import = "model.Bookmark" %>
-<%@ page import = "model.Report" %>
-<%@ page import = "model.BaseExam" %>
+<%@ page import = "" %>
+<%@ page import = "" %>
+<%@ page import = "" %>
+<%@ page import = "" %>
 
      <%--
      Account model = (Account) session.getUserID("#");
