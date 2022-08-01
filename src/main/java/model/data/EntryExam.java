@@ -1,9 +1,12 @@
-package model;
+package model.data;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class EntryExam extends BaseExam implements DisclosureRange {
+import model.DisclosureRange;
+
+public class EntryExam extends BaseExam implements DisclosureRange, Serializable {
 	/*要素
 	 * 試験ID
 	 * 製作者ユーザID

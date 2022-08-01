@@ -1,6 +1,8 @@
-package model;
+package model.data;
 
-public class Account {
+import java.io.Serializable;
+
+public class Account implements Serializable{
 	final private String userID;	//ユーザID
 	final private String profile;	//ユーザプロフィール文
 	final private String icon;		//ユーザアイコンパス

@@ -1,6 +1,8 @@
-package model;
+package model.data;
 
-public class Genre {
+import java.io.Serializable;
+
+public class Genre implements Serializable{
 	final private int genreID;
 	final private String genreName;
 	public Genre(int genreID, String genreName) {

@@ -1,8 +1,9 @@
-package model;
+package model.data;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Bookmark {
+public class Bookmark implements Serializable{
 	final private String userID;				//ブックマークをしたユーザのユーザーID
 	final private List<String> examIDList;		//ブックマークされた試験IDのリスト
 	
