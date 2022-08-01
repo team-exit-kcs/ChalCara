@@ -1,29 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ page import = "" %>
-<%@ page import = "" %>
-<%@ page import = "" %>
-<%@ page import = "" %>
+<%@ page import = "model.data.Account" %>
+<%@ page import = "model.data.Exam" %>
+<%@ page import = "model.data.Report" %>
+<%@ page import = "model.data.Bookmark" %>
 
      <%--
-     Account model = (Account) session.getUserID("#");
-     Account model = (Account) session.getProfile("#");
-     Account model = (Account) session.getIcon("#");
+     Account account = (Account) session.getAttrivute("Account");
      --%>
      
      <%--
-     BaseExam be = (BaseExam) request.getExamName("#");
+     Exam exam = (Exam) request.getAttrivute("Exam");
       --%>
       
      <%--
-     Bookmark bm = (Bookmark) request.getUserID("#");
-     Bookmark bm = (Bookmark) request.getExamIDList("#");
+     Bookmark bm = (Bookmark) request.getAttrivute("Bookmark");
       --%>
       
      <%--
-     Report rp = (Report) request.getReportID("#");
-     Report rp = (Report) request.getExamDate("#");
+     Report rp = (Report) request.getAttrivute("Report");
       --%>
 
 
@@ -45,14 +41,14 @@
 
 <div class="r1_item_1">
   <span>
-    <img src="./img/kari.png" <%-- =model. getIcon() --%> height="220" width="220" alt="User Icon">
+    <img src="./img/kari.png" <%-- =account.getIcon() --%> height="220" width="220" alt="User Icon">
   </span>
 </div>
 <div class="r1_item_2">
-    <p><%-- =model. getUserID() --%>ユーザID</p>
+    <p><%-- =account.getUserID() --%>ユーザID</p>
 </div>
 <div class="r1_item_3">
-    <p><%-- =model. getProfile() --%>自己紹介文</p>
+    <p><%-- =account.getProfile() --%>自己紹介文</p>
 </div>
 
 </div>
@@ -61,7 +57,9 @@
 
 <div class="box_1">
 
-<% for ( int i = 0 ;i<5; i++) { %>
+<% int examListsize = examList.size();
+
+for (int i=0 ;i<5 || i < examLizesize ;i++) { %>
  <div class = "exam">
   <img src="./img/exam.png" height="70" width="70" alt="Create exam file">
   <p><a href = "#">exam</a></p>
@@ -86,8 +84,8 @@
 <div class = "box_root">
 
    <div class = "b_box">
-   <% for( int i=0; i<5 ; i++ ) { %>
-   <p class = "b_exam"><a href = "#">・example1<%-- <%= be.getExamName() %> --%></a></p>
+   <% for( int i=0; i<5 or  ; i++ ) { %>
+   <p class = "b_exam"><a href = "#">・example1<%-- <%= ex.getAttrivute() %> --%></a></p>
    <% } %>
    </div>
 
