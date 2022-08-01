@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import model.data.BaseExam;
-
 public class Exam extends BaseExam implements Serializable{
 	/*要素
 	 * 試験ID
