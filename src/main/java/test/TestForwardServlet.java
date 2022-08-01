@@ -2,6 +2,9 @@ package test;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +12,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import model.data.Account;
+import model.data.Exam;
+import model.data.Report;
 
 /**
  * Servlet implementation class TestForwardServlet
@@ -50,6 +58,27 @@ public class TestForwardServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("Account",new Account("testUsr","プロフィール","./img/kari.png"));
+		
+		List<Exam> examList = new ArrayList<>();
+		List<String> tagList = new ArrayList<>();
+		examList.add(new Exam("testExam","testUsr",128,"ExamTest",new Date(),new Date(),60,120,"試験概要",0,
+				tagList,"testG",53,13));
+		request.setAttribute("ExamList", examList);
+		
+		List<String> bmList = new ArrayList<>();
+		bmList.add("testExam1");
+		bmList.add("testExam2");
+		bmList.add("testExam3");
+		bmList.add("testExam4");
+		bmList.add("testExam5");
+		bmList.add("testExam6");
+		request.setAttribute("BookmarkList", bmList);
+		
+		List<Report> rpList = new ArrayList<>();
+		rpList.add(new Report(1,"testUsr","testExam",new Date(),new Date(), 95,0.95,"ExamTest",60));
 		
 		String URL = request.getParameter("url");
 		RequestDispatcher dispatcher = request.getRequestDispatcher(URL);
