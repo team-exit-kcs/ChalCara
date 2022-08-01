@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Genre;
+import model.data.Genre;
 
 public class GenreDAO extends Database {
 	final private String TABLE = "Genre";

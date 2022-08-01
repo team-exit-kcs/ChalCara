@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Choices;
+import model.data.Choices;
 
 public class ChoicesDAO extends Database {
 	final private String TABLE = "Choices";

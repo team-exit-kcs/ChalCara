@@ -8,8 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.BigQuestion;
-import model.Question;
+import model.data.BigQuestion;
+import model.data.Question;
 
 public class BigQuestionDAO extends Database {
 	final private String TABLE = "BigQuestion";

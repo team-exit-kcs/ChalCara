@@ -9,8 +9,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import model.Exam;
-import model.Report;
+import model.data.Exam;
+import model.data.Report;
+
+
 
 public class ReportDAO extends Database {
 	final private String TABLE = "Report";

@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import model.EntryExam;
-import model.Exam;
+import model.data.EntryExam;
+import model.data.Exam;
 
 public class ExamDAO extends Database {
 	final private String TABLE = "Exam";
