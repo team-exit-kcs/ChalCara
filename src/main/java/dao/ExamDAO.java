@@ -67,6 +67,27 @@ public class ExamDAO extends Database {
 		return exam;
 	}
 	
+	public boolean isID(String id){
+		boolean resultSts=false;
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "SELECT " + EXAM_ID + " FROM " + TABLE + " WHERE " + EXAM_ID + " = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, id);
+			
+			ResultSet rs = pStmt.executeQuery();
+			
+			if(rs.next()) {
+				resultSts=true;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return resultSts;
+	}
+	
 	public List<String> findUserReport(String userID) {
 		List<String> examIDList = new ArrayList<>();
 		

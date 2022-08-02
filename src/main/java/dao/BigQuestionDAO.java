@@ -45,7 +45,7 @@ public class BigQuestionDAO extends Database {
 		return bigQuestionList;
 	}
 	
-	public boolean setQuestion(List<BigQuestion> bigQuestionList) {
+	public boolean setBigQuestion(List<BigQuestion> bigQuestionList) {
 		if(bigQuestionList == null || bigQuestionList.isEmpty()) {
 			return true;
 		}else {
