@@ -88,7 +88,7 @@ public class ExamDAO extends Database {
 		return resultSts;
 	}
 	
-	public List<String> findUserReport(String userID) {
+	public List<String> findUserExam(String userID) {
 		List<String> examIDList = new ArrayList<>();
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
