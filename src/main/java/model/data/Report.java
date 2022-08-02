@@ -11,7 +11,7 @@ public class Report implements Serializable{
 	 * 受験日
 	 * 経過時間
 	 * 点数
-	 * 合格率
+	 * 正答率
 	 * 試験名
 	 * 合格点
 	 */
