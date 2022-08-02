@@ -14,7 +14,6 @@ public class Mypage implements Serializable {
 	final private List<Report> reportList;
 	
 	public Mypage(List<String> examList, List<String> bookmarkList, List<Report> reportList) {
-		super();
 		this.examList = examList;
 		this.bookmarkList = bookmarkList;
 		this.reportList = reportList;
