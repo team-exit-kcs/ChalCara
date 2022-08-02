@@ -12,7 +12,7 @@
 
 
      <% 
-        Account account = (Account) session.getAttribute("Account");
+        Account account = (Account) session.getAttribute("LoginAccount");
         Mypage mypage = (Mypage) request.getAttribute("MypageData");
         List<String> examList = mypage.getExamList();
         List<String> bmList = mypage.getBookmarkList();
