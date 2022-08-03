@@ -203,8 +203,7 @@ button,
 input,
 select,
 textarea {
-  background-color: transparent;
-  border-style: none;
+  
 }
 
 a:focus,

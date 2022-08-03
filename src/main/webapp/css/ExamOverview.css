@@ -1,0 +1,67 @@
+@charset "UTF-8";
+
+body {
+    text-align: center;
+    position: relative;
+    font-family: serif;
+}
+
+div.main {
+	position: absolute;
+	top:100%;
+	left:48%;
+	transform: translateY(10%) translateX(-48%);
+	border:3px solid #000000;
+}
+
+.mi_1 {
+	text-align: center;
+	color: #000;
+	font-size: 30px;
+	border-bottom: 2px solid #000000;
+	margin: 1.5em 9em;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+label {
+	font-size:20px;
+}
+
+input{
+	font-family: serif;
+	border: 2px solid darkgray;
+	margin-bottom: 16px;
+}
+
+textarea {
+	font-family: serif;
+    width:40%;
+    height:100px;
+    vertical-align: text-top;
+}
+
+.btn-remove {
+    display: none;
+}
+
+div.tag {
+}
+
+.footer{
+	margin-top: 40px;
+}
+
+.back{
+	position:relative; 
+	font-family: serif;
+	font-size:22px;
+	margin-right: 100px;
+}
+.ok {
+	position:relative;
+	font-family: serif;
+	font-size:22px;
+	margin-left: 100px;
+}
