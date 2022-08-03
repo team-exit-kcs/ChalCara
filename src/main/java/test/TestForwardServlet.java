@@ -95,7 +95,7 @@ public class TestForwardServlet extends HttpServlet {
 		
 		List<String> tagList = new ArrayList<>();
 		for(int i=0;i<10;i++) {
-			tagList.add(Integer.toString(i));
+			tagList.add("Tag"+Integer.toString(i));
 		}
 		request.setAttribute("ExamCreatePage", new ExamCreatePage(genreList,tagList));
 //	*/
