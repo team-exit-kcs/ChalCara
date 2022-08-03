@@ -16,7 +16,6 @@
 <form>
 <h1 class = "mi_1">試験概要入力フォーム</h1>
    <div><label for = "e_Name">試験名：<input type = "text" placeholder = "examName"></label></div>
-   <div><label for = "u_Name">制作者ID：<input type = "text" placeholder = "GETuserID"></label></div>
 
           <div>
                <label for = "genre" >ジャンル：
