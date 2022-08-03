@@ -1,11 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ page import = "model.data.ExamCreatePage" %>
+<%@ page import = "model.data.Genre" %>
+<%@ page import = "java.util.List" %>
+    
+     <% 
+     	ExamCreatePage pageData = (ExamCreatePage) request.getAttribute("ExamCreatePage");
+        List<Genre> genreList = pageData.getGenreList();
+        List<String> tagList = pageData.getTagList();
+      %>
+    
+    
+    
+    
+      
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="./css/ExamOverview.css">
-<script src="./js/tag.js"></script>
 <jsp:include page="./title.jsp" />
 </head>
 <body>
@@ -19,23 +33,29 @@
 
           <div>
                <label for = "genre" >ジャンル：
-               <input type = "radio" name = "genre" value = "genre1">ジャンル１<%--getGenre --%>
-               <input type = "radio" name = "genre" value = "genre2">ジャンル２<%--getGenre --%>
-               <input type = "radio" name = "genre" value = "genre3">ジャンル３<%--getGenre --%>
+               <% for(Genre genre : genreList){ %>
+               		<input type = "radio" name = "genre" value = <%= genre.getGenreID() %>><%= genre.getGenreName() %> <%--getGenre --%>
+               <% } %>
                </label>
           </div>
-
+          
+          <datalist id="TagList">
+			<% for(String tag : tagList){ %>
+               		<option value=<%= tag %> ></option>
+          <% } %>
+          </datalist>
           <div class = "tag">
-               <label for = "tag">タグ：<input type = "text" name = "text[]" class = "text"></label>
-               <button type="button" class="btn-clone">追加</button>
-               <button type="button" class="btn-remove">削除</button>
+               <label for = "tag" id = "tagForm">タグ：
+               		<span><input type = "text" name = "text[]" class = "text" list = "TagList"></span>
+               </label>
+               <br><button type="button" id="btn-addTagForm">＋追加</button>
           </div>
           
           <div>
                <label for = "OpenRange" >公開範囲：
-               <input type = "radio" name = "genre" value = "genre1">公開
-               <input type = "radio" name = "genre" value = "genre2">限定公開<%-- javascript --%>
-               <input type = "radio" name = "genre" value = "genre3">非公開
+               <input type = "radio" name = "OpenRange" value = "0">公開
+               <input type = "radio" name = "OpenRange" value = "1">限定公開<%-- javascript --%>
+               <input type = "radio" name = "OpenRange" value = "2">非公開
                </label>
           </div>
           
@@ -52,7 +72,7 @@
           </div>
           
           </div>
-          
+          <script src="./js/tag.js"></script>
 </form>
 </div>
 </main>
