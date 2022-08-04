@@ -48,14 +48,14 @@
                <label for = "tag" id = "tagForm">タグ：
                		<span><input type = "text" name = "text[]" class = "text" list = "TagList"></span>
                </label>
-               <br><button type="button" id="btn-addTagForm">＋追加</button>
+               <br><button type="button" id="btn-addTagForm" onclick="addTagForm()">＋追加</button>
           </div>
           
           <div>
                <label for = "OpenRange" >公開範囲：
-               <input type = "radio" name = "OpenRange" value = "0">公開
-               <input type = "radio" name = "OpenRange" value = "1">限定公開<%-- javascript --%>
-               <input type = "radio" name = "OpenRange" value = "2">非公開
+               <input type = "radio" name = "OpenRange" value = "0" onchange = "LimitedPassForm()">公開
+               <input type = "radio" name = "OpenRange" value = "1" onchange = "LimitedPassForm()" id = "radio-limited">限定公開
+               <input type = "radio" name = "OpenRange" value = "2" onchange = "LimitedPassForm()">非公開
                </label>
           </div>
           
@@ -73,6 +73,7 @@
           
           </div>
           <script src="./js/tag.js"></script>
+          <script src="./js/openRange.js"></script>
 </form>
 </div>
 </main>
