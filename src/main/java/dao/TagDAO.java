@@ -34,6 +34,26 @@ public class TagDAO extends Database {
 		return tagList;
 	}
 	
+	public List<String> findAll(){
+		List<String> tagList = new ArrayList<>();
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "SELECT DISTINCT "+ TAG + " FROM " + TABLE + " ORDER BY " + TAG;
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			ResultSet rs = pStmt.executeQuery();
+			
+			while(rs.next()) {
+				String tag = rs.getString(TAG);
+				tagList.add(tag);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return tagList;
+	}
+	
 	public boolean setTag(String examID,List<String> tagList) {
 		if(tagList == null || tagList.isEmpty()) {
 			return true;
