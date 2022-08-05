@@ -54,7 +54,7 @@ label {
 	margin: 20px 20px;
 }
 #Select{
-	width: 800px;
+	width: 600px;
 	margin-bottom: 30px;
 }
 input[type=text],
@@ -113,7 +113,7 @@ h1 {
 	margin: 10px 0;
 }
 
-.Smolequestion{
+.Smallquestion{
 	display: none;
 }
 
@@ -152,8 +152,8 @@ h1 {
 	font-size: 32px;
 	text-align: center;
 	border-bottom: 2px solid #000000;
-	margin: 0 5em;
-	margin-bottom: 20px;
+	margin: 0 7em;
+	margin-bottom: 50px;
 	font-weight: bold; 
 }
 

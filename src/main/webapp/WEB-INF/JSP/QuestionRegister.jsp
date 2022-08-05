@@ -1,3 +1,5 @@
+<%--問題登録フォーム --%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -35,6 +37,9 @@
   <li id = "Select">
     <label><input type="radio" name="Select_Symbol">ア．</label>
     <input type="text" id="Select_text" name="Select_text" />
+  </li>
+  
+  <li id = "Select">
     <label><input type="radio" name="Select_Symbol">イ．</label>
     <input type="text" id="Select_text" name="Select_text" />
   </li>
@@ -42,9 +47,13 @@
   <li id = "Select">
     <label><input type="radio" name="Select_Symbol">ウ．</label>
     <input type="text" id="Select_text" name="Select_text" />
+  </li>
+  
+  <li id = "Select">
     <label><input type="radio" name="Select_Symbol">エ．</label>
     <input type="text" id="Select_text" name="Select_text" />
-  </li>  
+  </li>
+   
  </ul>
 </div>
 
@@ -60,6 +69,9 @@
   <li id = "Select">
     <label><input type="radio" name="Select_Symbol">ア．</label>
     <input type="text" id="Select_text" name="Select_text" />
+  </li>
+  
+  <li id = "Select">
     <label><input type="radio" name="Select_Symbol">イ．</label>
     <input type="text" id="Select_text" name="Select_text" />
   </li>
@@ -67,6 +79,9 @@
   <li id = "Select">
     <label><input type="radio" name="Select_Symbol">ウ．</label>
     <input type="text" id="Select_text" name="Select_text" />
+  </li>
+  
+  <li id = "Select">
     <label><input type="radio" name="Select_Symbol">エ．</label>
     <input type="text" id="Select_text" name="Select_text" />
   </li> 
