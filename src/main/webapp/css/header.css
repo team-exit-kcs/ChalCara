@@ -1,14 +1,33 @@
 @charset "UTF-8";
 
 * {
-    box-sizing: border-box;
+  padding: 0; /* Reset `padding` and `margin` of all elements */
+  margin: 0;
 }
 
-.header h1 {
-    background-color: #00a0dc;
-    color: #fff;
-    font-family: serif;
-    text-align: center;
-    font-size:45px;
-    
+#main {
+  width: 800px;
+  height: 200px;
+  border: 1px dotted black;
 }
+
+div.header_box{
+  font-size: 22px;
+  position:relative;
+  text-align:center;
+  margin: 0 auto;
+  height: 100px;
+  background-color: #00a0dc;
+  color: #fff;
+  font-family: serif;
+  
+}
+
+.header_box #login {
+  float: right;
+  color: #fff;"
+  font-size: 20px;
+  margin-right: 120px;
+  margin-bottom: 30px;
+}
+

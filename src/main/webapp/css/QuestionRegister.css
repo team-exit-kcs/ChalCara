@@ -52,12 +52,12 @@ label {
 	margin: 20px 20px;
 }
 
-#S_ques_area{
+.S_ques_area{
 	width: 500px;
 	height: 80px;
 	margin: 20px 20px;
 }
-#Select{
+.Select{
 	width: 600px;
 	margin-bottom: 30px;
 }
