@@ -26,7 +26,7 @@
     <li id = "keep_big">
     <label for="kpd_toi">大問</label>
     <select name = "keep_big">
-    <option value="">保存した問題</option>
+    <option value="">新規大問</option>
     <option value="q_1">Ｑ１</option>
     <option value="q_2">Ｑ２</option>
     <option value="q_3">Ｑ３</option>
@@ -52,26 +52,16 @@
   
 <%-- 選択 --%>
   <li id = "Select">
-    <label><input type="radio" name="Select_Symbol">ア．</label>
+    <label><input type="radio" name="Select_Symbol" value=0>1．</label>
     <input type="text" id="Select_text" name="Select_text" />
   </li>
   
   <li id = "Select">
-    <label><input type="radio" name="Select_Symbol">イ．</label>
+    <label><input type="radio" name="Select_Symbol" value=1>2．</label>
     <input type="text" id="Select_text" name="Select_text" />
   </li>
-  
-  <li id = "Select">
-    <label><input type="radio" name="Select_Symbol">ウ．</label>
-    <input type="text" id="Select_text" name="Select_text" />
-  </li>
-  
-  <li id = "Select">
-    <label><input type="radio" name="Select_Symbol">エ．</label>
-    <input type="text" id="Select_text" name="Select_text" />
-  </li>
-   
  </ul>
+  <br><button type="button" onclick="addChoicesForm()">＋選択肢を追加</button>
 </div>
 
 <div class = "Smallquestion"><%--小問が選択された時 --%>
@@ -120,5 +110,6 @@
                 }
             }
 </script>
+ <script src="./js/choices.js"></script>
 </body>
 </html>

@@ -51,6 +51,7 @@
 </div>
 
 <h2 class="mi_2">IBT作成一覧</h2>
+<a href = "/ExamCreateServlet"></a>
 
 <div class="box_1">
 
