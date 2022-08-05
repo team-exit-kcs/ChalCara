@@ -67,11 +67,20 @@
           <div class = "footer">
           
           <div class = "botton_area">
-          <input type="submit" value = "戻る" class = "back"></input>
+          <button type="button" id = "btn-back" class = "back" onclick="back()">戻る</button>
           <input type="submit" value = "ＯＫ" class = "ok"></input>
           </div>
           
           </div>
+          
+          <script type="text/javascript">
+         	function back(){
+          		result=window.confirm("入力した情報は保存されません");
+          		if(result){
+          			location.href='/ExamPlatform/MypageServlet'
+                }
+            }
+          </script>
           <script src="./js/tag.js"></script>
           <script src="./js/openRange.js"></script>
 </form>
