@@ -25,17 +25,44 @@ form li + li {
 label {
   /* 大きさと配置を統一 */
   display: inline-block;
-  width: 90px;
+  width:  100px;
   text-align: right;
 }
-ul.input{
-	width: 300px;
+
+#Ques_for{
+	width: 480px;
+	margin-bottom: 30px;
+	padding: 0;
+    margin: 0;
 }
-input,
+
+#Ques_for label {
+	width: 150px;
+	font-size: 18px;
+	margin-bottom: 20px;
+}
+
+#B_ques_area{
+	width: 650px;
+	height: 200px;
+	margin: 20px 20px;
+}
+
+#S_ques_area{
+	width: 500px;
+	height: 80px;
+	margin: 20px 20px;
+}
+#Select{
+	width: 800px;
+	margin-bottom: 30px;
+}
+input[type=text],
 textarea {
   /* すべてのテキストフィールドのフォント設定を一致させる
      既定で、 textarea には等幅フォントが設定されている */
   font: 1em sans-serif;
+  width: 200px;
 
   /* テキストフィールドの大きさを統一 */
   /*width: 300px;*/
@@ -70,9 +97,93 @@ button {
   margin-left: .5em;
 }
 
+select{
+	width: 100px;
+}
+
 h1 {
 	font-family: serif;
     font-size: 34px;
     border-bottom: 2px solid #000000;
     margin: 1em 6em;
+    font-weight: bold;
+}
+
+.S_question{
+	margin: 10px 0;
+}
+
+.Smolequestion{
+	display: none;
+}
+
+.footer{
+	margin-top: 100px;
+}
+
+.back{
+	position:relative; 
+	font-family: serif;
+	font-size:22px;
+	margin-right: 200px;
+	border-radius:10px;
+}
+
+.ok {
+	position:relative;
+	font-family: serif;
+	font-size:22px;
+	margin-left: 200px;
+	border-radius:10px;
+}
+
+.keepExam {
+  position:relative;
+  text-align:center;
+  margin: 0 auto;
+  padding: 20px 20px;
+  width: 900px;
+  border:3px solid #000000;
+  border-radius:10px;
+}
+
+#ke_mi{
+	font-family: serif;
+	font-size: 32px;
+	text-align: center;
+	border-bottom: 2px solid #000000;
+	margin: 0 5em;
+	margin-bottom: 20px;
+	font-weight: bold; 
+}
+
+li#keep_big{
+	font-size: 20px;
+	margin-right:27.5em;
+	margin-bottom: 20px;
+}
+
+
+li#keep_big select {
+	width: 150px;
+	height: 30px;
+}
+
+li#keep_small{
+	font-size: 20px;
+	margin-right:27.5em;
+	margin-bottom: 20px;
+}
+
+li#keep_small select {
+	width: 150px;
+	height: 30px;
+}
+
+#ok_1 {
+	position:relative;
+	font-family: serif;
+	font-size:22px;
+	margin-left: 450px;
+	border-radius:10px;
 }

@@ -11,27 +11,106 @@
 <body>
 <form>
 <h1>問題登録フォーム</h1>
-
-<div class="QuestionFormat_q">
-    <label for="QuestionFormat">問題形式：</label>
-    <input type="radio" id="QuestionFormat" name="QuestionFormat" value = "大問"/>大問
+<div id = "Ques_for">
+    <label for="QuestionFormat">＜問題形式＞</label>
+    <label><input type="radio"  name="QuestionFormat"/>大問</label>
+    <label><input type="radio"  name="QuestionFormat"/>小問</label>
 </div>
 
- <ul>
-  
+<%-- 大問 --%>
+<div class = "Bigquestion"><%--大問が選択された時 --%>
+ <ul class = "B_question">
+ 
   <li>
-    <label for="mail">E-mail:</label>
-    <input type="email" id="mail" name="user_email" />
+    <label for="b_toi">問１.</label>
+    <textarea id="B_ques_area" name="quesution" placeholder = "問題文を入力して下さい"></textarea>
+  </li>
+<%-- 小問 --%>  
+  <li>
+    <label for="s_toi">＜設問１＞</label>
+    <textarea id="S_ques_area" name="quesution" placeholder = "問題文を入力して下さい"></textarea>
   </li>
   
-  <li>
-    <label for="msg">Message:</label>
-    <textarea id="msg" name="user_message"></textarea>
+<%-- 選択 --%>
+  <li id = "Select">
+    <label><input type="radio" name="Select_Symbol">ア．</label>
+    <input type="text" id="Select_text" name="Select_text" />
+    <label><input type="radio" name="Select_Symbol">イ．</label>
+    <input type="text" id="Select_text" name="Select_text" />
   </li>
   
+  <li id = "Select">
+    <label><input type="radio" name="Select_Symbol">ウ．</label>
+    <input type="text" id="Select_text" name="Select_text" />
+    <label><input type="radio" name="Select_Symbol">エ．</label>
+    <input type="text" id="Select_text" name="Select_text" />
+  </li>  
  </ul>
+</div>
+
+<div class = "Smallquestion"><%--小問が選択された時 --%>
+<ul class = "S_question">
+  <%-- 小問 --%>  
+  <li>
+    <label for="s_toi">問１．</label>
+    <textarea id="S_ques_area" name="quesution" placeholder = "問題文を入力して下さい"></textarea>
+  </li>
+  
+  <%-- 選択 --%>
+  <li id = "Select">
+    <label><input type="radio" name="Select_Symbol">ア．</label>
+    <input type="text" id="Select_text" name="Select_text" />
+    <label><input type="radio" name="Select_Symbol">イ．</label>
+    <input type="text" id="Select_text" name="Select_text" />
+  </li>
+  
+  <li id = "Select">
+    <label><input type="radio" name="Select_Symbol">ウ．</label>
+    <input type="text" id="Select_text" name="Select_text" />
+    <label><input type="radio" name="Select_Symbol">エ．</label>
+    <input type="text" id="Select_text" name="Select_text" />
+  </li> 
+</ul>
+</div>
+
+<div class = "footer">
+          <div class = "botton_area">
+          <input type="submit" value = "戻る" class = "back"></input>
+          <input type="submit" value = "ＯＫ" class = "ok"></input>
+          </div>          
+</div>
 </form>
 
+<div class = "keepExam">
+<h2 id = "ke_mi">＜保存した問題一覧＞</h2>
 
+<ul>
+    <li id = "keep_big">
+    <label for="kpd_toi">大問</label>
+    <select name = "keep_big">
+    <option value="">保存した問題</option>
+    <option value="q_1">Ｑ１</option>
+    <option value="q_2">Ｑ２</option>
+    <option value="q_3">Ｑ３</option>
+    <option value="q_4">Ｑ４</option>
+    </select>
+    </li>
+    
+    <li id = "keep_small">
+    <label for="kpd_toi">小問</label>
+    <select name = "keep_small">
+    <option value="">保存した問題</option>
+    <option value="q_1">Ｑ１</option>
+    <option value="q_2">Ｑ２</option>
+    <option value="q_3">Ｑ３</option>
+    <option value="q_4">Ｑ４</option>
+    </select>
+    </li>
+</ul>
+<div id = "ok_1">
+<input type="submit" value = "ＯＫ" class = "ok"></input>
+</div>
+
+</div>
 </body>
 </html>
