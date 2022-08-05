@@ -75,7 +75,7 @@
 
 <div class = "footer">
           <div class = "botton_area">
-          <input type="submit" value = "back" class = "back"></input>
+          <button type="button" id = "btn-back" class = "back" onclick="back()">戻る</button>
           <input type="submit" value = "ＯＫ" class = "ok"></input>
           </div>          
 </div>
@@ -112,5 +112,13 @@
 </div>
 
 </div>
+<script type="text/javascript">
+         	function back(){
+          		result=window.confirm("保存されていないデータは破棄されます");
+          		if(result){
+          			location.href='/ExamPlatform//ExamCreateServlet'
+                }
+            }
+</script>
 </body>
 </html>
