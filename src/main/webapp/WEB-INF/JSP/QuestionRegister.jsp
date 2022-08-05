@@ -19,6 +19,23 @@
     <label><input type="radio" value = "1"name="QuestionFormat"/>小問</label>
 </div>
 
+
+<div class = "keepExam">
+
+<ul>
+    <li id = "keep_big">
+    <label for="kpd_toi">大問</label>
+    <select name = "keep_big">
+    <option value="">保存した問題</option>
+    <option value="q_1">Ｑ１</option>
+    <option value="q_2">Ｑ２</option>
+    <option value="q_3">Ｑ３</option>
+    <option value="q_4">Ｑ４</option>
+    </select>
+    </li>
+</ul>
+</div>
+
 <%-- 大問 --%>
 <div class = "Bigquestion"><%--大問が選択された時 --%>
  <ul class = "B_question">
@@ -95,38 +112,6 @@
           </div>          
 </div>
 </form>
-
-<div class = "keepExam">
-<h2 id = "ke_mi">＜保存した問題一覧＞</h2>
-
-<ul>
-    <li id = "keep_big">
-    <label for="kpd_toi">大問</label>
-    <select name = "keep_big">
-    <option value="">保存した問題</option>
-    <option value="q_1">Ｑ１</option>
-    <option value="q_2">Ｑ２</option>
-    <option value="q_3">Ｑ３</option>
-    <option value="q_4">Ｑ４</option>
-    </select>
-    </li>
-    
-    <li id = "keep_small">
-    <label for="kpd_toi">小問</label>
-    <select name = "keep_small">
-    <option value="">保存した問題</option>
-    <option value="q_1">Ｑ１</option>
-    <option value="q_2">Ｑ２</option>
-    <option value="q_3">Ｑ３</option>
-    <option value="q_4">Ｑ４</option>
-    </select>
-    </li>
-</ul>
-<div id = "ok_1">
-<input type="submit" value = "ＯＫ" class = "ok"></input>
-</div>
-
-</div>
 <script type="text/javascript">
          	function back(){
           		result=window.confirm("保存されていないデータは破棄されます");
