@@ -3,6 +3,7 @@ package test;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -14,8 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.data.Account;
+import model.data.EntryExam;
 import model.data.ExamCreatePage;
 import model.data.Genre;
+import model.data.Mypage;
+import model.data.Report;
 
 /**
  * Servlet implementation class TestForwardServlet
@@ -64,28 +68,23 @@ public class TestForwardServlet extends HttpServlet {
 //	*/		
 		
 
-	/*Mypage		
+//	/*Mypage		
  		List<String> examList = new ArrayList<>();
-		examList.add("testExam1");
-		examList.add("testExam2");
-		examList.add("testExam3");
-		examList.add("testExam4");
-		examList.add("testExam5");
+		for(int i=0;i<3;i++) {
+			examList.add("testExam"+Integer.toString(i));
+		}
 		
 		List<String> bmList = new ArrayList<>();
-		bmList.add("testExam1");
-		bmList.add("testExam2");
-		bmList.add("testExam3");
-		bmList.add("testExam4");
-		bmList.add("testExam5");
-		bmList.add("testExam6");
+		for(int i=0;i<10;i++) {
+			bmList.add("testExam"+Integer.toString(i));
+		}
 		
 		List<Report> rpList = new ArrayList<>();
 		rpList.add(new Report(1,"testUsr","testExam",new Date(),new Date(), 95,0.95,"ExamTest",60));
 		rpList.add(new Report(2000,"testUsr","testExam2000",new Date(),new Date(), 95,0.95,"ExamTest",60));
 		
 		request.setAttribute("MypageData", new Mypage(examList,bmList,rpList));
-	 */
+//	 */
 		
 //	/*ExamOverview
 		List<Genre> genreList = new ArrayList<>();
@@ -97,7 +96,13 @@ public class TestForwardServlet extends HttpServlet {
 		for(int i=0;i<10;i++) {
 			tagList.add("Tag"+Integer.toString(i));
 		}
-		request.setAttribute("ExamCreatePage", new ExamCreatePage(genreList,tagList));
+		
+		List<String> examtagList = new ArrayList<>();
+		for(int i=0;i<10;i+=2) {
+			examtagList.add("Tag"+Integer.toString(i));
+		}
+		request.setAttribute("ExamCreatePage", new ExamCreatePage(genreList,tagList,new EntryExam("test","testUsr",3,"testExam",
+				new Date(),new Date(),60,120,"試験概要です",1,examtagList,"pass"),1));
 //	*/
 		
 		

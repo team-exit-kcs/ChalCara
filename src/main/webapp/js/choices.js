@@ -1,11 +1,11 @@
-function addChoicesForm(){
-	let choicesHtml = '<span><br><input type = "text" name = "text" class = "text" list = "TagList"><button type="button" class="btn-rmTagForm" onclick="rmTagForm(this)">-削除</button><span>';
-	let choicesForm = document.getElementById("choicesForm");
+function addChoicesForm(select){
+	var i = 100;
+	let choicesHtml = '<li class = "Select"><label><input type="radio" name="Select_Symbol" value="'+i+'">'+i+'．</label><input type="text" class="Select_text" name="Select_text" /><button type="button" onclick="rmChoicesForm(this)">−選択肢を削除</button></li>';
 	
-	choicesForm.insertAdjacentHTML("beforeend",choicesHtml);
+	select.parentNode.insertAdjacentHTML("beforebegin",choicesHtml);
 }
 
 function rmChoicesForm(rmChoices){
-	span = rmChoices.parentNode;
-	span.remove();
+	li = rmChoices.parentNode;
+	li.remove();
 }
