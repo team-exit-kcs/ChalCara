@@ -24,5 +24,4 @@
  </ul>
 </div>
 </div>
-
 <script src="./js/choices.js"></script>

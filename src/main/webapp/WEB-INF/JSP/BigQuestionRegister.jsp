@@ -23,6 +23,8 @@
 
 <jsp:include page="./QuestionForm.jsp" />
 
+<jsp:include page="./QuestionForm.jsp" />
+
 </div>
 <div class = "footer">
           <div class = "botton_area">
