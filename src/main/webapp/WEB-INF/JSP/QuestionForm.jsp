@@ -12,12 +12,12 @@
 <div>
  <ul class = "B_question">
   <li class = "Select">
-    <label><input type="radio" name="Select_Symbol" value=0>1．</label>
+    <label><input type="radio" name="Select_Symbol" value=0><span>1．</span></label>
     <input type="text" class="Select_text" name="Select_text" />
   </li>
   
   <li class = "Select">
-    <label><input type="radio" name="Select_Symbol" value=1>2．</label>
+    <label><input type="radio" name="Select_Symbol" value=1><span>2．</span></label>
     <input type="text" class="Select_text" name="Select_text" />
   </li>
   <li><br><button type="button" onclick="addChoicesForm(this)">＋選択肢を追加</button></li>
