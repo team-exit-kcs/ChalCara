@@ -9,7 +9,6 @@ function rmChoicesForm(rmChoices){
 	let choicesCnt = rmChoices.parentNode.parentNode.childElementCount-1;
 	let Choices=rmChoices.parentNode;
 	for(let i=Number(Choices.firstElementChild.firstElementChild.value);i<choicesCnt;i++){
-		console.log(i);
 		Choices=Choices.nextElementSibling;
 		Choices.firstElementChild.firstElementChild.setAttribute('value',i);;
 		Choices.firstElementChild.lastElementChild.textContent = (i)+"．";
