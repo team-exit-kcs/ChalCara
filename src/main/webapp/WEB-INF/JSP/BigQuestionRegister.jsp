@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ page import = "model.data.ExamCreatePage" %>
+<%@ page import = "model.data.BigQuestion" %>
+<%@ page import = "model.data.Question" %>
+<%@ page import = "model.data.Choices" %>
+<%@ page import = "java.util.ArrayList" %>
+<%@ page import = "java.util.List" %>
+
+     <% 
+     	ExamCreatePage pageData = (ExamCreatePage) session.getAttribute("ExamCreatePage");
+     	List<BigQuestion> bigQuestionList = pageData.getBigQuestionList();
+      %>
     
 <!DOCTYPE html>
 <html>
@@ -11,29 +23,35 @@
 <body>
 <form action="/ExamPlatform/ExamCreateServlet/Question" method="post">
 <h1>問題登録フォーム</h1>
-<%-- 大問 --%>
-<div class = "Bigquestion"><%--大問が選択された時 --%>
- <ul class = "B_question">
- 
-  <li>
-    <label for="b_toi">問１.</label>
-    <textarea id="B_ques_area" name="quesution" placeholder = "問題文を入力して下さい"></textarea>
-  </li>
- </ul> 
 
-<jsp:include page="./QuestionForm.jsp" />
-
-<jsp:include page="./QuestionForm.jsp" />
-
-</div>
+ <%if(bigQuestionList.isEmpty()){ %>
+	<jsp:include page="./BigQuestionForm.jsp">
+		<jsp:param name="bigQuestionNum" value = "1" />
+		<jsp:param name="questionFormat" value = "0" />
+	</jsp:include>
+ <%
+ }else{
+	 for(BigQuestion bq : bigQuestionList){
+ %>
+ 	<jsp:include page="./BigQuestionForm.jsp">
+		<jsp:param name="bigQuestionNum" value = "<%= bq.getBigQuestionID() %>" />
+		<jsp:param name="questionFormat" value = "0" />
+	</jsp:include>
+ <%}}%>
+	
 <div class = "footer">
           <div class = "botton_area">
           <button type="button" id = "btn-back" class = "back" onclick="back()">戻る</button>
-          <input type="submit" value = "ＯＫ" class = "ok"></input>
+          <input type="submit" value = "登録確認画面へ" class = "ok"></input>
           </div>          
 </div>
 </form>
+
 <script type="text/javascript">
+			function getSelectBigQ(){
+				return document.getElementById('select-bq').value;
+			}
+
          	function back(){
           		result=window.confirm("保存されていないデータは破棄されます");
           		if(result){

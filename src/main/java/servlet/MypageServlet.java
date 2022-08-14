@@ -40,7 +40,7 @@ public class MypageServlet extends HttpServlet {
 		Mypage m = ml.exequte(account.getUserID());
 		request.setAttribute("MypageData", m);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/Mypage.jsp");
-			dispatcher.forward(request, response);
+		dispatcher.forward(request, response);
 	}
 	
 }

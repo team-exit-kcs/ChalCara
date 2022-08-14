@@ -7,7 +7,7 @@
 <%@ page import = "java.util.List" %>
     
      <% 
-     	ExamCreatePage pageData = (ExamCreatePage) request.getAttribute("ExamCreatePage");
+     	ExamCreatePage pageData = (ExamCreatePage) session.getAttribute("ExamCreatePage");
         List<Genre> genreList = pageData.getGenreList();
         List<String> tagList = pageData.getTagList();
         EntryExam entryExam = pageData.getEntryExam();

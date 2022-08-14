@@ -1,6 +1,7 @@
 package model.data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Question implements Serializable {
@@ -23,6 +24,18 @@ public class Question implements Serializable {
 	final private double allocationOfPoint;
 	final private List<Choices> choicesList;
 	
+	public Question(String examID, int bigQuestionID, int questionID, String questionSentence, int answer,
+			String questionExplanation, double allocationOfPoint) {
+		this.examID = examID;
+		this.bigQuestionID = bigQuestionID;
+		this.questionID = questionID;
+		this.questionSentence = questionSentence;
+		this.answer = answer;
+		this.questionExplanation = questionExplanation;
+		this.allocationOfPoint = allocationOfPoint;
+		this.choicesList = new ArrayList<>();;
+	}
+
 	public Question(String examID, int bigQuestionID, int questionID, String questionSentence, int answer,
 			String questionExplanation, double allocationOfPoint, List<Choices> choicesList) {
 		this.examID = examID;

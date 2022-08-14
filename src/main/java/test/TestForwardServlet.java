@@ -15,10 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.data.Account;
+import model.data.BigQuestion;
+import model.data.Choices;
 import model.data.EntryExam;
 import model.data.ExamCreatePage;
 import model.data.Genre;
 import model.data.Mypage;
+import model.data.Question;
 import model.data.Report;
 
 /**
@@ -101,8 +104,24 @@ public class TestForwardServlet extends HttpServlet {
 		for(int i=0;i<10;i+=2) {
 			examtagList.add("Tag"+Integer.toString(i));
 		}
-		request.setAttribute("ExamCreatePage", new ExamCreatePage(genreList,tagList,new EntryExam("test","testUsr",3,"testExam",
-				new Date(),new Date(),60,120,"試験概要です",1,examtagList,"pass"),1));
+		
+		EntryExam entryExam = new EntryExam("test","testUsr",3,"testExam",new Date(),new Date(),60,120,"試験概要です",1,examtagList,"pass");
+		
+		List<BigQuestion> bigQuestionList = new ArrayList<>();
+		
+		for(int a=1;a<3;a++) {
+			List<Question> questionList = new ArrayList<>();
+			for(int b=1;b<4;b++) {
+				List<Choices> choicesList = new ArrayList<>();
+				for(int c=1;c<9-b;c++) {
+					choicesList.add(new Choices("exam",a,b,c,a+"-"+b+"-"+c));
+				}
+				questionList.add(new Question("exam",a,b,a+"-"+b,2,"",2.5,choicesList));
+			}
+			bigQuestionList.add(new BigQuestion("exam",a,"exam"+a,questionList));
+		}
+		
+		session.setAttribute("ExamCreatePage", new ExamCreatePage(genreList,tagList,entryExam,1,bigQuestionList));
 //	*/
 		
 		
