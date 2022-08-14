@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 main {
-	grid-template-columns: 1fr 1fr 1fr
+	grid-template-columns: 1fr 1fr 1fr;
 }
 
 .mi_1 {
@@ -51,19 +51,30 @@ main {
     padding: 40px 10em;
 }
 
+.Create_box{
+	position: relative;
+	font-family: serif;
+	width: 1500px;
+}
+
 .mi_2 {
 	text-align:center;
-    font-family: serif;
     font-weight: bold;
     font-size: 26px;
     border-bottom: 2px solid #000000;
     margin-left: 7.0em;
     margin-right: 43.0em;
     margin-top: 2.5em;
-    margin-bottom: 1.75em;
+    margin-bottom: 40px;
     white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+}
+
+.Create_box , .Create_exam{
+	text-align: right;
+	font-size: 24px;
+	margin-right: 200px;
 }
 
 .box_1 {
@@ -87,7 +98,7 @@ main {
 	text-align: right;
 	font-size: 18px;
 	margin-top: 1.5em;
-	margin-right: 13em;
+	margin-right: 12em;
 	margin-bottom: 3em;
 	
 }
@@ -164,13 +175,13 @@ main {
 
 .miru_b {
 	width: 50%;
-	margin-left: 15em;
+	margin-left: 16em;
 	text-align: right;
 }
 
 .miru_r {
 	width: 50%;
-	margin-left: 15em;
+	margin-left: 16em;
 	text-align: right;
 }
 

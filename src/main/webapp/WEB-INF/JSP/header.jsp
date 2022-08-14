@@ -10,10 +10,8 @@
  <header id = "header_1">
  
  <div class = "header_box">
- <h1>いぐざむぷらっとふぉーむ</h1>
- <div>
- <a href="" id = "login">ログイン</a>
- </div>
+ <span id = "h1">いぐざむぷらっとふぉーむ</span>
+ <button type="button" id = "login">ログイン</button>
  </div>
  
  <nav>

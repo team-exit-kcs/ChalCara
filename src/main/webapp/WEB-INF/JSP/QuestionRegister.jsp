@@ -13,7 +13,7 @@
 <body>
 <form action="/ExamPlatform/ExamCreateServlet/Question" method="post">
 <h1>問題登録フォーム</h1>
-
+<main>
 <jsp:include page="./QuestionForm.jsp" />
 
 <div class = "Smallquestion"><%--小問が選択された時 --%>
@@ -53,6 +53,7 @@
           <input type="submit" value = "ＯＫ" class = "ok"></input>
           </div>          
 </div>
+</main>
 </form>
 <script type="text/javascript">
          	function back(){

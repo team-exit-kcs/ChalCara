@@ -15,7 +15,7 @@
 <div class = "Bigquestion"><%--大問が選択された時 --%>
  <ul class = "B_question">
  
-  <li>
+  <li class = "B_mon">
     <label for="b_toi">問１.</label>
     <textarea id="B_ques_area" name="quesution" placeholder = "問題文を入力して下さい"></textarea>
   </li>
