@@ -121,7 +121,7 @@ public class TestForwardServlet extends HttpServlet {
 			bigQuestionList.add(new BigQuestion("exam",a,"exam"+a,questionList));
 		}
 		
-		session.setAttribute("ExamCreatePage", new ExamCreatePage(genreList,tagList,entryExam,1,bigQuestionList));
+		session.setAttribute("ExamCreatePage", new ExamCreatePage(genreList,tagList,entryExam,0,bigQuestionList));
 //	*/
 		
 		
