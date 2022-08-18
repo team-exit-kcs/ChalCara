@@ -60,6 +60,4 @@
   <li><br><button type="button" onclick="addChoicesForm(this)">＋選択肢を追加</button></li>
  </ul>
 </div>
-<script src="./js/choices.js"></script>
-<script src="./js/Question.js"></script>
 </div>

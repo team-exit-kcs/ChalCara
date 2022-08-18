@@ -23,6 +23,7 @@
 <body>
 <form action="/ExamPlatform/ExamCreateServlet/Question" method="post">
 <h1>問題登録フォーム</h1>
+<div>
 
  <%if(bigQuestionList.isEmpty()){ %>
 	<jsp:include page="./BigQuestionForm.jsp">
@@ -38,7 +39,9 @@
 		<jsp:param name="questionFormat" value = "0" />
 	</jsp:include>
  <%}}%>
-	
+
+<span><br><button type="button" onclick="addBigQuestionForm(this)">＋大問を追加</button></span>
+</div>
 <div class = "footer">
           <div class = "botton_area">
           <button type="button" id = "btn-back" class = "back" onclick="back()">戻る</button>
@@ -59,5 +62,7 @@
                 }
             }
 </script>
+<script src="./js/choices.js"></script>
+<script src="./js/BigQuestion.js"></script>
 </body>
 </html>
