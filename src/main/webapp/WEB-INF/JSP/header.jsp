@@ -23,9 +23,9 @@
       <li><a href = "#">ゲーム</a>
       <li><a href = "#">マイページ</a>
    </ul> 
- </nav>
+</nav>
  
- </header>
+</header>
  
  
  
