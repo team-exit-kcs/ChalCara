@@ -12,22 +12,27 @@
 }
 
 div.header_box{
-  font-size: 22px;
   position:relative;
   text-align:center;
-  margin: 0 auto;
+  padding: 0;
+  margin: 0;
   height: 100px;
   background-color: #00a0dc;
   color: #fff;
   font-family: serif;
   
 }
+div.headerbox span{
+	width:100px;
+	height: 100px;
+	font-size:32px;
+}
 
-.header_box #login {
-  float: right;
-  color: #fff;"
-  font-size: 20px;
-  margin-right: 120px;
-  margin-bottom: 30px;
+#login {
+	position: relative;
+    right: 40px;
+    bottom: 100px;
+    color: #000;"
+    font-size: 20px;
 }
 

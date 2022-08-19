@@ -56,6 +56,7 @@
           <input type="submit" value = "登録確認画面へ" class = "ok"></input>
           </div>          
 </div>
+</main>
 </form>
 <script type="text/javascript">
          	function back(){

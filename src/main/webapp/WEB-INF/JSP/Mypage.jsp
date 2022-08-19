@@ -50,9 +50,12 @@
 
 </div>
 
+<div class = "Create_box">
 <h2 class="mi_2">IBT作成一覧</h2>
+<a class = "Create_exam" href = "" >IBT試験問題を作成</a>
 <a href = "/ExamCreateServlet"></a>
 
+</div>
 <div class="box_1">
 
 <% int examListsize = examList.size();
@@ -62,7 +65,7 @@ for (int i=0 ;i<5 && i < examListsize ;i++) { %>
   <img src="./img/exam.png" height="70" width="70" alt="Create exam file">
   <p><a href = "#"><%= examList.get(i)%></a></p>
  </div>
-<% }%>
+<%}%>
 
 </div>
 
