@@ -31,14 +31,10 @@
 </ul>  
 <%-- 選択 --%>
 <div>
-<<<<<<< HEAD
  <ul class = "B_question">
  
  <%if(question == null){ %>
  
-=======
- <ul class = "S_question">
->>>>>>> refs/remotes/origin/master
   <li class = "Select">
     <label><input type="radio" name="Select_Symbol" value=1><span>1．</span></label>
     <input type="text" class="Select_text" name="Select_text" />
@@ -48,8 +44,6 @@
     <label><input type="radio" name="Select_Symbol" value=2><span>2．</span></label>
     <input type="text" class="Select_text" name="Select_text" />
   </li>
-<<<<<<< HEAD
-  
  <%
  }else{
  	for(Choices choices : question.getChoicesList()){
@@ -63,16 +57,6 @@
  <%}}%>
  
   <li><br><button type="button" onclick="addChoicesForm(this)">＋選択肢を追加</button></li>
-=======
-  <li><br><button type="button" onclick="addChoicesForm(this)" class = "Select_box">＋選択肢を追加</button></li>
-  
->>>>>>> refs/remotes/origin/master
  </ul>
 </div>
-<<<<<<< HEAD
 </div>
-=======
-</div>
-<script src="./js/choices.js"></script>
-</main>
->>>>>>> refs/remotes/origin/master
