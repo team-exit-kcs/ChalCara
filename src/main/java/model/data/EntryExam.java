@@ -6,7 +6,7 @@ import java.util.List;
 
 import model.DisclosureRange;
 
-public class EntryExam extends BaseExam implements DisclosureRange, Serializable {
+public class EntryExam extends BaseExam implements Serializable {
 	/*要素
 	 * 試験ID
 	 * 製作者ユーザID
@@ -26,9 +26,12 @@ public class EntryExam extends BaseExam implements DisclosureRange, Serializable
 	public EntryExam(String examID, String userID, int genreID, String examName, Date createDate, Date updateDate,
 			int passingScore, int examTime, String examExplanation, int disclosureRange, List<String> tagList,
 			String limitedPassword) {
+		
 		super(examID, userID, genreID, examName, createDate, updateDate, passingScore, examTime, examExplanation,
 				disclosureRange, tagList);
-		if(disclosureRange == LIMITED) {
+		
+		DisclosureRange DR = new DisclosureRange();
+		if(DR.isLimited(disclosureRange)) {
 			this.limitedPassword = limitedPassword;
 		}else {
 			this.limitedPassword = null;

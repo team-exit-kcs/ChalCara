@@ -26,7 +26,7 @@
 
 <div class = "main">
 
-<form>
+<form action="/ExamPlatform/ExamCreateServlet" method="post">
 <h1 class = "mi_1">試験概要入力フォーム</h1>
    <div><label for = "e_Name">試験名：<input type = "text" name = "examName" <%= entryExam == null ? "placeholder = \"examName\"" : "value = \""+entryExam.getExamName()+"\""%>></label></div>
 
@@ -46,16 +46,16 @@
           <div class = "tag">
                <label for = "tag" id = "tagForm">タグ：
                <%if(entryExam==null || entryExam.getTagList().isEmpty()){%>
-               		<span><input type = "text" name = "text" class = "text" list = "TagList"></span>
+               		<span><input type = "text" name = "tag" class = "text" list = "TagList"></span>
                <%
                }else{
             	   int i=0;
                    for(String tag:entryExam.getTagList()){
                 	   if(i==0){
                %>
-               	          <span><input type = "text" name = "text" class = "text" list = "TagList" value = <%= tag%>></span>
+               	          <span><input type = "text" name = "tag" class = "text" list = "TagList" value = <%= tag%>></span>
                        <%}else{%>
-                          <span><br><input type = "text" name = "text" class = "text" list = "TagList" value = <%= tag%>><button type="button" class="btn-rmTagForm" onclick="rmTagForm(this)">-削除</button></span>
+                          <span><br><input type = "text" name = "tag" class = "text" list = "TagList" value = <%= tag%>><button type="button" class="btn-rmTagForm" onclick="rmTagForm(this)">-削除</button></span>
                <%
                        }
                 	   i++;
@@ -80,9 +80,9 @@
                <label><input type="radio" value = "1"name="QuestionFormat"  <%= questionFormat==1 ? "checked=\"checked\"" : ""%>>小問</label>
           </div>
           
-          <div><label for = "e_Time">試験時間：<input type = "number" name = "examTime" <%= entryExam == null ? "" : "value = \""+entryExam.getExamTime()+"\""%>>分</label></div>
+          <div><label for = "e_Time">試験時間：<input type = "number" name = "examTime" min = 1 <%= entryExam == null ? "" : "value = \""+entryExam.getExamTime()+"\""%>>分</label></div>
           
-          <div><label for = "e_score">合格点：<input type = "number" name = "passingScore" <%= entryExam == null ? "" : "value = \""+entryExam.getPassingScore()+"\""%>>点</label></div>
+          <div><label for = "e_score">合格点：<input type = "number" name = "passingScore" min = 1 <%= entryExam == null ? "" : "value = \""+entryExam.getPassingScore()+"\""%>>点</label></div>
           
           <div>
                <label for = "Explanation">説明文：</label>

@@ -2,9 +2,6 @@ package test;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,14 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.data.Account;
-import model.data.BigQuestion;
-import model.data.Choices;
-import model.data.EntryExam;
-import model.data.ExamCreatePage;
-import model.data.Genre;
-import model.data.Mypage;
-import model.data.Question;
-import model.data.Report;
 
 /**
  * Servlet implementation class TestForwardServlet
@@ -64,14 +53,14 @@ public class TestForwardServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
 		
 //	/*Account
-		HttpSession session = request.getSession();
 		session.setAttribute("LoginUser",new Account("testUsr","プロフィール","./img/kari.png"));
 //	*/		
 		
 
-//	/*Mypage		
+	/*Mypage		
  		List<String> examList = new ArrayList<>();
 		for(int i=0;i<3;i++) {
 			examList.add("testExam"+Integer.toString(i));
@@ -89,7 +78,7 @@ public class TestForwardServlet extends HttpServlet {
 		request.setAttribute("MypageData", new Mypage(examList,bmList,rpList));
 //	 */
 		
-//	/*ExamOverview
+	/*ExamOverview
 		List<Genre> genreList = new ArrayList<>();
 		for(int i=0;i<10;i++) {
 			genreList.add(new Genre(i,"ジャンル"+Integer.toString(i)));

@@ -22,8 +22,8 @@ public class ExamCreatePage implements Serializable{
 	public ExamCreatePage(List<Genre> genreList, List<String> tagList) {
 		this.genreList = genreList;
 		this.tagList = tagList;
-		this.questionFormat = 0;
 		this.entryExam = null;
+		this.questionFormat = 0;
 		this.bigQuestionList = new ArrayList<>();
 	}
 

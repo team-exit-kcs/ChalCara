@@ -1,7 +1,11 @@
 package model;
 
-public interface DisclosureRange {
+public class DisclosureRange {
 	public final int OPEN = 0;
 	public final int LIMITED = 1;
 	public final int CLOSE = 2;
+	
+	public boolean isLimited(int disclosureRange) {
+		return this.LIMITED == disclosureRange;
+	}
 }
