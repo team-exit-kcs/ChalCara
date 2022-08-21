@@ -45,7 +45,11 @@ public class ExamCreateServlet extends HttpServlet {
 		TagDAO tagDAO = new TagDAO();
 		
 		HttpSession session = request.getSession();
-		session.setAttribute("ExamCreatePage", new ExamCreatePage(genreDAO.findAll(), tagDAO.findAll() ));
+		
+		ExamCreatePage examData = (ExamCreatePage) session.getAttribute("ExamCreatePage");
+		if(examData == null) {
+			session.setAttribute("ExamCreatePage", new ExamCreatePage(genreDAO.findAll(), tagDAO.findAll() ));
+		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/ExamOverview.jsp");
 		dispatcher.forward(request, response);
@@ -57,9 +61,6 @@ public class ExamCreateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		DisclosureRange DR = new DisclosureRange();
-		
-		//仮ユーザ
-		session.setAttribute("LoginUser",new Account("testUsr","プロフィール","./img/kari.png"));
 		
 		Account account = (Account) session.getAttribute("LoginUser");
 		
@@ -102,8 +103,13 @@ public class ExamCreateServlet extends HttpServlet {
 		
 		session.setAttribute("ExamCreatePage", new ExamCreatePage(genreList, tagList, entry, questionFormat));
 		
-		//遷移先を変更
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/ExamOverview.jsp");
+		RequestDispatcher dispatcher;
+		if(questionFormat == 0) {
+			dispatcher = request.getRequestDispatcher("/ExamCreateServlet/BigQuestion");
+		}else {
+			dispatcher = request.getRequestDispatcher("/ExamCreateServlet/Question");
+		}
+		
 		dispatcher.forward(request, response);
 	}
 

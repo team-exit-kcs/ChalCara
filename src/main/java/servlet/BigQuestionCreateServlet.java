@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class QuestionCreateServlet
+ * Servlet implementation class BigQuestionCreateServlet
  */
-@WebServlet("/ExamCreateServlet/Question")
-public class QuestionCreateServlet extends HttpServlet {
+@WebServlet("/ExamCreateServlet/BigQuestion")
+public class BigQuestionCreateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuestionCreateServlet() {
+    public BigQuestionCreateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,7 +28,7 @@ public class QuestionCreateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/QuestionRegister.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/BigQuestionRegister.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -36,7 +36,7 @@ public class QuestionCreateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

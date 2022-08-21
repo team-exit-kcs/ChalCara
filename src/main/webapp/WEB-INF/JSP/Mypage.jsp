@@ -52,7 +52,7 @@
 
 <div class = "Create_box">
 <h2 class="mi_2">IBT作成一覧</h2>
-<a class = "Create_exam" href = "" >IBT試験問題を作成</a>
+<a class = "Create_exam" href = "/ExamPlatform/ExamCreateServlet" >IBT試験問題を作成</a>
 <a href = "/ExamCreateServlet"></a>
 
 </div>

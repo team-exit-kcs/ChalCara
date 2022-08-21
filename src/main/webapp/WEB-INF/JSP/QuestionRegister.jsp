@@ -61,7 +61,7 @@
          	function back(){
           		result=window.confirm("保存されていないデータは破棄されます");
           		if(result){
-          			location.href='/ExamPlatform//ExamCreateServlet'
+          			location.href='/ExamPlatform/ExamCreateServlet'
                 }
             }
 </script>

@@ -19,13 +19,10 @@
 <p>ジャンル：<%-- genle --%></p><br>
 <p>タグ：<%-- tag --%></p><br>
 <p>公開範囲：<%-- Open Range --%></p><br>
-<ul>
-  <li>
-    <label for="Setu">説明文:</label>
-    <textarea id="Setu" name="e_Setu"></textarea>
-  </li>
-</ul>
-<p>問題一覧：</p>
+<p>試験時間：<%-- examTime --%></p><br>
+<p>合格点：<%-- passingScore --%></p><br>
+<p>説明文:<%-- Explanation --%></p><br>
+<p>問題一覧</p>
 </form>
 </body>
 </html>

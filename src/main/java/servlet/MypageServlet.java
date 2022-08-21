@@ -33,8 +33,13 @@ public class MypageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
+		
+		
+		//仮ユーザ
+		session.setAttribute("LoginUser",new Account("testUsr","プロフィール","./img/kari.png"));
+		
+		
 		Account account = (Account) session.getAttribute("LoginUser");
 		MypageLogic ml = new MypageLogic();
 		Mypage m = ml.exequte(account.getUserID());

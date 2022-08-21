@@ -14,7 +14,7 @@
      	List<BigQuestion> bigQuestionList = pageData.getBigQuestionList();
      	BigQuestion bigQuestion = null;
      	List<Question> questionList = new ArrayList<>();
-     	if(bigQuestionList.size() >= (bigQuestionNum-1)){
+     	if(bigQuestionList.size() > (bigQuestionNum-1)){
      		bigQuestion = bigQuestionList.get(bigQuestionNum-1);
         	questionList = bigQuestion.getQuestionList();
      	}
