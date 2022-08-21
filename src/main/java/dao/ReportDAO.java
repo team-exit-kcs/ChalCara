@@ -17,8 +17,8 @@ import model.data.Report;
 public class ReportDAO extends Database {
 	final private String TABLE = "Report";
 	final private String REPORT_ID = "ReportID";
-	final private String EXAM_ID = "ExamID";
 	final private String USER_ID = "UserID";
+	final private String EXAM_ID = "ExamID";
 	final private String EXAM_DATE = "ExamDate";
 	final private String ELAPSED_TIME = "ElapsedTime";
 	final private String SCORE = "Score";
@@ -69,8 +69,9 @@ public class ReportDAO extends Database {
 			
 			ResultSet rs = pStmt.executeQuery();
 			
+			int reportID;
 			while(rs.next()) {
-				int reportID = rs.getInt(REPORT_ID);
+				reportID = rs.getInt(REPORT_ID);
 				reportIDList.add(reportID);
 			}
 		}catch(SQLException e) {
@@ -122,4 +123,29 @@ public class ReportDAO extends Database {
 		return cnt;
 	}
 	
+	public boolean setReport(Report report) {
+		boolean resultSts=false;
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "INSERT INTO " + TABLE + "VALUES(?,?)";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setInt(1, report.getReportID());
+			pStmt.setString(2, report.getUserID());
+			pStmt.setString(3, report.getExamID());
+			pStmt.setDate(4, new java.sql.Date(report.getExamDate().getTime()));
+			pStmt.setTime(5, new java.sql.Time(report.getElapsedTime().getTime()));
+			pStmt.setInt(6, report.getScore());
+			pStmt.setDouble(6, report.getCorrectAnswerRate());
+			
+			int result = pStmt.executeUpdate();
+			if(result>0) {
+				resultSts=true;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return resultSts;
+	}
 }
