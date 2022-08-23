@@ -23,11 +23,13 @@
 
 <div>
  <ul class = "B_question">
+  <li><label for="s_toi"><%= questionFormat==0 ? "＜設問" + questionNum + "＞" : "問" + questionNum + "."%></label></li>
   <li>
-    <label for="s_toi"><%= questionFormat==0 ? "＜設問" + questionNum + "＞" : "問" + questionNum + "."%></label>
-    <textarea class="S_ques_area" name="quesution" placeholder = "問題文を入力して下さい"><%= question == null ? "" : question.getQuestionExplanation() %></textarea>
+    <textarea class="S_ques_area" name="quesution" placeholder = "問題文を入力して下さい"><%= question == null ? "" : question.getQuestionSentence() %></textarea>
     <%= questionNum == 1 ? "" : "<button type=\"button\" onclick=\"rmQuestionForm(this)\">−" + (questionFormat==0 ? "設問" : "問") + "を削除</button>" %>
   </li>
+  <li><textarea class="S_ques_area" name="questionExplanation" placeholder = "解説を入力して下さい(任意)"><%= question == null ? "" : question.getQuestionExplanation() %></textarea></li>
+  <li>配点：<input type = "number" name = "Score"  <%= question == null ? "value = 2" : "value = \""+question.getAllocationOfPoint()+"\""%>>点</li>
 </ul>  
 <%-- 選択 --%>
 <div>
@@ -50,7 +52,7 @@
  %>
  
   <li class = "Select">
-    <label><input type="radio" name="Select_Symbol" value=<%= choices.getChoicesID() %> <%= question==null ? "" : choices.getChoicesID()==question.getAnswer() ? "checked=\"checked\"" : ""%>><span><%= choices.getChoicesID() %>．</span></label>
+    <label><input type="radio" name="Select_Symbol" value=<%= choices.getChoicesID() %> <%= choices.getChoicesID()==question.getAnswer() ? "checked=\"checked\"" : ""%>><span><%= choices.getChoicesID() %>．</span></label>
     <input type="text" class="Select_text" name="Select_text" value=<%= choices.getChoices() %> /><%= choices.getChoicesID() <= 2 ? "" : "<button type=\"button\" onclick=\"rmChoicesForm(this)\">−選択肢を削除</button>" %>
   </li>
 
@@ -59,4 +61,7 @@
   <li><br><button type="button" onclick="addChoicesForm(this)">＋選択肢を追加</button></li>
  </ul>
 </div>
+
+<input type="hidden" name="choicesNum" value="<%= question == null ? "2" : question.getChoicesList().size() %>">
+
 </div>

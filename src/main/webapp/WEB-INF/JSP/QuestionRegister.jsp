@@ -50,6 +50,8 @@
 <span><br><button type="button" onclick="addQuestionForm(this)">＋小問を追加</button></span>
 </div>
 
+<input type="hidden" id="QNum" name="questionNum" value="<%= questionList.isEmpty() ? "1" : questionList.size() %>">
+
 <div class = "footer">
           <div class = "botton_area">
           <button type="button" id = "btn-back" class = "back" onclick="back()">戻る</button>

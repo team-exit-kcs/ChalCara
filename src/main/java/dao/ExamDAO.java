@@ -121,7 +121,7 @@ public class ExamDAO extends Database {
 			pStmt.setInt(3, exam.getGenreID());
 			pStmt.setString(4, exam.getExamName());
 			pStmt.setDate(5, new java.sql.Date(exam.getCreateDate().getTime()));
-			pStmt.setDate(5, new java.sql.Date(exam.getUpdateDate().getTime()));
+			pStmt.setDate(6, new java.sql.Date(exam.getUpdateDate().getTime()));
 			pStmt.setInt(7, exam.getPassingScore());
 			pStmt.setInt(8, exam.getExamTime());
 			pStmt.setString(9, exam.getExamExplanation());

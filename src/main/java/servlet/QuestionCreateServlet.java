@@ -8,6 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import model.data.Account;
+import model.data.ExamCreatePage;
 
 /**
  * Servlet implementation class QuestionCreateServlet
@@ -28,16 +32,33 @@ public class QuestionCreateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/QuestionRegister.jsp");
-		dispatcher.forward(request, response);
+		HttpSession session = request.getSession();
+		
+		ExamCreatePage examData = (ExamCreatePage) session.getAttribute("ExamCreatePage");
+		
+		if(examData == null) {
+			response.sendRedirect("/ExamPlatform/ExamCreateServlet");
+		}else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/QuestionRegister.jsp");
+			dispatcher.forward(request, response);
+		}
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		
-		doGet(request, response);
+		Account account = (Account) session.getAttribute("LoginUser");
+		ExamCreatePage examData = (ExamCreatePage) session.getAttribute("ExamCreatePage");
+		String userID = account.getUserID();
+		String examID = examData.getEntryExam().getExamID();
+		
+		request.setCharacterEncoding("UTF-8");
+		
+		
 	}
 
 }

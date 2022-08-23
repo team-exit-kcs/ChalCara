@@ -42,6 +42,9 @@
 
 <span><br><button type="button" onclick="addBigQuestionForm(this)">＋大問を追加</button></span>
 </div>
+
+<input type="hidden" id="BQNum" name="bigQuestionNum" value="<%= bigQuestionList.isEmpty() ? "1" : bigQuestionList.size() %>">
+
 <div class = "footer">
           <div class = "botton_area">
           <button type="button" id = "btn-back" class = "back" onclick="back()">戻る</button>

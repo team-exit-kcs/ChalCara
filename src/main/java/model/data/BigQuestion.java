@@ -1,7 +1,6 @@
 package model.data;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 public class BigQuestion implements Serializable {
@@ -15,13 +14,6 @@ public class BigQuestion implements Serializable {
 	final private int bigQuestionID;
 	final private String bigQuestionSentence;
 	final private List<Question> questionList;
-	
-	public BigQuestion(String examID, int bigQuestionID, String bigQuestionSentence) {
-		this.examID = examID;
-		this.bigQuestionID = bigQuestionID;
-		this.bigQuestionSentence = bigQuestionSentence;
-		this.questionList = new ArrayList<>();
-	}
 
 	public BigQuestion(String examID, int bigQuestionID, String bigQuestionSentence, List<Question> questionList) {
 		this.examID = examID;

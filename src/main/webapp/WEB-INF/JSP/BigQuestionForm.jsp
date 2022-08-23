@@ -25,9 +25,8 @@
 <%-- 大問 --%>
 <div class = "Bigquestion">
  <ul class = "B_question">
- 
+  <li><label for="b_toi">問<%= bigQuestionNum %>.</label></li>
   <li>
-    <label for="b_toi">問<%= bigQuestionNum %>.</label>
     <textarea id="B_ques_area" name="quesution" placeholder = "問題文を入力して下さい"><%= bigQuestion==null ? "" : bigQuestion.getBigQuestionSentence() %></textarea>
     <%= bigQuestionNum == 1 ? "" : "<button type=\"button\" onclick=\"rmBigQuestionForm(this)\">−大問を削除</button>" %>
   </li>
@@ -50,4 +49,7 @@
  
  <span><br><button type="button" onclick="addQuestionForm(this)">＋設問を追加</button></span>
 </div>
+
+<input type="hidden" name="questionNum" value="<%= questionList.isEmpty() ? "1" : questionList.size() %>">
+
 </div>

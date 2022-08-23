@@ -20,7 +20,6 @@ import model.DisclosureRange;
 import model.data.Account;
 import model.data.EntryExam;
 import model.data.ExamCreatePage;
-import model.data.Genre;
 
 /**
  * Servlet implementation class ExamCreateServlet
@@ -60,17 +59,12 @@ public class ExamCreateServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		
 		DisclosureRange DR = new DisclosureRange();
-		
 		Account account = (Account) session.getAttribute("LoginUser");
-		
 		ExamCreatePage examData = (ExamCreatePage) session.getAttribute("ExamCreatePage");
-		List<Genre> genreList = examData.getGenreList();
-		List<String> tagList = examData.getTagList();
 		
 		request.setCharacterEncoding("UTF-8");
-		
-		session.removeAttribute("ExamCreatePage");
 		
 		//試験ID作成完成後"hoge"を変更
 		String examID = "hoge";
@@ -101,13 +95,15 @@ public class ExamCreateServlet extends HttpServlet {
 		
 		int questionFormat = Integer.parseInt(request.getParameter("QuestionFormat"));
 		
-		session.setAttribute("ExamCreatePage", new ExamCreatePage(genreList, tagList, entry, questionFormat));
+		ExamCreatePage newExamData = new ExamCreatePage(examData, entry, questionFormat);
+		session.removeAttribute("ExamCreatePage");
+		session.setAttribute("ExamCreatePage", newExamData);
 		
 		RequestDispatcher dispatcher;
 		if(questionFormat == 0) {
-			dispatcher = request.getRequestDispatcher("/ExamCreateServlet/BigQuestion");
+			dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/BigQuestionRegister.jsp");
 		}else {
-			dispatcher = request.getRequestDispatcher("/ExamCreateServlet/Question");
+			dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/QuestionRegister.jsp");
 		}
 		
 		dispatcher.forward(request, response);
