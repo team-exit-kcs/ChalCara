@@ -27,7 +27,7 @@
  <ul class = "B_question">
   <li><label for="b_toi">問<%= bigQuestionNum %>.</label></li>
   <li>
-    <textarea id="B_ques_area" name="quesution" placeholder = "問題文を入力して下さい"><%= bigQuestion==null ? "" : bigQuestion.getBigQuestionSentence() %></textarea>
+    <textarea id="B_ques_area" required name="Bquestion" placeholder = "問題文を入力して下さい"><%= bigQuestion==null ? "" : bigQuestion.getBigQuestionSentence() %></textarea>
     <%= bigQuestionNum == 1 ? "" : "<button type=\"button\" onclick=\"rmBigQuestionForm(this)\">−大問を削除</button>" %>
   </li>
  </ul> 

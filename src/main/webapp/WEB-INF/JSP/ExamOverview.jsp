@@ -28,12 +28,12 @@
 
 <form action="/ExamPlatform/ExamCreateServlet" method="post">
 <h1 class = "mi_1">試験概要入力フォーム</h1>
-   <div><label for = "e_Name">試験名：<input type = "text" name = "examName" <%= entryExam == null ? "placeholder = \"examName\"" : "value = \""+entryExam.getExamName()+"\""%>></label></div>
+   <div><label for = "e_Name">試験名：<input type = "text" required name = "examName" <%= entryExam == null ? "placeholder = \"examName\"" : "value = \""+entryExam.getExamName()+"\""%>></label></div>
 
           <div>
                <label for = "genre" >ジャンル：
                <% for(Genre genre : genreList){ %>
-               		<input type = "radio" name = "genre" value = <%= genre.getGenreID() %> <%= entryExam==null ? "":genre.getGenreID()==entryExam.getGenreID() ? "checked=\"checked\"" : ""%>><%= genre.getGenreName() %> <%--getGenre --%>
+               		<input type = "radio" name = "genre" required value = <%= genre.getGenreID() %> <%= entryExam==null ? "":genre.getGenreID()==entryExam.getGenreID() ? "checked=\"checked\"" : ""%>><%= genre.getGenreName() %> <%--getGenre --%>
                <% } %>
                </label>
           </div>
@@ -68,7 +68,7 @@
           
           <div>
                <label for = "OpenRange" >公開範囲：
-               <input type = "radio" name = "OpenRange" value = "0" onchange = "LimitedPassForm()" <%= entryExam==null ? "" : entryExam.getDisclosureRange()==0 ? "checked=\"checked\"" : ""%>>公開
+               <input type = "radio" name = "OpenRange" value = "0" required onchange = "LimitedPassForm()" <%= entryExam==null ? "" : entryExam.getDisclosureRange()==0 ? "checked=\"checked\"" : ""%>>公開
                <input type = "radio" name = "OpenRange" value = "1" onchange = "LimitedPassForm()" <%= entryExam==null ? "" : entryExam.getDisclosureRange()==1 ? "checked=\"checked\"" : ""%> id = "radio-limited">限定公開
                <input type = "radio" name = "OpenRange" value = "2" onchange = "LimitedPassForm()" <%= entryExam==null ? "" : entryExam.getDisclosureRange()==2 ? "checked=\"checked\"" : ""%>>非公開
                </label>
@@ -76,13 +76,13 @@
           
           <div id = "Ques_for">
                <label for="QuestionFormat">問題形式：</label>
-               <label><input type="radio" value = "0" name="QuestionFormat" <%= questionFormat==0 ? "checked=\"checked\"" : ""%>>大問</label>
-               <label><input type="radio" value = "1"name="QuestionFormat"  <%= questionFormat==1 ? "checked=\"checked\"" : ""%>>小問</label>
+               <label><input type="radio" value = "0" required name="QuestionFormat" <%= questionFormat==0 ? "checked=\"checked\"" : ""%>>大問</label>
+               <label><input type="radio" value = "1" name="QuestionFormat"  <%= questionFormat==1 ? "checked=\"checked\"" : ""%>>小問</label>
           </div>
           
-          <div><label for = "e_Time">試験時間：<input type = "number" name = "examTime" min = 1 <%= entryExam == null ? "" : "value = \""+entryExam.getExamTime()+"\""%>>分</label></div>
+          <div><label for = "e_Time">試験時間：<input type = "number" required name = "examTime" min = 1 <%= entryExam == null ? "" : "value = \""+entryExam.getExamTime()+"\""%>>分</label></div>
           
-          <div><label for = "e_score">合格点：<input type = "number" name = "passingScore" min = 1 <%= entryExam == null ? "" : "value = \""+entryExam.getPassingScore()+"\""%>>点</label></div>
+          <div><label for = "e_score">合格点：<input type = "number" required name = "passingScore" min = 1 <%= entryExam == null ? "" : "value = \""+entryExam.getPassingScore()+"\""%>>点</label></div>
           
           <div>
                <label for = "Explanation">説明文：</label>
