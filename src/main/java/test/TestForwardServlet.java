@@ -106,7 +106,6 @@ public class TestForwardServlet extends HttpServlet {
 		EntryExam entryExam = new EntryExam("test","testUsr",3,"testExam",new Date(),new Date(),60,120,"試験概要です",1,examtagList,"pass");
 		
 		List<BigQuestion> bigQuestionList = new ArrayList<>();
-		
 		for(int a=1;a<3;a++) {
 			List<Question> questionList = new ArrayList<>();
 			for(int b=1;b<4;b++) {

@@ -29,7 +29,7 @@
 <body>
 <form action="/ExamPlatform/ExamCreateServlet/Question" method="post">
 <h1>問題登録フォーム</h1>
-
+<div>
 <div>
 
  <%if(questionList.isEmpty()){ %>
@@ -57,6 +57,7 @@
           <button type="button" id = "btn-back" class = "back" onclick="back()">戻る</button>
           <input type="submit" value = "登録確認画面へ" class = "ok"></input>
           </div>          
+</div>
 </div>
 </form>
 <script type="text/javascript">

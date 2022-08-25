@@ -38,12 +38,12 @@
  <%if(question == null){ %>
  
   <li class = "Select">
-    <label><input type="radio" required name="Select_ans" value=1><span>1．</span></label>
+    <label><input type="radio" required name="Select_ans[<%= bigQuestionNum %>][<%= questionNum %>]" value=1><span>1．</span></label>
     <input type="text" required class="Select_text" name="Select_text" />
   </li>
   
   <li class = "Select">
-    <label><input type="radio" required name="Select_ans" value=2><span>2．</span></label>
+    <label><input type="radio" required name="Select_ans[<%= bigQuestionNum %>][<%= questionNum %>]" value=2><span>2．</span></label>
     <input type="text" required class="Select_text" name="Select_text" />
   </li>
  <%
@@ -52,7 +52,7 @@
  %>
  
   <li class = "Select">
-    <label><input type="radio" required name="Select_ans" value=<%= choices.getChoicesID() %> <%= choices.getChoicesID()==question.getAnswer() ? "checked=\"checked\"" : ""%>><span><%= choices.getChoicesID() %>．</span></label>
+    <label><input type="radio" required name="Select_ans[<%= bigQuestionNum %>][<%= questionNum %>]" value=<%= choices.getChoicesID() %> <%= choices.getChoicesID()==question.getAnswer() ? "checked=\"checked\"" : ""%>><span><%= choices.getChoicesID() %>．</span></label>
     <input type="text" required class="Select_text" name="Select_text" value=<%= choices.getChoices() %> /><%= choices.getChoicesID() <= 2 ? "" : "<button type=\"button\" onclick=\"rmChoicesForm(this)\">−選択肢を削除</button>" %>
   </li>
 
