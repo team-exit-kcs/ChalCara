@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-form {
+main {
   position:relative;
   text-align:center;
   margin: 0 auto;
@@ -18,7 +18,7 @@ ul {
   margin: 0;
 }
 
-form li + li {
+main li + li {
   margin-top: 1em;
 }
 
@@ -82,4 +82,4 @@ button {
   /* このマージンは、ラベルとテキストフィールドの間のスペースと
      おおよそ同じスペースを表す */
   margin-left: .5em;
-}
+}}
