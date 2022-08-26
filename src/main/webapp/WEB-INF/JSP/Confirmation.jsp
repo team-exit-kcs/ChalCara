@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="./css/Confimation.css">
 </head>
 <body>
-<form>
+<main>
 <h1>確認フォーム</h1>
 
 <p>試験名：<%-- examname --%></p><br>
@@ -23,6 +23,6 @@
 <p>合格点：<%-- passingScore --%></p><br>
 <p>説明文:<%-- Explanation --%></p><br>
 <p>問題一覧</p>
-</form>
+</main>
 </body>
 </html>
