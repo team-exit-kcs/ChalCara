@@ -1,2 +1,11 @@
 @charset "UTF-8";
 
+main {
+  position:relative;
+  margin: 0 auto;
+  width: 800px;
+  /* フォームの輪郭 */
+  padding: 1em;
+  border: 2px solid #000;
+  margin: 40px 21em;
+}
