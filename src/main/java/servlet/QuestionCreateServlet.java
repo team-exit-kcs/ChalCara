@@ -65,7 +65,6 @@ public class QuestionCreateServlet extends HttpServlet {
 		int[] arrayChoicesNum = Stream.of(request.getParameterValues("choicesNum")).mapToInt(Integer::parseInt).toArray();
 		
 		String[] arrayQuestion = request.getParameterValues("question");
-		int[] arrayAnswer = Stream.of(request.getParameterValues("Select_ans")).mapToInt(Integer::parseInt).toArray();
 		String[] arrayQuestionExplanation = request.getParameterValues("questionExplanation");
 		double[] arrayScore = Stream.of(request.getParameterValues("Score")).mapToDouble(Double::parseDouble).toArray();
 		String[] arrayChoices = request.getParameterValues("Select_text");
@@ -79,11 +78,11 @@ public class QuestionCreateServlet extends HttpServlet {
 				choicesList.add(new Choices(examID,1,x+1,y+1,arrayChoices[choicesCnt]));
 			}
 			String q = arrayQuestion[x];
-//			int ans = arrayAnswer[x];
+			int ans = Integer.parseInt(request.getParameter("Select_ans[小問][問" + (x+1) + ".]"));
 			String qe = arrayQuestionExplanation[x];
 			double score = arrayScore[x];
 			
-			questionList.add(new Question(examID,1,x+1,q,1,qe,score,choicesList));
+			questionList.add(new Question(examID,1,x+1,q,ans,qe,score,choicesList));
 		}
 		bigQuestionList.add(new BigQuestion(examID,1,null,questionList));
 		
@@ -91,8 +90,7 @@ public class QuestionCreateServlet extends HttpServlet {
 		session.removeAttribute("ExamCreatePage");
 		session.setAttribute("ExamCreatePage", newExamData);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/QuestionRegister.jsp");
-		dispatcher.forward(request, response);
+		response.sendRedirect("/ExamPlatform/ExamCreateServlet/Confirmation");
 	}
 
 }

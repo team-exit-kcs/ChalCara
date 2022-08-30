@@ -99,14 +99,11 @@ public class ExamCreateServlet extends HttpServlet {
 		session.removeAttribute("ExamCreatePage");
 		session.setAttribute("ExamCreatePage", newExamData);
 		
-		RequestDispatcher dispatcher;
 		if(questionFormat == 0) {
-			dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/BigQuestionRegister.jsp");
+			response.sendRedirect("/ExamPlatform/ExamCreateServlet/BigQuestion");
 		}else {
-			dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/QuestionRegister.jsp");
+			response.sendRedirect("/ExamPlatform/ExamCreateServlet/Question");
 		}
-		
-		dispatcher.forward(request, response);
 	}
 
 }

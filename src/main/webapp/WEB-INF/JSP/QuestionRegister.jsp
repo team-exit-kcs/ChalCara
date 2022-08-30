@@ -29,7 +29,12 @@
 <body>
 <form action="/ExamPlatform/ExamCreateServlet/Question" method="post">
 <h1>問題登録フォーム</h1>
-<div>
+
+<div class = "Bigquestion">
+ <ul class = "B_question">
+  <li><h2>小問</h2></li>
+ </ul> 
+ 
 <div>
 
  <%if(questionList.isEmpty()){ %>
