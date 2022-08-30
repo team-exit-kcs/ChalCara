@@ -18,10 +18,10 @@
 <head>
 <meta charset="UTF-8">
 <jsp:include page="./title.jsp" />
-<link rel="stylesheet" href="./css/QuestionRegister.css">
+<link rel="stylesheet" href="/ExamPlatform/css/QuestionRegister.css">
 </head>
 <body>
-<form action="/ExamPlatform/ExamCreateServlet/Question" method="post">
+<form action="/ExamPlatform/ExamCreateServlet/BigQuestion" method="post">
 <h1>問題登録フォーム</h1>
 <div>
 
@@ -65,7 +65,7 @@
                 }
             }
 </script>
-<script src="./js/choices.js"></script>
-<script src="./js/BigQuestion.js"></script>
+<script src="/ExamPlatform/js/choices.js"></script>
+<script src="/ExamPlatform/js/BigQuestion.js"></script>
 </body>
 </html>
