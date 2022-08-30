@@ -16,13 +16,13 @@ import model.data.ExamCreatePage;
  * Servlet implementation class ConfimationServlet
  */
 @WebServlet("/ExamCreateServlet/Confirmation")
-public class ConfimationServlet extends HttpServlet {
+public class CreateConfimationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ConfimationServlet() {
+    public CreateConfimationServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
