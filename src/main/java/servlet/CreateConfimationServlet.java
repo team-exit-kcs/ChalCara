@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.ExamCreateLogic;
 import model.data.ExamCreatePage;
 
 /**
@@ -47,7 +49,19 @@ public class CreateConfimationServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		ExamCreateLogic examLogic =new ExamCreateLogic();
+		
+		HttpSession session = request.getSession();
+		
+		ExamCreatePage examData = (ExamCreatePage) session.getAttribute("ExamCreatePage");
+		examLogic.exequte(examData.getEntryExam(), examData.getBigQuestionList());
+		
+		response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        out.println("<html>");
+        out.println("<p>試験の登録が完了しました</p>");
+        out.println("<a href=\"/ExamPlatform/MypageServlet\">マイページに戻る</a>");
+        out.println("</html>");
 	}
 
 }
