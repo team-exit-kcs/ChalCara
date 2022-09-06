@@ -12,9 +12,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel = "stylesheet" href= "./css/Confimation.css">
+<link rel = "stylesheet" href= "/ExamPlatform/css/Confimation.css">
 <jsp:include page="./title.jsp" />
-<link rel="stylesheet" href="./css/Confimation.css">
+<link rel="stylesheet" href="/ExamPlatform/css/Confimation.css">
 </head>
 <body>
 <main>
@@ -38,20 +38,20 @@
 <p>説明文:<c:out value="${ExamCreatePage.entryExam.examExplanation}" /></p><br>
 <p>問題一覧<br>
 <c:forEach var="BQ" items="${ExamCreatePage.bigQuestionList}">
-	<c:if test="ExamCreatePage.questionFormat == 0">
+	<c:if test="${ExamCreatePage.questionFormat == 0}">
 		<span>問${BQ.bigQuestionID}</span><br>
 		<span>${BQ.bigQuestionSentence}</span><br>
 	</c:if>
 	<c:forEach var="Q" items="${BQ.questionList}">
 		<c:choose>
-			<c:when test="ExamCreatePage.questionFormat == 0">＜設問${Q.questionID}＞<br></c:when>
+			<c:when test="${ExamCreatePage.questionFormat == 0}">＜設問${Q.questionID}＞<br></c:when>
 			<c:otherwise><span>問${Q.questionID}</span><br></c:otherwise>
 		</c:choose>
 		<span>${Q.questionSentence}</span><br>
 		<span>解説：${Q.questionExplanation}</span><br>
 		<span>配点：${Q.allocationOfPoint}</span><br>
 		<c:forEach var="choices" items="${Q.choicesList}">
-			<c:if test="choices.choicesID==Q.answer">
+			<c:if test="${choices.choicesID==Q.answer}">
 				<span>答え   </span>
 			</c:if>
 			<span>${choices.choicesID}：${choices.choices}</span><br>

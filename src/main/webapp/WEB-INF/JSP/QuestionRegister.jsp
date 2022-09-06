@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ page import = "model.data.ExamCreatePage" %>
 <%@ page import = "model.data.BigQuestion" %>
 <%@ page import = "model.data.Question" %>
@@ -18,8 +19,11 @@
         	questionList = bigQuestionList.get(0).getQuestionList();
      	}
       %>
-    
+   
 <!DOCTYPE html>
+
+<c:set var="questionList" value="${ExamCreatePage.bigQuestionList[0].questionList}" />
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -36,26 +40,27 @@
  </ul> 
  
 <div>
-
- <%if(questionList.isEmpty()){ %>
-	<jsp:include page="./QuestionForm.jsp">
-		<jsp:param name="bigQuestionNum" value = "1" />
-		<jsp:param name="questionNum" value = "1" />
-	</jsp:include>
- <%
- }else{
- 	for(Question q : questionList){
- %>
- 	<jsp:include page="./QuestionForm.jsp">
- 		<jsp:param name="bigQuestionNum" value = "1" />
-		<jsp:param name="questionNum" value = "<%= q.getQuestionID() %>" />
-	</jsp:include>
- <%}}%>
+<c:choose>
+    <c:when test="${empty questionList}">
+        <jsp:include page="./QuestionForm.jsp">
+			<jsp:param name="bigQuestionNum" value = "1" />
+			<jsp:param name="questionNum" value = "1" />
+		</jsp:include>
+    </c:when>
+    <c:otherwise>
+        <c:forEach var="q" items="${questionList}">
+         	<jsp:include page="./BigQuestionForm.jsp">
+		        <jsp:param name="bigQuestionNum" value = "1" />
+		        <jsp:param name="questionNum" value = "${q.questionID}" />
+	        </jsp:include>
+	    </c:forEach>
+    </c:otherwise>
+</c:choose>
 
 <span><br><button type="button" onclick="addQuestionForm(this)">＋小問を追加</button></span>
 </div>
 
-<input type="hidden" id="QNum" name="questionNum" value="<%= questionList.isEmpty() ? "1" : questionList.size() %>">
+<input type="hidden" id="QNum" name="questionNum" value="<c:choose><c:when test="${empty questionList}">1</c:when><c:otherwise><c:out value="${questionList.size()}"/></c:otherwise></c:choose>">
 
 <div class = "footer">
           <div class = "botton_area">

@@ -1,17 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import = "model.data.ExamCreatePage" %>
 <%@ page import = "model.data.BigQuestion" %>
 <%@ page import = "model.data.Question" %>
 <%@ page import = "model.data.Choices" %>
 <%@ page import = "java.util.ArrayList" %>
 <%@ page import = "java.util.List" %>
-
-     <% 
-     	ExamCreatePage pageData = (ExamCreatePage) session.getAttribute("ExamCreatePage");
-     	List<BigQuestion> bigQuestionList = pageData.getBigQuestionList();
-      %>
     
 <!DOCTYPE html>
 <html>
@@ -25,26 +21,27 @@
 <h1>問題登録フォーム</h1>
 <div>
 
- <%if(bigQuestionList.isEmpty()){ %>
-	<jsp:include page="./BigQuestionForm.jsp">
-		<jsp:param name="bigQuestionNum" value = "1" />
-		<jsp:param name="questionFormat" value = "0" />
-	</jsp:include>
- <%
- }else{
-	 for(BigQuestion bq : bigQuestionList){
- %>
- 	<jsp:include page="./BigQuestionForm.jsp">
-		<jsp:param name="bigQuestionNum" value = "<%= bq.getBigQuestionID() %>" />
-		<jsp:param name="questionFormat" value = "0" />
-	</jsp:include>
- <%}}%>
+<c:choose>
+    <c:when test="${empty ExamCreatePage.bigQuestionList}">
+        <jsp:include page="./BigQuestionForm.jsp">
+		    <jsp:param name="bigQuestionNum" value = "1" />
+		    <jsp:param name="questionFormat" value = "0" />
+	    </jsp:include>
+    </c:when>
+    <c:otherwise>
+        <c:forEach var="bq" items="${ExamCreatePage.bigQuestionList}">
+         	<jsp:include page="./BigQuestionForm.jsp">
+		        <jsp:param name="bigQuestionNum" value = "${bq.bigQuestionID}" />
+		        <jsp:param name="questionFormat" value = "0" />
+	        </jsp:include>
+	    </c:forEach>
+    </c:otherwise>
+</c:choose>
 
 <span><br><button type="button" onclick="addBigQuestionForm(this)">＋大問を追加</button></span>
 </div>
 
-<input type="hidden" id="BQNum" name="bigQuestionNum" value="<%= bigQuestionList.isEmpty() ? "1" : bigQuestionList.size() %>">
-
+<input type="hidden" id="BQNum" name="bigQuestionNum" value="<c:choose><c:when test="${empty ExamCreatePage.bigQuestionList}">1</c:when><c:otherwise><c:out value="${ExamCreatePage.bigQuestionList.size()}"/></c:otherwise></c:choose>">
 <div class = "footer">
           <div class = "botton_area">
           <button type="button" id = "btn-back" class = "back" onclick="back()">戻る</button>

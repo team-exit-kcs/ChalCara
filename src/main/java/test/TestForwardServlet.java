@@ -20,7 +20,9 @@ import model.data.Choices;
 import model.data.EntryExam;
 import model.data.ExamCreatePage;
 import model.data.Genre;
+import model.data.Mypage;
 import model.data.Question;
+import model.data.Report;
 
 /**
  * Servlet implementation class TestForwardServlet
@@ -69,7 +71,7 @@ public class TestForwardServlet extends HttpServlet {
 //	*/		
 		
 
-	/*Mypage		
+//	/*Mypage		
  		List<String> examList = new ArrayList<>();
 		for(int i=0;i<3;i++) {
 			examList.add("testExam"+Integer.toString(i));
