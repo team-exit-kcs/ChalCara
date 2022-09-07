@@ -67,7 +67,7 @@ public class TestForwardServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 //	/*Account
-		session.setAttribute("LoginUser",new Account("testUsr","プロフィール","./img/kari.png"));
+		session.setAttribute("LoginUser",new Account("<input type = \"text\" /><h1>testUsr</h1>","プロフィール","./img/kari.png"));
 //	*/		
 		
 

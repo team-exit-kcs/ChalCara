@@ -12,15 +12,6 @@
 <%@ page import = "java.text.SimpleDateFormat" %>
 
 
-     <% 
-        Account account = (Account) session.getAttribute("LoginUser");
-        Mypage mypage = (Mypage) request.getAttribute("MypageData");
-        List<String> examList = mypage.getExamList();
-        List<String> bmList = mypage.getBookmarkList();
-        List<Report> rpList = mypage.getReportList();
-      %>
-
-
 <!DOCTYPE html>
 
 <c:set var="maxCnt" value="4" />
