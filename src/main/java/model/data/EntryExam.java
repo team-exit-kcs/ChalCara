@@ -1,10 +1,12 @@
 package model.data;
 
 import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
 
 import model.DisclosureRange;
+import model.Hash;
 
 public class EntryExam extends BaseExam implements DisclosureRange, Serializable {
 	/*要素
@@ -25,11 +27,12 @@ public class EntryExam extends BaseExam implements DisclosureRange, Serializable
 
 	public EntryExam(String examID, String userID, int genreID, String examName, Date createDate, Date updateDate,
 			int passingScore, int examTime, String examExplanation, int disclosureRange, List<String> tagList,
-			String limitedPassword) {
+			String limitedPassword) throws NoSuchAlgorithmException {
 		super(examID, userID, genreID, examName, createDate, updateDate, passingScore, examTime, examExplanation,
 				disclosureRange, tagList);
 		if(disclosureRange == LIMITED) {
-			this.limitedPassword = limitedPassword;
+			Hash hash = new Hash();
+			this.limitedPassword = hash.createHash(limitedPassword);
 		}else {
 			this.limitedPassword = null;
 		}
