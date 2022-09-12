@@ -18,11 +18,11 @@
 		<form action="/ExamPlatform/LoginServlet" method="post">
 			<div>
 				<label for="input_id">ログインID:</label>
-				<input type="text" id="input_id" name="id">
+				<input type="text" required id="input_id" name="id">
 			</div>
 			<div>
 				<label for="input_pw">パスワード:</label>
-				<input type="password" id="input_pw" name="pass">
+				<input type="password" required id="input_pw" name="pass">
 				<c:if test="${not empty msg}"><p class="errorMsg"><c:out value="${msg}"/></p></c:if>
 			</div>
 		
