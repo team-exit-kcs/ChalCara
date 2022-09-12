@@ -19,14 +19,14 @@ import model.data.Login;
 /**
  * Servlet implementation class AccountCreateServlet
  */
-@WebServlet("/AccountEntryServret")
-public class AccountEntryServret extends HttpServlet {
+@WebServlet("/AccountEntryServlet")
+public class AccountEntryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AccountEntryServret() {
+    public AccountEntryServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
