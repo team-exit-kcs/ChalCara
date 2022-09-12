@@ -4,12 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="./css/BulletinBoard.css">
 <jsp:include page="./title.jsp" />
 </head>
 <body>
 <jsp:include page="./header.jsp" />
 
-<main id = root>
+<main>
 
 </main>
 
