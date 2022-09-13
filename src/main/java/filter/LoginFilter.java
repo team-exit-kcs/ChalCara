@@ -19,7 +19,7 @@ import model.data.Account;
 /**
  * Servlet Filter implementation class LoginFilter
  */
-@WebFilter(urlPatterns={"/MypageServlet", "/ExamCreateServlet/*"})
+@WebFilter(urlPatterns={"/MypageServlet", "/LogoutServlet", "/ExamCreateServlet/*"})
 public class LoginFilter extends HttpFilter implements Filter {
        
     /**
