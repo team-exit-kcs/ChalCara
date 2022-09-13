@@ -6,10 +6,12 @@
 }
 
 #h1 {
+	position:relative;
 	font-size: 50px;
 	font-family: serif;
 	font-weight: bold;
-	margin-top: 10px;
+	left:180px;
+	top: 10px;
 }
 
 #main {
@@ -37,10 +39,8 @@ div.headerbox span{
 }
 
 #login {
-	position: relative;
-    right: 40px;
-    bottom: 100px;
-    color: #000;"
+	margin-left: 300px;
+    color: #000;
     font-size: 20px;
 }
 

@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+
+* {
+  padding: 0; /* Reset `padding` and `margin` of all elements */
+  margin: 0;
+}
+
+#main {
+  width: 800px;
+  height: 200px;
+}
+
+div.footer_box{
+  position:relative;
+  text-align:center;
+  height: 100px;
+  background-color: #00a0dc;
+  color: #fff;
+  font-family: serif;
+  
+}
+
+#faq{
+  position:relative;
+  top: 20px;
+  right: 80px;
+  font-size: 45px;
+  font-weight: bold;
+}
+
+#toi{
+  position:relative;
+  top: 20px;
+  left: 140px;
+  font-size: 45px;
+  font-weight: bold;
+}
+
+#sikiri {
+	position:relative;
+	left: 60px;
+	border-left: 3px solid #dddddd;
+}
+
+#sikiri_1 {
+	position:relative;
+	right: 240px;
+	border-left: 3px solid #dddddd;
+}
+
+#sikiri_2 {
+	position:relative;
+	left: 240px;
+	border-left: 3px solid #dddddd;
+}
