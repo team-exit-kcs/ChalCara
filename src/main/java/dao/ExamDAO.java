@@ -34,8 +34,8 @@ public class ExamDAO extends Database {
 		Exam exam = null;
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
-			String sql = "SELECT "+ GENRE_ID + EXAM_NAME + CREATE_DATE + UPDATE_DATE + PASSING_SCORE + 
-					EXAM_TIME + EXAM_EXPLANATION + DISCLOSURE_RANGE + " FROM " + TABLE + " WHERE " + EXAM_ID + " = ?";
+			String sql = "SELECT "+ USER_ID + ", " + GENRE_ID + ", " + EXAM_NAME + ", " + CREATE_DATE + ", " + UPDATE_DATE + ", " + PASSING_SCORE + ", " + 
+					EXAM_TIME + ", " + EXAM_EXPLANATION + ", " + DISCLOSURE_RANGE + " FROM " + TABLE + " WHERE " + EXAM_ID + " = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, examID);
 			
