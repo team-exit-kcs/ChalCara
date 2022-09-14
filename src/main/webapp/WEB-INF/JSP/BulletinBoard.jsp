@@ -26,13 +26,8 @@
 <main>
 
 <h2>掲示板</h2>
-<% 
-   String str = "exam1,exam2,exam3,exam4";
-   request.setAttribute("data",str);
-%>
-<c:forTokens var="s" items="${data}" delims="," varStatus="st">
-<p id = "Record"> yyyy/mm/dd　　　　　UserID　　　　　　　　　　　<a href = "#" id = "exam">examname</a></p>
-</c:forTokens>
+
+<p id = "Record"> <c:out value = "${ }">　　　　　UserID　　　　　　　　　　　<a href = "#" id = "exam">examname</a></p>
 
 <a href = "#">1</a>
 </main>
