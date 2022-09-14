@@ -2,9 +2,6 @@ package test;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,14 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.data.Account;
-import model.data.BigQuestion;
-import model.data.Choices;
-import model.data.EntryExam;
-import model.data.ExamCreatePage;
-import model.data.Genre;
-import model.data.Mypage;
-import model.data.Question;
-import model.data.Report;
 
 /**
  * Servlet implementation class TestForwardServlet
@@ -67,11 +56,12 @@ public class TestForwardServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 //	/*Account
-		session.setAttribute("LoginUser",new Account("<input type = \"text\" /><h1>testUsr</h1>","プロフィール","./img/kari.png"));
+//		session.setAttribute("LoginUser",new Account("<input type = \"text\" /><h1>testUsr</h1>","./img/kari.png","プロフィール"));
+		session.setAttribute("LoginUser",new Account("testUsr","./img/kari.png","プロフィール"));
 //	*/		
 		
 
-//	/*Mypage		
+	/*Mypage		
  		List<String> examList = new ArrayList<>();
 		for(int i=0;i<3;i++) {
 			examList.add("testExam"+Integer.toString(i));
@@ -89,7 +79,7 @@ public class TestForwardServlet extends HttpServlet {
 		request.setAttribute("MypageData", new Mypage(examList,bmList,rpList));
 //	 */
 		
-//	/*ExamOverview
+	/*ExamOverview
 		List<Genre> genreList = new ArrayList<>();
 		for(int i=0;i<10;i++) {
 			genreList.add(new Genre(i,"ジャンル"+Integer.toString(i)));
@@ -105,7 +95,13 @@ public class TestForwardServlet extends HttpServlet {
 			examtagList.add("Tag"+Integer.toString(i));
 		}
 		
-		EntryExam entryExam = new EntryExam("test","testUsr",3,"testExam",new Date(),new Date(),60,120,"試験概要です",1,examtagList,"pass");
+		EntryExam entryExam=null;
+		try {
+			entryExam = new EntryExam("testUsr",3,"testExam",new Date(),new Date(),60,120,"試験概要です",1,examtagList,"pass");
+		} catch (NoSuchAlgorithmException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 		
 		List<BigQuestion> bigQuestionList = new ArrayList<>();
 		for(int a=1;a<3;a++) {

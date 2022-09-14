@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -66,9 +67,6 @@ public class ExamCreateServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		//試験ID作成完成後"hoge"を変更
-		String examID = "hoge";
-		
 		String userID = account.getUserID();
 		int genreID = Integer.parseInt(request.getParameter("genre"));
 		String examName = request.getParameter("examName");
@@ -90,8 +88,14 @@ public class ExamCreateServlet extends HttpServlet {
 			limitedPassword = null;
 		}
 		
-		EntryExam entry = new EntryExam(examID, userID, genreID, examName, createDate, updateDate, passingScore, 
-				examTime, examExplanation, disclosureRange, examTagList, limitedPassword);
+		EntryExam entry=null;
+		try {
+			entry = new EntryExam(userID, genreID, examName, createDate, updateDate, passingScore, 
+					examTime, examExplanation, disclosureRange, examTagList, limitedPassword);
+		} catch (NoSuchAlgorithmException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 		
 		int questionFormat = Integer.parseInt(request.getParameter("QuestionFormat"));
 		

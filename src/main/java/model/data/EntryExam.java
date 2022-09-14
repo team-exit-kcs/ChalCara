@@ -1,10 +1,13 @@
 package model.data;
 
 import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
 
+import dao.ExamDAO;
 import model.DisclosureRange;
+import model.Hash;
 
 public class EntryExam extends BaseExam implements Serializable {
 	/*要素
@@ -23,11 +26,11 @@ public class EntryExam extends BaseExam implements Serializable {
 	 */
 	final private String limitedPassword;
 
-	public EntryExam(String examID, String userID, int genreID, String examName, Date createDate, Date updateDate,
+	public EntryExam(String userID, int genreID, String examName, Date createDate, Date updateDate,
 			int passingScore, int examTime, String examExplanation, int disclosureRange, List<String> tagList,
-			String limitedPassword) {
+			String limitedPassword) throws NoSuchAlgorithmException {
 		
-		super(examID, userID, genreID, examName, createDate, updateDate, passingScore, examTime, examExplanation,
+		super(createExamID(userID, examName), userID, genreID, examName, createDate, updateDate, passingScore, examTime, examExplanation,
 				disclosureRange, tagList);
 		
 		DisclosureRange DR = new DisclosureRange();
@@ -38,11 +41,24 @@ public class EntryExam extends BaseExam implements Serializable {
 		}
 	}
 
-	public EntryExam(String examID, String userID, int genreID, String examName, Date createDate, Date updateDate,
-			int passingScore, int examTime, String examExplanation, int disclosureRange, List<String> tagList) {
-		super(examID, userID, genreID, examName, createDate, updateDate, passingScore, examTime, examExplanation,
+	public EntryExam(String userID, int genreID, String examName, Date createDate, Date updateDate,
+			int passingScore, int examTime, String examExplanation, int disclosureRange, List<String> tagList) throws NoSuchAlgorithmException {
+		super(createExamID(userID, examName), userID, genreID, examName, createDate, updateDate, passingScore, examTime, examExplanation,
 				disclosureRange, tagList);
 		this.limitedPassword = null;
+	}
+	
+	private static String createExamID(String userID, String examName) throws NoSuchAlgorithmException {
+		ExamDAO examDAO = new ExamDAO();
+		Hash hash = new Hash();
+		
+		int i=0;
+		String examID = hash.createHash(userID+examName);
+		while(examDAO.isID(examID)) {
+			examID = hash.createHash(userID+examName+i);
+			i++;
+		}
+		return examID;
 	}
 
 	public String getLimitedPassword() {

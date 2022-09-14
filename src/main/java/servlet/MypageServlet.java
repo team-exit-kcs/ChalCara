@@ -35,11 +35,6 @@ public class MypageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		
-		
-		//仮ユーザ
-		session.setAttribute("LoginUser",new Account("testUsr","プロフィール","./img/kari.png"));
-		
-		
 		Account account = (Account) session.getAttribute("LoginUser");
 		MypageLogic ml = new MypageLogic();
 		Mypage m = ml.exequte(account.getUserID());
