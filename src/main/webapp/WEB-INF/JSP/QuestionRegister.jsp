@@ -10,15 +10,6 @@
 <%@ page import = "model.data.Choices" %>
 <%@ page import = "java.util.ArrayList" %>
 <%@ page import = "java.util.List" %>
-
-     <% 
-     	ExamCreatePage pageData = (ExamCreatePage) session.getAttribute("ExamCreatePage");
-     	List<BigQuestion> bigQuestionList = pageData.getBigQuestionList();
-     	List<Question> questionList = new ArrayList<>();
-     	if(!bigQuestionList.isEmpty()){
-        	questionList = bigQuestionList.get(0).getQuestionList();
-     	}
-      %>
    
 <!DOCTYPE html>
 
