@@ -40,6 +40,70 @@ public class BookmarkDAO extends Database{
 		return bookmark;
 	}
 	
+	public boolean isBookmark(String examID,String userID) {
+		boolean result = false;
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "SELECT * FROM " + TABLE + " WHERE " + EXAM_ID + " = ? AND " + USER_ID + " = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, examID);
+			pStmt.setString(2, userID);
+			
+			ResultSet rs = pStmt.executeQuery();
+			
+			while(rs.next()) {
+				result = true;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return result;
+	}
+	
+	public boolean setBookmark(String examID,String userID) {
+		boolean result = false;
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "INSERT INTO " + TABLE + " VALUES(?,?)";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, examID);
+			pStmt.setString(2, userID);
+			
+			int rs = pStmt.executeUpdate();
+			if(rs>0) {
+				result=true;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return result;
+	}
+	
+	public boolean deleteBookmark(String examID,String userID) {
+		boolean result = false;
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "DELETE FROM " + TABLE + " WHERE " + EXAM_ID + " = ? AND " + USER_ID + " = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, examID);
+			pStmt.setString(2, userID);
+			
+			int rs = pStmt.executeUpdate();
+			if(rs>0) {
+				result=true;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return result;
+	}
+	
 	public int getUserCount(String examID) {
 		int cnt=0;
 		

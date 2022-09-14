@@ -10,21 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.ExaminationLogic;
+import model.BookmarkLogic;
 import model.data.Account;
-import model.data.ExaminationPage;
 
 /**
- * Servlet implementation class ExaminationServlet
+ * Servlet implementation class BookmarkServlet
  */
-@WebServlet("/ExaminationServlet")
-public class ExaminationServlet extends HttpServlet {
+@WebServlet("/BookmarkServlet")
+public class BookmarkServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ExaminationServlet() {
+    public BookmarkServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,22 +32,18 @@ public class ExaminationServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ExaminationLogic examLogic = new ExaminationLogic();
+		BookmarkLogic bookmarkLogic = new BookmarkLogic();
 		HttpSession session = request.getSession();
 		
 		request.setCharacterEncoding("UTF-8");
 		String examID = request.getParameter("examID");
 		Account user = (Account) session.getAttribute("LoginUser");
-		ExaminationPage pageData = examLogic.exequte(examID,user);
+		boolean result = bookmarkLogic.exequte(examID,user.getUserID());
 		
-		if(pageData == null){
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/NotFound.jsp");
-			dispatcher.forward(request, response);
+		if(result) {
+			response.sendRedirect("/ExamPlatform/ExaminationServlet?examID=" + examID);
 		}else {
-			session.removeAttribute("pageData");
-			session.setAttribute("pageData", pageData);
-			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/ExamGaiyou.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/NotFound.jsp");
 			dispatcher.forward(request, response);
 		}
 	}
