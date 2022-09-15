@@ -19,16 +19,16 @@ import model.data.ExamCreatePage;
 import model.data.Question;
 
 /**
- * Servlet implementation class QuestionCreateServlet
+ * Servlet implementation class BigQuestionCreateServlet
  */
-@WebServlet("/ExamCreateServlet/Question")
-public class QuestionCreateServlet extends HttpServlet {
+@WebServlet("/ExamCreateServlet/BigQuestion")
+public class BigQuestionCreateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuestionCreateServlet() {
+    public BigQuestionCreateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,10 +44,9 @@ public class QuestionCreateServlet extends HttpServlet {
 		if(examData == null) {
 			response.sendRedirect("/ExamPlatform/ExamCreateServlet");
 		}else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/QuestionRegister.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/BigQuestionRegister.jsp");
 			dispatcher.forward(request, response);
 		}
-		
 	}
 
 	/**
@@ -61,30 +60,38 @@ public class QuestionCreateServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		int questionNum = Integer.parseInt(request.getParameter("questionNum"));
+		int bigQuestionNum = Integer.parseInt(request.getParameter("bigQuestionNum"));
+		int[] arrayQuestionNum = Stream.of(request.getParameterValues("questionNum")).mapToInt(Integer::parseInt).toArray();
 		int[] arrayChoicesNum = Stream.of(request.getParameterValues("choicesNum")).mapToInt(Integer::parseInt).toArray();
 		
+		String[] arrayBigQuestion = request.getParameterValues("Bquestion");
 		String[] arrayQuestion = request.getParameterValues("question");
 		String[] arrayQuestionExplanation = request.getParameterValues("questionExplanation");
 		double[] arrayScore = Stream.of(request.getParameterValues("Score")).mapToDouble(Double::parseDouble).toArray();
 		String[] arrayChoices = request.getParameterValues("Select_text");
 		
 		int choicesCnt = 0;
+		int questionCnt = 0;
 		List<BigQuestion> bigQuestionList = new ArrayList<>();
-		List<Question> questionList = new ArrayList<>();
-		for(int x = 0; x<questionNum; x++) {
-			List<Choices> choicesList = new ArrayList<>();
-			for(int y = 0; y<arrayChoicesNum[x]; y++,choicesCnt++) {
-				choicesList.add(new Choices(examID,1,x+1,y+1,arrayChoices[choicesCnt]));
-			}
-			String q = arrayQuestion[x];
-			int ans = Integer.parseInt(request.getParameter("Select_ans[小問][問" + (x+1) + ".]"));
-			String qe = arrayQuestionExplanation[x];
-			double score = arrayScore[x];
+		for(int x = 0; x<bigQuestionNum; x++) {
+			List<Question> questionList = new ArrayList<>();
 			
-			questionList.add(new Question(examID,1,x+1,q,ans,qe,score,choicesList));
+			for(int y = 1; y<=arrayQuestionNum[x]; y++, questionCnt++) {
+				List<Choices> choicesList = new ArrayList<>();
+				
+				for(int z = 1; z<=arrayChoicesNum[questionCnt]; z++, choicesCnt++) {
+					choicesList.add(new Choices(examID,x+1,y,z,arrayChoices[choicesCnt]));
+				}
+				String q = arrayQuestion[questionCnt];
+				int ans = Integer.parseInt(request.getParameter("Select_ans[問" + (x+1) + ".][＜設問" + (y) + "＞]"));
+				String qe = arrayQuestionExplanation[questionCnt];
+				double score = arrayScore[questionCnt];
+				
+				questionList.add(new Question(examID,x+1,y,q,ans,qe,score,choicesList));
+			}
+		String bq = arrayBigQuestion[x];
+		bigQuestionList.add(new BigQuestion(examID,x+1,bq,questionList));
 		}
-		bigQuestionList.add(new BigQuestion(examID,1,null,questionList));
 		
 		ExamCreatePage newExamData = new ExamCreatePage(examData, bigQuestionList);
 		session.removeAttribute("ExamCreatePage");

@@ -1,0 +1,102 @@
+@charset "UTF-8";
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+form li + li {
+  margin-top: 1em;
+}
+
+label {
+  /* 大きさと配置を統一 */
+  display: inline-block;
+  width:  150px;
+  text-align: right;
+  padding: 0;
+}
+
+label[for=s_toi]{
+	margin-top:40px;
+}
+
+.Select{
+	width: 600px;
+	margin: 25px 0;
+}
+
+.S_question{
+	position:relative;
+	left: 0;
+}
+
+div.Quesution_root{
+	margin: 60px 10px;
+}
+
+input[type=text],
+textarea {
+  /* すべてのテキストフィールドのフォント設定を一致させる
+     既定で、 textarea には等幅フォントが設定されている */
+  font: 1em sans-serif;
+  width: 200px;
+
+  /* テキストフィールドの大きさを統一 */
+  /*width: 300px;*/
+  box-sizing: border-box;
+
+  /* フォームフィールド境界に合わせる */
+  border: 1px solid #999;
+}
+
+input:focus,
+textarea:focus {
+  /* フォーカスのある要素を強調する */
+  border-color: #000;
+}
+
+textarea {
+  /* 複数行のテキストフィールドをラベルに揃える */
+  vertical-align: top;
+
+  /* テキスト入力に十分な空間を与える */
+  height: 5em;
+}
+
+.button {
+  /* ボタンを他のテキストフィールドと同じ場所に置く */
+  padding-left: 90px; /* label 要素と同じサイズ */
+}
+
+button {
+  /* このマージンは、ラベルとテキストフィールドの間のスペースと
+     おおよそ同じスペースを表す */
+  margin-left: .5em;
+}
+
+.S_ques_area{
+	width: 500px;
+	height: 80px;
+	margin-top: 60px ;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-bottom: 15px;
+}
+
+.Delete{
+	position: absolute;
+	right: 180px;
+}
+
+.Select_box{
+	position: absolute;
+	bottom: 0;
+	right: 320px;
+}
+
+#B_ques_area{
+	width: 500px;
+	height: 200px;
+	margin: 40px 20px;
+}

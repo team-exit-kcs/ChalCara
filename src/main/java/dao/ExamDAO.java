@@ -34,8 +34,8 @@ public class ExamDAO extends Database {
 		Exam exam = null;
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
-			String sql = "SELECT "+ GENRE_ID + EXAM_NAME + CREATE_DATE + UPDATE_DATE + PASSING_SCORE + 
-					EXAM_TIME + EXAM_EXPLANATION + DISCLOSURE_RANGE + " FROM " + TABLE + " WHERE " + EXAM_ID + " = ?";
+			String sql = "SELECT " + USER_ID + "," + GENRE_ID + "," + EXAM_NAME + "," + CREATE_DATE + "," + UPDATE_DATE + "," + PASSING_SCORE + "," + 
+					EXAM_TIME + "," + EXAM_EXPLANATION + "," + DISCLOSURE_RANGE + " FROM " + TABLE + " WHERE " + EXAM_ID + " = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, examID);
 			
@@ -114,14 +114,14 @@ public class ExamDAO extends Database {
 		TagDAO tagDAO = new TagDAO();
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
-			String sql = "INSERT INTO " + TABLE + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO " + TABLE + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, exam.getExamID());
 			pStmt.setString(2, exam.getUserID());
 			pStmt.setInt(3, exam.getGenreID());
 			pStmt.setString(4, exam.getExamName());
 			pStmt.setDate(5, new java.sql.Date(exam.getCreateDate().getTime()));
-			pStmt.setDate(5, new java.sql.Date(exam.getUpdateDate().getTime()));
+			pStmt.setDate(6, new java.sql.Date(exam.getUpdateDate().getTime()));
 			pStmt.setInt(7, exam.getPassingScore());
 			pStmt.setInt(8, exam.getExamTime());
 			pStmt.setString(9, exam.getExamExplanation());
