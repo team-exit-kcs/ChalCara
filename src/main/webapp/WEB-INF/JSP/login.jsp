@@ -29,7 +29,7 @@
 			<input type="submit" value="ログイン">
 		</form>
 	
-		<a href="/ExamPlatform/AccountEntryServret">アカウントをお持ちでない方はこちら</a>
+		<a href="/ExamPlatform/AccountEntryServlet">アカウントをお持ちでない方はこちら</a>
 	</div>
 </body>
 </html>

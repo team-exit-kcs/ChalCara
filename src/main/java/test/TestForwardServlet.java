@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.data.Account;
-
 /**
  * Servlet implementation class TestForwardServlet
  */
@@ -55,7 +53,7 @@ public class TestForwardServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		
-//	/*Account
+	/*Account
 //		session.setAttribute("LoginUser",new Account("<input type = \"text\" /><h1>testUsr</h1>","プロフィール","./img/kari.png"));
 		session.setAttribute("LoginUser",new Account("testUsr","プロフィール","./img/kari.png"));
 //	*/		
