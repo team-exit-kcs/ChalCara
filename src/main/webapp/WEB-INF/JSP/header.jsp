@@ -11,7 +11,7 @@
  
  <div class = "header_box">
  <span id = "h1">いぐざむぷらっとふぉーむ</span>
- <button type="button" id = "login">ログイン</button>
+ <button type="button" id = "login" onclick=”location.href=’/ExamPlatform/LoginServlet’”>ログイン</button>
  </div>
  
  <nav>

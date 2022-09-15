@@ -71,8 +71,8 @@ public class AccountDAO extends Database {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, login.getUserID());
 			pStmt.setString(2, login.getPASS());
-			pStmt.setString(3, "");
-			pStmt.setString(4, "./img/kari.png");
+			pStmt.setString(3, "./img/kari.png");
+			pStmt.setString(4, "");
 			
 			int result = pStmt.executeUpdate();
 			if(result>0) {
