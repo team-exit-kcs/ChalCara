@@ -33,9 +33,10 @@ public class EntryExam extends BaseExam implements Serializable {
 		super(createExamID(userID, examName), userID, genreID, examName, createDate, updateDate, passingScore, examTime, examExplanation,
 				disclosureRange, tagList);
 		
+		Hash hash = new Hash();
 		DisclosureRange DR = new DisclosureRange();
 		if(DR.isLimited(disclosureRange)) {
-			this.limitedPassword = limitedPassword;
+			this.limitedPassword = hash.createHash(limitedPassword);
 		}else {
 			this.limitedPassword = null;
 		}
