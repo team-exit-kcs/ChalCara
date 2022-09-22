@@ -104,7 +104,7 @@ public class TestForwardServlet extends HttpServlet {
 				new Date(),new Date(),60,120,"試験概要です",1,examtagList,"pass"),1));
 //	*/
 		
-		/*試験実行 小問
+//		/*試験実行 小問
 		List<String> tagList = new ArrayList<>();
 		tagList.add("IT");
 		tagList.add("情報処理技術者試験");
@@ -136,7 +136,7 @@ public class TestForwardServlet extends HttpServlet {
 		session.setAttribute("pageData", new ExaminationPage(exam,1,bigQuestionList,false));
 //	*/
 		
-//		/*試験実行 大問
+		/*試験実行 大問
 		List<String> tagList = new ArrayList<>();
 		for(int i=0;i<10;i+=2) {
 			tagList.add("Tag"+Integer.toString(i));
