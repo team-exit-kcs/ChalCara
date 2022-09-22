@@ -15,7 +15,6 @@ public class ExaminationPage implements Serializable {
 	final private boolean bookmark;
 	
 	public ExaminationPage(Exam exam, int questionFormat, List<BigQuestion> bigQuestionList, boolean bookmark) {
-		super();
 		this.exam = exam;
 		this.questionFormat = questionFormat;
 		this.bigQuestionList = bigQuestionList;
