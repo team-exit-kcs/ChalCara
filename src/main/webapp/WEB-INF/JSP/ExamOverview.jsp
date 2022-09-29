@@ -33,7 +33,7 @@
           
           <datalist id="TagList">
           <c:forEach var="tag" items="${ExamCreatePage.tagList}">
-               	<option value= ><c:out value="${tag}" /></option>
+               	<option><c:out value="${tag}" /></option>
           </c:forEach>
           </datalist>
           <div class = "tag">
