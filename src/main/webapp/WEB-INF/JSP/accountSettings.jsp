@@ -13,7 +13,7 @@
 <h1>アカウント管理</h1>
 <div>
 <span>ユーザID: <c:out value="${LoginUser.userID}"/><br/></span>
-<span>パスワード: 非表示<br/><button type="button" onclick="location.href='/ExamPlatform//UpdAccountServlet/UpdPass'">パスワードを変更する</button><br/></span>
+<span>パスワード: 非表示<br/><button type="button" onclick="location.href='/ExamPlatform/UpdAccountServlet/UpdPass'">パスワードを変更する</button><br/></span>
 <div>
 <br/>
 <form action="/ExamPlatform/UpdAccountServlet" method="post">
@@ -24,6 +24,7 @@
 </div>
 <div>
 <button type="button" id = "btn-back" class = "back" onclick="location.href='/ExamPlatform/MypageServlet'">戻る</button>
+<button type="button" class = "Withdraw" onclick="location.href='/ExamPlatform/UpdAccountServlet/Withdraw'">退会</button>
 </div>
 </body>
 </html>

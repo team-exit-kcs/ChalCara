@@ -42,6 +42,27 @@ public class AccountDAO extends Database {
 		return account;
 	}
 	
+	public boolean deleteAccount(Login login) {
+		boolean resultSts=false;
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "DELETE FROM " + TABLE + " WHERE " + USER_ID + " = ? AND " + PASS + " = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, login.getUserID());
+			pStmt.setString(2, login.getPASS());
+			
+			int result = pStmt.executeUpdate();
+			
+			if(result>0) {
+				resultSts=true;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return resultSts;
+	}
+	
 	public boolean updProfile(String id, String profile) {
 		boolean resultSts=false;
 		
@@ -64,7 +85,7 @@ public class AccountDAO extends Database {
 	}
 	
 	public boolean updPass(Login login) {
-boolean resultSts=false;
+		boolean resultSts=false;
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
 			String sql = "UPDATE " + TABLE + " SET " + PASS + " = ? WHERE " + USER_ID + " = ?";
