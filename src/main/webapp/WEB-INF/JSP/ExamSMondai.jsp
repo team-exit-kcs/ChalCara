@@ -14,15 +14,10 @@
 	</div>
 
 	<h1><c:out value="${pageData.exam.examName}"/></h1>
-	
-	<c:forEach var="BQ" items="${pageData.bigQuestionList}">
-	<h2>大問<c:out value="${BQ.bigQuestionID}"/></h2><br/>
-	
-	<p><c:out value="${BQ.bigQuestionSentence}"/></p><br/>
-	
+	<c:set var="BQ" value="${pageData.bigQuestionList[0]}"/>
 	<c:forEach var="Q" items="${BQ.questionList}">
 	<div>
-		設問<c:out value="${Q.questionID}"/><br/>
+		問<c:out value="${Q.questionID}"/><br/>
 		<p><c:out value="${Q.questionSentence}"/></p>
 	<c:forEach var="C" items="${Q.choicesList}">
 		<input name='<c:out value="${C.bigQuestionID}"/><c:out value="${C.questionID}"/>' value=<c:out value="${C.choicesID}"/> type="radio">
@@ -30,7 +25,9 @@
 	</c:forEach>
 	</div>
 	</c:forEach>
-	</c:forEach>
+	<div style="text-align: center; background-color: aqua; position: fixed; width: 100%; bottom: 0; left: 0;">
+		<button>試験終了</button>
+	</div>
 	
 	
 	<!-- #region JS要素 -->
