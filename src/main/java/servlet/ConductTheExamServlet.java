@@ -38,8 +38,13 @@ public class ConductTheExamServlet extends HttpServlet {
 		if(pageData == null){
 			response.sendRedirect("/ExamPlatform/ExaminationServlet");
 		}else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/ExamMondai.jsp");
-			dispatcher.forward(request, response);
+			if(pageData.getQuestionFormat()==0) {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/ExamMondai.jsp");
+				dispatcher.forward(request, response);
+			}else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/ExamSMondai.jsp");
+				dispatcher.forward(request, response);
+			}
 		}
 		
 	}
