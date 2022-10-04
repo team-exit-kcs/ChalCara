@@ -42,6 +42,31 @@ public class AccountDAO extends Database {
 		return account;
 	}
 	
+	public Account findByAccount(String ID) {
+		Account account = null;
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "SELECT " + USER_ID + "," + PROFILE + "," + ICON + " FROM " + TABLE + " WHERE " + USER_ID + " = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, ID);
+
+			
+			ResultSet rs = pStmt.executeQuery();
+			
+			if(rs.next()) {
+				String userID = rs.getString(USER_ID);
+				String profile = rs.getString(PROFILE);
+				String icon = rs.getString(ICON);
+				account = new Account(userID,profile,icon);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+		return account;
+  }
+  
 	public boolean deleteAccount(Login login) {
 		boolean resultSts=false;
 		
@@ -134,7 +159,7 @@ public class AccountDAO extends Database {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, login.getUserID());
 			pStmt.setString(2, login.getPASS());
-			pStmt.setString(3, "./img/kari.png");
+			pStmt.setString(3, "/ExamPlatform/img/kari.png");
 			pStmt.setString(4, "");
 			
 			int result = pStmt.executeUpdate();
