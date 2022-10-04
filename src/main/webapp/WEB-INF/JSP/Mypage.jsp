@@ -37,7 +37,8 @@
   </span>
 </div>
 <div class="r1_item_2">
-    <p><c:out value="${LoginUser.userID}"/></p>
+    <p>ユーザID : <c:out value="${LoginUser.userID}"/></p>
+    <br/><a class = "UpdAccount" href = "/ExamPlatform/UpdAccountServlet" >アカウント設定</a>
 </div>
 <div class="r1_item_3">
     <p><c:out value="${LoginUser.profile}"/></p>
