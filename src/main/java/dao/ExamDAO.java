@@ -134,8 +134,8 @@ public class ExamDAO extends Database {
 		return examList;
 	}
 	
-	public List<String> findUserExam(String userID) {
-		List<String> examIDList = new ArrayList<>();
+	public List<Exam> findUserExam(String userID) {
+		List<Exam> examIDList = new ArrayList<>();
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
 			String sql = "SELECT "+ EXAM_ID + " FROM " + TABLE + " WHERE " + USER_ID + " = ?";
@@ -146,7 +146,7 @@ public class ExamDAO extends Database {
 			
 			while(rs.next()) {
 				String examID = rs.getString(EXAM_ID);
-				examIDList.add(examID);
+				examIDList.add(this.findExamInfo(examID));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();

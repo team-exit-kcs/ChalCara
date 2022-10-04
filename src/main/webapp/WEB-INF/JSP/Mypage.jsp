@@ -14,7 +14,7 @@
 
 <!DOCTYPE html>
 
-<c:set var="maxCnt" value="4" />
+<c:set var="maxCnt" value="6" />
 
 <html>
 <head>
@@ -56,7 +56,7 @@
 <c:forEach var="exam" items="${MypageData.examList}" end="${maxCnt}">
  <div class = "exam">
   <img src="./img/exam.png" height="70" width="70" alt="Create exam file">
-  <p><a href = "#"><c:out value="${exam}"/></a></p>
+  <p><a href = "/ExamPlatform/ExaminationServlet?examID=<c:out value="${exam.examID}"/>"><c:out value="${exam.examName}"/></a></p>
  </div>
 </c:forEach>
 
@@ -79,7 +79,7 @@
 
    <div class = "b_box">
    <c:forEach var="bookmark" items="${MypageData.bookmarkList}" end="${maxCnt}">
-   <p class = "b_exam"><a href = "#"><c:out value="${bookmark}"/></a></p>
+   <p class = "b_exam"><a href = "/ExamPlatform/ExaminationServlet?examID=<c:out value="${bookmark.examID}"/>"><c:out value="${bookmark.examName}"/></a></p>
    </c:forEach>
    </div>
 
