@@ -22,29 +22,34 @@
 <h2>掲示板</h2>
 
 <div class = "sort">
-<a href = "#" id = "sin">新着順</a>
-<a href = "#" id = "book">ブクマ順</a>
-<a href = "#" id = "acs">月間実行回数順</a>
+<input type = "radio" name = "root" id = "sin" value = "select_1"  onclick="formSwitch()" checked><label id = "sin">新着順</label>
+<input type = "radio" name = "root" id = "book" value = "select_2" onclick="formSwitch()" ><label id = "book">ブクマ順</label>
+<input type = "radio" name = "root" id = "acs" value = "select_3"  onclick="formSwitch()" ><label id = "acs">月間実行回数順</label>
 </div>
 
-<c:set var = "examList" value ="${Mypage.ExamList}" scope = {request} />
-<c:set var = "bmList" value ="${Mypage.bmList}" scope = {request} />
+<c:set var = "sinList" value ="" scope = {request} />
+<c:set var = "bookList" value ="" scope = {request} />
+<c:set var = "acsList" value ="" scope = {request} />
 
-<%-- 新着順(デフォ) --%>
+<div class = "box1">
+<c:forEach var = "v" items = "%{examList}" varStatus = "st" begin = "0" end = "9"  step = "1">
+<p id = "Record"><c:out value = "${v.createDate()}" />　　　　　<c:out value = "${v.userID()}"/>　　　　　　　　　　　<a href = "#" id = "exam"><c:out value = "${v.examName()}"/></a></p>
+</c:forEach>
+</div>
 
-<c:forEach var = "v" items = "%{examList}" varStatus = "st" end = "10">
+<div class = "box2">
+<c:forEach var = "v" items = "%{bmList}" varStatus = "st" begin = "0" end = "9" step = "1">
+<p id = "Record"><c:out value = "${v.createDate()}" />　　　　　<c:out value = "${v.userID()}"/>　　　　　　　　　　　<a href = "#" id = "exam"><c:out value = "${v.examName()}"/></a></p>
+</c:forEach>
+</div>
+
+<div class = "box3">
+<c:forEach var = "v" items = "%{examList}" varStatus = "st" begin = "0" end = "9"  step = "1">
 <p id = "Record"><c:out value = "${v.createDate()}" />　　　　　<c:out value = "${v.userID()}"/>　　　　　　　　　　　<a href = "#" id = "exam"><c:out value = "${v.examName()}"/></a></p>
 </c:forEach>
 
-<%-- ブクマ順 
+</div>
 
-<c:if  >
-<c:forEach var = "v" items = "%{bmList}" varStatus = "st" end = "10">
-<p id = "Record"><c:out value = "${v.createDate()}" />　　　　　<c:out value = "${v.userID()}"/>　　　　　　　　　　　<a href = "#" id = "exam"><c:out value = "${v.examName()}"/></a></p>
-</c:forEach>
-</c:if>
-
---%>
 
 <a href = "#">1</a>
 </main>
