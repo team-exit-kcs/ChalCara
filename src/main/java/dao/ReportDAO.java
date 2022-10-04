@@ -59,6 +59,26 @@ public class ReportDAO extends Database {
 		return report;
 	}
 	
+	public List<Exam> findMonthlyExeTopExam() {
+		ExamDAO examDAO = new ExamDAO();
+		List<Exam> ExamList = new ArrayList<>();
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "SELECT " + EXAM_ID + " FROM " + TABLE + " WHERE " + EXAM_DATE + " >= (NOW() - INTERVAL 30 DAY) GROUP BY " + EXAM_ID + " ORDER BY count(*) DESC LIMIT 10";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			ResultSet rs = pStmt.executeQuery();
+			
+			while(rs.next()) {
+				ExamList.add(examDAO.findExamInfo(rs.getString(EXAM_ID)));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return ExamList;
+	}
+	
 	public List<Integer> findUserReport(String userID) {
 		List<Integer> reportIDList = new ArrayList<>();
 		

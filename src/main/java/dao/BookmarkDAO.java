@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.data.Bookmark;
+import model.data.Exam;
 
 public class BookmarkDAO extends Database{
 	
@@ -38,6 +39,26 @@ public class BookmarkDAO extends Database{
 		}
 		
 		return bookmark;
+	}
+	
+	public List<Exam> findBookmarkTopExam() {
+		ExamDAO examDAO = new ExamDAO();
+		List<Exam> ExamList = new ArrayList<>();
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "SELECT " + EXAM_ID + " FROM " + TABLE + " GROUP BY " + EXAM_ID + " ORDER BY count(*) DESC LIMIT 10";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			ResultSet rs = pStmt.executeQuery();
+			
+			while(rs.next()) {
+				ExamList.add(examDAO.findExamInfo(rs.getString(EXAM_ID)));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return ExamList;
 	}
 	
 	public int getUserCount(String examID) {
