@@ -67,10 +67,12 @@ public class AccountDAO extends Database {
 		boolean resultSts=false;
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
-			String sql = "INSERT INTO " + TABLE + "VALUES(?,?)";
+			String sql = "INSERT INTO " + TABLE + " VALUES(?,?,?,?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, login.getUserID());
 			pStmt.setString(2, login.getPASS());
+			pStmt.setString(3, "./img/kari.png");
+			pStmt.setString(4, "");
 			
 			int result = pStmt.executeUpdate();
 			if(result>0) {
