@@ -9,12 +9,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import model.DisclosureRange;
 import model.data.Exam;
 import model.data.Report;
 
 
 
-public class ReportDAO extends Database {
+public class ReportDAO extends Database implements DisclosureRange {
 	final private String TABLE = "Report";
 	final private String REPORT_ID = "ReportID";
 	final private String EXAM_ID = "ExamID";
@@ -64,13 +65,16 @@ public class ReportDAO extends Database {
 		List<Exam> ExamList = new ArrayList<>();
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
-			String sql = "SELECT " + EXAM_ID + " FROM " + TABLE + " WHERE " + EXAM_DATE + " >= (NOW() - INTERVAL 30 DAY) GROUP BY " + EXAM_ID + " ORDER BY count(*) DESC LIMIT 10";
+			String sql = "SELECT " + EXAM_ID + " FROM " + TABLE + " WHERE " + EXAM_DATE + " >= (NOW() - INTERVAL 30 DAY) GROUP BY " + EXAM_ID + " ORDER BY count(*) DESC";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			ResultSet rs = pStmt.executeQuery();
 			
-			while(rs.next()) {
-				ExamList.add(examDAO.findExamInfo(rs.getString(EXAM_ID)));
+			while(rs.next() || ExamList.size() <= 10) {
+				Exam exam = examDAO.findExamInfo(rs.getString(EXAM_ID));
+				if(exam.getDisclosureRange() == OPEN) {
+					ExamList.add(exam);
+				}
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
