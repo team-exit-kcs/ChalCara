@@ -12,7 +12,7 @@
 <jsp:include page="./searchForm.jsp" /><br/>
 <c:if test="${not empty msg}"><p><c:out value="${msg}"/></p></c:if>
 <c:forEach var="result" items="${searchResult.resultList}" begin="${(searchResult.page - 1)*searchResult.STEP}" end="${searchResult.page * searchResult.STEP - 1}">
-<span><img src="<c:out value="${result.icon}"/>"><a href="<c:out value="${result.URL}"/>" ><c:out value="${result.name}"/></a></span><br/>
+<span><img src="<c:out value="${result.icon}"/>" style="width: 25px;"><a href="<c:out value="${result.URL}"/>" ><c:out value="${result.name}"/></a></span><br/>
 </c:forEach>
 </body>
 </html>
