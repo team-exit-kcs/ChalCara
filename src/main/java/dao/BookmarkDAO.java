@@ -12,7 +12,7 @@ import model.DisclosureRange;
 import model.data.Bookmark;
 import model.data.Exam;
 
-public class BookmarkDAO extends Database implements DisclosureRange{
+public class BookmarkDAO extends Database{
 	
 	final private String TABLE = "Bookmark";
 	final private String EXAM_ID = "ExamID";
@@ -43,6 +43,7 @@ public class BookmarkDAO extends Database implements DisclosureRange{
 	}
 	
 	public List<Exam> findBookmarkTopExam() {
+		DisclosureRange DR = new DisclosureRange();
 		ExamDAO examDAO = new ExamDAO();
 		List<Exam> ExamList = new ArrayList<>();
 		
@@ -54,7 +55,7 @@ public class BookmarkDAO extends Database implements DisclosureRange{
 			
 			while(rs.next() || ExamList.size() <= 10) {
 				Exam exam = examDAO.findExamInfo(rs.getString(EXAM_ID));
-				if(exam.getDisclosureRange() == OPEN) {
+				if(exam.getDisclosureRange() == DR.OPEN) {
 					ExamList.add(exam);
 				}
 			}

@@ -13,7 +13,7 @@ import model.DisclosureRange;
 import model.data.EntryExam;
 import model.data.Exam;
 
-public class ExamDAO extends Database implements DisclosureRange {
+public class ExamDAO extends Database {
 	final private String TABLE = "Exam";
 	final private String EXAM_ID = "ExamID";
 	final private String USER_ID = "UserID";
@@ -90,10 +90,11 @@ public class ExamDAO extends Database implements DisclosureRange {
 	}
 	
 	public List<Exam> findNewExam() {
+		DisclosureRange DR = new DisclosureRange();
 		List<Exam> ExamList = new ArrayList<>();
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
-			String sql = "SELECT " + EXAM_ID + " FROM " + TABLE + " WHERE " + DISCLOSURE_RANGE + " = " + OPEN + " ORDER BY " + CREATE_DATE + " DESC LIMIT 10";
+			String sql = "SELECT " + EXAM_ID + " FROM " + TABLE + " WHERE " + DISCLOSURE_RANGE + " = " + DR.OPEN + " ORDER BY " + CREATE_DATE + " DESC LIMIT 10";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			ResultSet rs = pStmt.executeQuery();

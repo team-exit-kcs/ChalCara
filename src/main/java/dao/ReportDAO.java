@@ -15,7 +15,7 @@ import model.data.Report;
 
 
 
-public class ReportDAO extends Database implements DisclosureRange {
+public class ReportDAO extends Database {
 	final private String TABLE = "Report";
 	final private String REPORT_ID = "ReportID";
 	final private String EXAM_ID = "ExamID";
@@ -61,6 +61,7 @@ public class ReportDAO extends Database implements DisclosureRange {
 	}
 	
 	public List<Exam> findMonthlyExeTopExam() {
+		DisclosureRange DR = new DisclosureRange();
 		ExamDAO examDAO = new ExamDAO();
 		List<Exam> ExamList = new ArrayList<>();
 		
@@ -72,7 +73,7 @@ public class ReportDAO extends Database implements DisclosureRange {
 			
 			while(rs.next() || ExamList.size() <= 10) {
 				Exam exam = examDAO.findExamInfo(rs.getString(EXAM_ID));
-				if(exam.getDisclosureRange() == OPEN) {
+				if(exam.getDisclosureRange() == DR.OPEN) {
 					ExamList.add(exam);
 				}
 			}
