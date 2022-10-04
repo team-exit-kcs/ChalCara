@@ -18,16 +18,16 @@ public class SearchLogic {
 		
 		switch(format) {
 		case 1:
-			List<Exam> examList = examDAO.findSearchExam(word);
-			for(Exam exam : examList) {
-				resultList.add(new Search("/ExamPlatform/img/exam.png", "/ExamPlatform/ExaminationServlet?examID=" + exam.getExamID(), exam.getExamName()));
+			List<Exam> examList1 = examDAO.findSearchExam(word);
+			for(Exam exam1 : examList1) {
+				resultList.add(new Search("/ExamPlatform/img/exam.png", "/ExamPlatform/ExaminationServlet?examID=" + exam1.getExamID(), exam1.getExamName()));
 			}
 			break;
 			
 		case 2:
-			Exam exam = examDAO.findExamInfo(word);
-			if(exam != null && DR.isNotClose(exam.getDisclosureRange())) {
-				resultList.add(new Search("/ExamPlatform/img/exam.png", "/ExamPlatform/ExaminationServlet?examID=" + exam.getExamID(), exam.getExamName()));
+			Exam exam2 = examDAO.findExamInfo(word);
+			if(exam2 != null && DR.isNotClose(exam2.getDisclosureRange())) {
+				resultList.add(new Search("/ExamPlatform/img/exam.png", "/ExamPlatform/ExaminationServlet?examID=" + exam2.getExamID(), exam2.getExamName()));
 			}
 			
 			break;
@@ -40,12 +40,9 @@ public class SearchLogic {
 				resultList.add(new Search(account.getIcon(), "/ExamPlatform/UserPageServlet?userID=" + account.getUserID(), account.getUserID()));
 			}
 			
-			List<String> examIDList = examDAO.findUserExam(word);
-			for(String id : examIDList) {
-				Exam userExam = examDAO.findExamInfo(id);
-				if(DR.isNotClose(userExam.getDisclosureRange())) {
-					resultList.add(new Search("/ExamPlatform/img/exam.png", "/ExamPlatform/ExaminationServlet?examID=" + userExam.getExamID(), userExam.getExamName()));
-				}
+			List<Exam> examList3 = examDAO.findSearchUserExam(word);
+			for(Exam exam3 : examList3) {
+				resultList.add(new Search("/ExamPlatform/img/exam.png", "/ExamPlatform/ExaminationServlet?examID=" + exam3.getExamID(), exam3.getExamName()));
 			}
 			break;
 		}
