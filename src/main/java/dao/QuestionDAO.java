@@ -65,7 +65,7 @@ public class QuestionDAO extends Database {
 			try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
 				int result=0;
 			
-				String sql = "INSERT INTO " + TABLE + "VALUES(?, ?, ?, ?, ?, ?, ?)";
+				String sql = "INSERT INTO " + TABLE + " VALUES(?, ?, ?, ?, ?, ?, ?)";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 				for(Question question: questionList) {

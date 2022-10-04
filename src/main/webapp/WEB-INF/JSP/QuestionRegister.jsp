@@ -2,66 +2,74 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ page import = "model.data.ExamCreatePage" %>
+<%@ page import = "model.data.BigQuestion" %>
+<%@ page import = "model.data.Question" %>
+<%@ page import = "model.data.Choices" %>
+<%@ page import = "java.util.ArrayList" %>
+<%@ page import = "java.util.List" %>
+   
 <!DOCTYPE html>
+
+<c:set var="questionList" value="${ExamCreatePage.bigQuestionList[0].questionList}" />
+
 <html>
 <head>
 <meta charset="UTF-8">
 <jsp:include page="./title.jsp" />
-<link rel="stylesheet" href="./css/QuestionRegister.css">
+<link rel="stylesheet" href="/ExamPlatform/css/QuestionRegister.css">
 </head>
 <body>
 <form action="/ExamPlatform/ExamCreateServlet/Question" method="post">
 <h1>問題登録フォーム</h1>
-<main>
-<jsp:include page="./QuestionForm.jsp" />
 
-<div class = "Smallquestion"><%--小問が選択された時 --%>
-<ul class = "S_question">
-  <%-- 小問 --%>  
-  <li>
-    <label for="s_toi">問１．</label>
-    <textarea class="S_ques_area" name="quesution" placeholder = "問題文を入力して下さい"></textarea>
-  </li>
-  
-  <%-- 選択 --%>
-  <li class = "Select">
-    <label><input type="radio" name="Select_Symbol">ア．</label>
-    <input type="text" class="Select_text" name="Select_text" />
-  </li>
-  
-  <li class = "Select">
-    <label><input type="radio" name="Select_Symbol">イ．</label>
-    <input type="text" class="Select_text" name="Select_text" />
-  </li>
-  
-  <li class = "Select">
-    <label><input type="radio" name="Select_Symbol">ウ．</label>
-    <input type="text" class="Select_text" name="Select_text" />
-  </li>
-  
-  <li class = "Select">
-    <label><input type="radio" name="Select_Symbol">エ．</label>
-    <input type="text" class="Select_text" name="Select_text" />
-  </li> 
-</ul>
+<div class = "Bigquestion">
+ <ul class = "B_question">
+  <li><h2>小問</h2></li>
+ </ul> 
+ 
+<div>
+<c:choose>
+    <c:when test="${empty questionList}">
+        <jsp:include page="./QuestionForm.jsp">
+			<jsp:param name="bigQuestionNum" value = "1" />
+			<jsp:param name="questionNum" value = "1" />
+		</jsp:include>
+    </c:when>
+    <c:otherwise>
+        <c:forEach var="q" items="${questionList}">
+         	<jsp:include page="./BigQuestionForm.jsp">
+		        <jsp:param name="bigQuestionNum" value = "1" />
+		        <jsp:param name="questionNum" value = "${q.questionID}" />
+	        </jsp:include>
+	    </c:forEach>
+    </c:otherwise>
+</c:choose>
+
+<span><br><button type="button" onclick="addQuestionForm(this)">＋小問を追加</button></span>
 </div>
+
+<input type="hidden" id="QNum" name="questionNum" value="<c:choose><c:when test="${empty questionList}">1</c:when><c:otherwise><c:out value="${questionList.size()}"/></c:otherwise></c:choose>">
 
 <div class = "footer">
           <div class = "botton_area">
           <button type="button" id = "btn-back" class = "back" onclick="back()">戻る</button>
-          <input type="submit" value = "ＯＫ" class = "ok"></input>
+          <input type="submit" value = "登録確認画面へ" class = "ok"></input>
           </div>          
 </div>
-</main>
+</div>
 </form>
 <script type="text/javascript">
          	function back(){
           		result=window.confirm("保存されていないデータは破棄されます");
           		if(result){
-          			location.href='/ExamPlatform//ExamCreateServlet'
+          			location.href='/ExamPlatform/ExamCreateServlet'
                 }
             }
 </script>
+<script src="/ExamPlatform/js/choices.js"></script>
+<script src="/ExamPlatform/js/Question.js"></script>
 </body>
 </html>
