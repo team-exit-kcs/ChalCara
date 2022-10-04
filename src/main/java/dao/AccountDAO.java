@@ -65,6 +65,69 @@ public class AccountDAO extends Database {
 		}
 		
 		return account;
+  }
+  
+	public boolean deleteAccount(Login login) {
+		boolean resultSts=false;
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "DELETE FROM " + TABLE + " WHERE " + USER_ID + " = ? AND " + PASS + " = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, login.getUserID());
+			pStmt.setString(2, login.getPASS());
+			
+			int result = pStmt.executeUpdate();
+			
+			if(result>0) {
+				resultSts=true;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return resultSts;
+	}
+	
+	public boolean updProfile(String id, String profile) {
+		boolean resultSts=false;
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "UPDATE " + TABLE + " SET " + PROFILE + " = ? WHERE " + USER_ID + " = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, profile);
+			pStmt.setString(2, id);
+			
+			int result = pStmt.executeUpdate();
+			
+			if(result>0) {
+				resultSts=true;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return resultSts;
+	}
+	
+	public boolean updPass(Login login) {
+		boolean resultSts=false;
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "UPDATE " + TABLE + " SET " + PASS + " = ? WHERE " + USER_ID + " = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, login.getPASS());
+			pStmt.setString(2, login.getUserID());
+			
+			int result = pStmt.executeUpdate();
+			
+			if(result>0) {
+				resultSts=true;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return resultSts;
 	}
 	
 	public boolean isID(String id){
