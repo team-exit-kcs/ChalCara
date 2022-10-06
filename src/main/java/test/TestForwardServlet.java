@@ -2,6 +2,9 @@ package test;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import model.data.Exam;
 
 /**
  * Servlet implementation class TestForwardServlet
@@ -52,6 +57,20 @@ public class TestForwardServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
+		
+//  /*Home
+		List<Exam> newExamList = new ArrayList<>();
+		
+		newExamList.add(new Exam("", "sato", 1, "ITパスポート", new Date(), new Date(),60, 60, "", 1, null,"", 1000, 50));
+		newExamList.add(new Exam("", "hoge", 1, "基本情報技術者試験", new Date(), new Date(),60, 60, "", 1, null,"", 1000, 50));
+		newExamList.add(new Exam("", "root", 1, "’ or 'A' = 'A", new Date(), new Date(),60, 60, "", 1, null,"", 1000, 50));
+		newExamList.add(new Exam("", "sudo", 1, "定番クイズ10選", new Date(), new Date(),60, 60, "", 1, null,"", 1000, 50));
+		newExamList.add(new Exam("", "aaaa", 1, "１", new Date(), new Date(),60, 60, "", 1, null,"", 1000, 50));
+		newExamList.add(new Exam("", "test", 1, "簿記　勘定科目", new Date(), new Date(),60, 60, "", 1, null,"", 1000, 50));
+		newExamList.add(new Exam("", "cafe", 1, "英単語", new Date(), new Date(),60, 60, "", 1, null,"", 1000, 50));
+		
+		session.setAttribute("homeData",newExamList);
+//	*/
 		
 	/*Account
 //		session.setAttribute("LoginUser",new Account("<input type = \"text\" /><h1>testUsr</h1>","プロフィール","./img/kari.png"));
