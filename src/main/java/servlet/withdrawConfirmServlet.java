@@ -68,7 +68,7 @@ public class withdrawConfirmServlet extends HttpServlet {
 	        PrintWriter out = response.getWriter();
 	        out.println("<html>");
 	        out.println("<p>退会が完了しました</p>");
-	        out.println("<a href=\"#\">ホームに戻る</a>");
+	        out.println("<a href=\"/ExamPlatform/HomeServlet\">ホームに戻る</a>");
 	        out.println("</html>");
 		}else {
 			request.setAttribute("msg", new String("エラー：ユーザIDまたはパスワードが正しくありません"));

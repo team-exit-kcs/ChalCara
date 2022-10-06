@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
 
 import javax.servlet.RequestDispatcher;
@@ -65,12 +64,7 @@ public class AccountEntryServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("LoginUser",new Account(userID,"","./img/kari.png"));
 			
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<html>");
-			out.println("<p>アカウントの登録が完了しました</p>");
-			out.println("<a href=\"/ExamPlatform/MypageServlet\">マイページへ</a>");
-			out.println("</html>");
+			response.sendRedirect("/ExamPlatform/MypageServlet");
 		}
 	}
 
