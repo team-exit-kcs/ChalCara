@@ -28,10 +28,3 @@ h2{
 .sort{
    text-align: center;
 }
-
-input#sin {
-	position: relative;
-	right: 300px;
-	top: 2.5px;
-	bottom: 20px;
-}
