@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import model.DisclosureRange;
 import model.data.EntryExam;
 import model.data.Exam;
 
@@ -34,8 +35,9 @@ public class ExamDAO extends Database {
 		Exam exam = null;
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
-			String sql = "SELECT "+ GENRE_ID + EXAM_NAME + CREATE_DATE + UPDATE_DATE + PASSING_SCORE + 
-					EXAM_TIME + EXAM_EXPLANATION + DISCLOSURE_RANGE + " FROM " + TABLE + " WHERE " + EXAM_ID + " = ?";
+
+			String sql = "SELECT "+ USER_ID + ", " + GENRE_ID + ", " + EXAM_NAME + ", " + CREATE_DATE + ", " + UPDATE_DATE + ", " + PASSING_SCORE + ", " + 
+					EXAM_TIME + ", " + EXAM_EXPLANATION + ", " + DISCLOSURE_RANGE + " FROM " + TABLE + " WHERE " + EXAM_ID + " = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, examID);
 			
@@ -88,8 +90,53 @@ public class ExamDAO extends Database {
 		return resultSts;
 	}
 	
-	public List<String> findUserExam(String userID) {
-		List<String> examIDList = new ArrayList<>();
+	public List<Exam> findSearchExam(String word) {
+		DisclosureRange DR = new DisclosureRange();
+		List<Exam> examIDList = new ArrayList<>();
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "SELECT " + EXAM_ID + " FROM " + TABLE + " WHERE " + DISCLOSURE_RANGE + " != "  + DR.CLOSE + " AND ( " + EXAM_NAME + " LIKE ? OR " + EXAM_EXPLANATION + " LIKE ? )";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, "%" + word + "%");
+			pStmt.setString(2, "%" + word + "%");
+			
+			ResultSet rs = pStmt.executeQuery();
+			
+			while(rs.next()) {
+				String examID = rs.getString(EXAM_ID);
+				examIDList.add(this.findExamInfo(examID));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return examIDList;
+	}
+	
+	public List<Exam> findSearchUserExam(String userID) {
+		DisclosureRange DR = new DisclosureRange();
+		List<Exam> examList = new ArrayList<>();
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "SELECT "+ EXAM_ID + " FROM " + TABLE + " WHERE " + DISCLOSURE_RANGE + " != "  + DR.CLOSE + " AND " + USER_ID + " = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, userID);
+			
+			ResultSet rs = pStmt.executeQuery();
+			
+			while(rs.next()) {
+				String examID = rs.getString(EXAM_ID);
+				examList.add(this.findExamInfo(examID));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return examList;
+	}
+	
+	public List<Exam> findUserExam(String userID) {
+		List<Exam> examIDList = new ArrayList<>();
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
 			String sql = "SELECT "+ EXAM_ID + " FROM " + TABLE + " WHERE " + USER_ID + " = ?";
@@ -100,7 +147,7 @@ public class ExamDAO extends Database {
 			
 			while(rs.next()) {
 				String examID = rs.getString(EXAM_ID);
-				examIDList.add(examID);
+				examIDList.add(this.findExamInfo(examID));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -114,14 +161,14 @@ public class ExamDAO extends Database {
 		TagDAO tagDAO = new TagDAO();
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
-			String sql = "INSERT INTO " + TABLE + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO " + TABLE + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, exam.getExamID());
 			pStmt.setString(2, exam.getUserID());
 			pStmt.setInt(3, exam.getGenreID());
 			pStmt.setString(4, exam.getExamName());
 			pStmt.setDate(5, new java.sql.Date(exam.getCreateDate().getTime()));
-			pStmt.setDate(5, new java.sql.Date(exam.getUpdateDate().getTime()));
+			pStmt.setDate(6, new java.sql.Date(exam.getUpdateDate().getTime()));
 			pStmt.setInt(7, exam.getPassingScore());
 			pStmt.setInt(8, exam.getExamTime());
 			pStmt.setString(9, exam.getExamExplanation());

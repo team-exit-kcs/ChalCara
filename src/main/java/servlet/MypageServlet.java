@@ -33,14 +33,14 @@ public class MypageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
+		
 		Account account = (Account) session.getAttribute("LoginUser");
 		MypageLogic ml = new MypageLogic();
 		Mypage m = ml.exequte(account.getUserID());
 		request.setAttribute("MypageData", m);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/Mypage.jsp");
-			dispatcher.forward(request, response);
+		dispatcher.forward(request, response);
 	}
 	
 }

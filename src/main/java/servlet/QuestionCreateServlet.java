@@ -1,12 +1,22 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import model.data.BigQuestion;
+import model.data.Choices;
+import model.data.ExamCreatePage;
+import model.data.Question;
 
 /**
  * Servlet implementation class QuestionCreateServlet
@@ -27,16 +37,60 @@ public class QuestionCreateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		HttpSession session = request.getSession();
+		
+		ExamCreatePage examData = (ExamCreatePage) session.getAttribute("ExamCreatePage");
+		
+		if(examData == null) {
+			response.sendRedirect("/ExamPlatform/ExamCreateServlet");
+		}else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/QuestionRegister.jsp");
+			dispatcher.forward(request, response);
+		}
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		
-		doGet(request, response);
+		ExamCreatePage examData = (ExamCreatePage) session.getAttribute("ExamCreatePage");
+		String examID = examData.getEntryExam().getExamID();
+		
+		request.setCharacterEncoding("UTF-8");
+		
+		int questionNum = Integer.parseInt(request.getParameter("questionNum"));
+		int[] arrayChoicesNum = Stream.of(request.getParameterValues("choicesNum")).mapToInt(Integer::parseInt).toArray();
+		
+		String[] arrayQuestion = request.getParameterValues("question");
+		String[] arrayQuestionExplanation = request.getParameterValues("questionExplanation");
+		double[] arrayScore = Stream.of(request.getParameterValues("Score")).mapToDouble(Double::parseDouble).toArray();
+		String[] arrayChoices = request.getParameterValues("Select_text");
+		
+		int choicesCnt = 0;
+		List<BigQuestion> bigQuestionList = new ArrayList<>();
+		List<Question> questionList = new ArrayList<>();
+		for(int x = 0; x<questionNum; x++) {
+			List<Choices> choicesList = new ArrayList<>();
+			for(int y = 0; y<arrayChoicesNum[x]; y++,choicesCnt++) {
+				choicesList.add(new Choices(examID,1,x+1,y+1,arrayChoices[choicesCnt]));
+			}
+			String q = arrayQuestion[x];
+			int ans = Integer.parseInt(request.getParameter("Select_ans[小問][問" + (x+1) + ".]"));
+			String qe = arrayQuestionExplanation[x];
+			double score = arrayScore[x];
+			
+			questionList.add(new Question(examID,1,x+1,q,ans,qe,score,choicesList));
+		}
+		bigQuestionList.add(new BigQuestion(examID,1,null,questionList));
+		
+		ExamCreatePage newExamData = new ExamCreatePage(examData, bigQuestionList);
+		session.removeAttribute("ExamCreatePage");
+		session.setAttribute("ExamCreatePage", newExamData);
+		
+		response.sendRedirect("/ExamPlatform/ExamCreateServlet/Confirmation");
 	}
 
 }
