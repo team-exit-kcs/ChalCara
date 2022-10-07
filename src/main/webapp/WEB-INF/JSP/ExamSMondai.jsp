@@ -9,11 +9,13 @@
 </head>
 <body style="margin: 50px 0">
 	<div style="text-align: center; background-color: aqua; position: fixed; width: 100%; top: 0; left: 0;">
-		試験時間：<span></span>
+		試験時間(残り)：
+		<span id="remainingTime"></span>
+		
 		<button onclick="QuitExecManually()">試験を終了する</button>
 	</div>
 
-	<h1><c:out value="${pageData.exam.examName}"/></h1>
+	<h1 style="text-align: center"><c:out value="${pageData.exam.examName}"/></h1>
 	<c:set var="BQ" value="${pageData.bigQuestionList[0]}"/>
 	<c:forEach var="Q" items="${BQ.questionList}">
 	<div>
@@ -32,6 +34,10 @@
 	
 	<!-- #region JS要素 -->
 	<script>
+	const examtime = <c:out value="${pageData.exam.examTime}"/> * 60 * 1000;
+	//const examtime = 0.25 * 60 * 1000;
+	let time = Math.floor(examtime / 1000);
+	
 	function QuitExecManually() {
 		if (confirm("本当に終了しますか?")) {
 			//ページのリダイレクト
@@ -44,7 +50,22 @@
 	setTimeout(function () {
 		//ページのリダイレクト or ユーザにPOSTさせる
 		alert("時間切れ");
-	}, 10000/*ここに時間(ミリ秒)*/);
+	}, examtime/*ここに時間(ミリ秒)*/);
+
+	setInterval(function () {
+		if (time > 0) {
+			--time;
+			document.getElementById("remainingTime").textContent = "" + zeroPad(Math.floor(time / 60)) + ":" + zeroPad(time % 60);
+		}
+	}, 1000);
+
+	function zeroPad(n) {
+		let s = n.toString();
+		if (s.length == 1) {
+			return "0" + s;
+		}
+		return s;
+	}
 	</script>
 	<!-- #endregion -->
 </body>
