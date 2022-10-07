@@ -12,11 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.CreateReportLogic;
+import model.data.Account;
 import model.data.BigQuestion;
 import model.data.CheckAns;
 import model.data.CheckAnsPage;
 import model.data.ExaminationPage;
 import model.data.Question;
+import model.data.Report;
 
 /**
  * Servlet implementation class CheckAnsServlet
@@ -37,14 +40,14 @@ public class CheckAnsServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		CreateReportLogic crl = new CreateReportLogic();
 		HttpSession session = request.getSession();
 		
 		request.setCharacterEncoding("UTF-8");
 		ExaminationPage pageData = (ExaminationPage) session.getAttribute("pageData");
+		Account user = (Account) session.getAttribute("LoginUser");
 		
 		if(pageData == null) {
-			//試験ページデータがない場合ホームへ
 			request.setAttribute("msg", new String("受験情報が見つかりませんでした"));
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/error.jsp");
 			dispatcher.forward(request, response);
@@ -70,8 +73,15 @@ public class CheckAnsServlet extends HttpServlet {
 					checkAnsList.add(new CheckAns(q.getBigQuestionID(), q.getQuestionID(), q.getQuestionSentence(), q.getAnswer(), userAns, tf, q.getQuestionExplanation(), q.getAllocationOfPoint(), q.getChoicesList()));
 				}
 			}
+			CheckAnsPage checkAnsPage = new CheckAnsPage(pageData.getExam().getExamID(), (int)score, checkAnsList);
+			
+			Report report = crl.execute(checkAnsPage, pageData.getExam() , user);
+			
 			session.removeAttribute("checkAnsPage");
-			session.setAttribute("checkAnsPage", new CheckAnsPage(pageData.getExam().getExamID(), score, checkAnsList));
+			session.setAttribute("checkAnsPage", checkAnsPage);
+			
+			session.removeAttribute("report");
+			session.setAttribute("report", report);
 			
 			response.sendRedirect("/ExamPlatform/ReportServlet");
 		}

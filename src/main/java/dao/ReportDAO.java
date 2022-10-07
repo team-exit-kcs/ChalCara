@@ -23,19 +23,19 @@ public class ReportDAO extends Database {
 	final private String SCORE = "Score";
 	final private String CORRECT_ANSWER_RATE = "CorrectAnswerRate";
 	
-	public Report findReportInfo(int reportID) {
+	public Report findReportInfo(String userID, int reportID) {
 		ExamDAO examDAO = new ExamDAO();
 		Report report = null;
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
-			String sql = "SELECT * FROM " + TABLE + " WHERE " + REPORT_ID + " = ?";
+			String sql = "SELECT * FROM " + TABLE + " WHERE " + USER_ID + " = ? AND " + REPORT_ID + " = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setInt(1, reportID);
+			pStmt.setString(1, userID);
+			pStmt.setInt(2, reportID);
 			
 			ResultSet rs = pStmt.executeQuery();
 			
 			if(rs.next()) {
-				String userID = rs.getString(USER_ID);
 				String examID = rs.getString(EXAM_ID);
 				Date examDate = rs.getDate(EXAM_DATE);
 				int score = rs.getInt(SCORE);
@@ -57,6 +57,26 @@ public class ReportDAO extends Database {
 		return report;
 	}
 	
+	public int getMAXReportID(String userID) {
+		int id=0;
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "SELECT MAX("+ REPORT_ID + ") AS max FROM " + TABLE + " WHERE " + USER_ID + " = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, userID);
+			
+			ResultSet rs = pStmt.executeQuery();
+			
+			if(rs.next()) {
+				id = rs.getInt("max");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+		
+		return id;
+	}
 	public List<Integer> findUserReport(String userID) {
 		List<Integer> reportIDList = new ArrayList<>();
 		
@@ -131,7 +151,6 @@ public class ReportDAO extends Database {
 			pStmt.setString(2, report.getUserID());
 			pStmt.setString(3, report.getExamID());
 			pStmt.setDate(4, new java.sql.Date(report.getExamDate().getTime()));
-			pStmt.setTime(5, new java.sql.Time(report.getElapsedTime().getTime()));
 			pStmt.setInt(6, report.getScore());
 			pStmt.setDouble(6, report.getCorrectAnswerRate());
 			

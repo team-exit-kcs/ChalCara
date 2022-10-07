@@ -10,10 +10,10 @@ public class CheckAnsPage implements Serializable {
 	 * 正誤判定リスト
 	 */
 	final private String examID;
-	final private double score;
+	final private int score;
 	final private List<CheckAns> checkAnsList;
 	
-	public CheckAnsPage(String examID, double score, List<CheckAns> checkAnsList) {
+	public CheckAnsPage(String examID, int score, List<CheckAns> checkAnsList) {
 		this.examID = examID;
 		this.score = score;
 		this.checkAnsList = checkAnsList;
@@ -27,7 +27,7 @@ public class CheckAnsPage implements Serializable {
 		return checkAnsList;
 	}
 
-	public double getScore() {
+	public int getScore() {
 		return score;
 	}
 	

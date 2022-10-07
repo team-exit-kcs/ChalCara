@@ -58,7 +58,7 @@
 	function QuitExecManually() {
 		if (confirm("本当に終了しますか?")) {
 			//ページのリダイレクト
-			//ex) window.location.href = "../"
+			window.location.href = "/ExamPlatform/CheckAnsServlet"
 			alert("ページのリダイレクトする");
 		}
 	}

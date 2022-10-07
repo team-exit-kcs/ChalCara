@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import = "model.data.Report" %>
 <%@ page import = "java.util.List" %>
 <%@ page import = "java.util.Date" %>
@@ -26,7 +26,7 @@
 <span>印刷</span>
 </button>--%>
 </div>
-<p id = Examname><c:out value="${report.getExamName()}"/></p>
+<p id = Examname><c:out value="${report.examName}"/></p>
 <div  class = gouhi_ten>
 <%-- int ten = report.getScore();
    int g_ten = report.getPassingScore();
@@ -39,7 +39,7 @@
    }--%>
    
 <c:choose>
- <c:when test="${report.Score > report.PassingScore }">
+ <c:when test="${report.score > report.passingScore }">
  <h2 id = gouhi>合格</h2>
  </c:when>
  <c:otherwise>
@@ -47,12 +47,14 @@
  </c:otherwise>
 </c:choose>
 
-<p id = ten><c:out value="${report.getScore()}"/></p>
+<p id = ten><c:out value="${report.score}"/></p>
 </div>
 
 <div class = name_date>
-<p id = name><c:out value="${report.getUserID()}"/></p>
-<p id="date"><c:out value="${report.getExamDate()}"/></p>
+<p id = name><c:out value="${report.userID}"/></p>
+<c:set var="pattern" value="yyyy/MM/dd" />
+
+<p id="date"><fmt:formatDate value="${report.examDate}" pattern="${pattern}"/></p>
 <%--<script>
 date = new Date();
 year = date.getFullYear();
@@ -65,8 +67,8 @@ document.getElementById("date").innerHTML = year + "/" + month + "/" + day;
 <a href = "#" id = "syousai">詳細</a><br>
 
 <div class = "replay_back">
-<a href = "#" id = "replay">もう一度やる</a>
-<a href = "#" id = "back">ホームに戻る</a>
+<a href = "/ExamPlatform/ExaminationServlet?examID=<c:out value="${report.examID}"/>" id = "replay">もう一度やる</a>
+<a href = "ExamPlatform/HomeServlet" id = "back">ホームに戻る</a>
 </div>
 
 <%--<script src="./js/print.js"></script>--%>
