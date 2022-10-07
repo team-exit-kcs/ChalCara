@@ -118,7 +118,7 @@ public class TestForwardServlet extends HttpServlet {
 		session.setAttribute("ExamCreatePage", new ExamCreatePage(genreList,tagList,entryExam,0,bigQuestionList));
 //	*/
 		
-//		/*試験実行 小問
+		/*試験実行 小問
 		List<String> tagList = new ArrayList<>();
 		tagList.add("IT");
 		tagList.add("情報処理技術者試験");
