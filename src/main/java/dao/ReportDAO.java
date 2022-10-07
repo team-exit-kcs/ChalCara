@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import model.DisclosureRange;
 import model.data.Exam;
 import model.data.Report;
 
@@ -57,6 +58,30 @@ public class ReportDAO extends Database {
 		}
 		
 		return report;
+	}
+	
+	public List<Exam> findMonthlyExeTopExam() {
+		DisclosureRange DR = new DisclosureRange();
+		ExamDAO examDAO = new ExamDAO();
+		List<Exam> ExamList = new ArrayList<>();
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "SELECT " + EXAM_ID + " FROM " + TABLE + " WHERE " + EXAM_DATE + " >= (NOW() - INTERVAL 30 DAY) GROUP BY " + EXAM_ID + " ORDER BY count(*) DESC";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			ResultSet rs = pStmt.executeQuery();
+			
+			while(rs.next() || ExamList.size() <= 10) {
+				Exam exam = examDAO.findExamInfo(rs.getString(EXAM_ID));
+				if(exam.getDisclosureRange() == DR.OPEN) {
+					ExamList.add(exam);
+				}
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return ExamList;
 	}
 	
 	public List<Integer> findUserReport(String userID) {
