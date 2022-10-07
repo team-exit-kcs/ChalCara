@@ -37,7 +37,7 @@ public class LogoutServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.println("<html>");
 		out.println("<p>ログアウトが完了しました</p>");
-		out.println("<a href=\"#\">ホームへ</a>");
+		out.println("<a href=\"/ExamPlatform/HomeServlet\">ホームへ</a>");
 		out.println("</html>");
 	}
 

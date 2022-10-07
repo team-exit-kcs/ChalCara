@@ -6,14 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <jsp:include page="./title.jsp"/>
-<link rel="stylesheet" href="./css/Home.css">
+<link rel="stylesheet" href="/ExamPlatform/css/Home.css">
+<link rel="stylesheet" href="/ExamPlatform/css/BulletinBoard.css">
+<script src="/ExamPlatform/js/Category.js"></script>
 </head>
 <body>
 <jsp:include page="./header.jsp" />
 <main id = "Main_Home">
-<div id = "kari">
-<h2>ホーム(仮)</h2>
-</div>
+<jsp:include page="./BulletinBoard.jsp" />
 </main>
 </body>
 </html>
