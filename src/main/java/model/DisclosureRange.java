@@ -8,4 +8,8 @@ public class DisclosureRange {
 	public boolean isLimited(int disclosureRange) {
 		return this.LIMITED == disclosureRange;
 	}
+	
+	public boolean isNotClose(int disclosureRange) {
+		return this.CLOSE != disclosureRange;
+	}
 }

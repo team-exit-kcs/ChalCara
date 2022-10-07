@@ -1,8 +1,8 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,17 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.SearchLogic;
+import model.data.SearchResult;
+
 /**
- * Servlet implementation class LogoutServlet
+ * Servlet implementation class SearchServlet
  */
-@WebServlet("/LogoutServlet")
-public class LogoutServlet extends HttpServlet {
+@WebServlet("/SearchServlet")
+public class SearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogoutServlet() {
+    public SearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,24 +32,28 @@ public class LogoutServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
-		session.removeAttribute("LoginUser");
-		
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		out.println("<html>");
-		out.println("<p>ログアウトが完了しました</p>");
-		out.println("<a href=\"/ExamPlatform/HomeServlet\">ホームへ</a>");
-		out.println("</html>");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/search.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		SearchLogic searchLogic = new SearchLogic();
+		HttpSession session = request.getSession();
+		
+		request.setCharacterEncoding("UTF-8");
+		
+		int searchFormat = Integer.parseInt(request.getParameter("searchFormat"));
+		String searchWord = request.getParameter("searchWord");
+		
+		SearchResult result = searchLogic.exequte(searchFormat, searchWord);
+		
+		session.removeAttribute("searchResult");
+		session.setAttribute("searchResult", result);
+		
+		response.sendRedirect("/ExamPlatform/SearchServlet/result?page=1");
 	}
 
 }

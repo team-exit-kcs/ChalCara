@@ -35,8 +35,9 @@ public class ExamDAO extends Database {
 		Exam exam = null;
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
-			String sql = "SELECT " + USER_ID + "," + GENRE_ID + "," + EXAM_NAME + "," + CREATE_DATE + "," + UPDATE_DATE + "," + PASSING_SCORE + "," + 
-					EXAM_TIME + "," + EXAM_EXPLANATION + "," + DISCLOSURE_RANGE + " FROM " + TABLE + " WHERE " + EXAM_ID + " = ?";
+
+			String sql = "SELECT "+ USER_ID + ", " + GENRE_ID + ", " + EXAM_NAME + ", " + CREATE_DATE + ", " + UPDATE_DATE + ", " + PASSING_SCORE + ", " + 
+					EXAM_TIME + ", " + EXAM_EXPLANATION + ", " + DISCLOSURE_RANGE + " FROM " + TABLE + " WHERE " + EXAM_ID + " = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, examID);
 			
@@ -109,8 +110,54 @@ public class ExamDAO extends Database {
 		return ExamList;
 	}
 	
-	public List<String> findUserExam(String userID) {
-		List<String> examIDList = new ArrayList<>();
+
+	public List<Exam> findSearchExam(String word) {
+		DisclosureRange DR = new DisclosureRange();
+		List<Exam> examIDList = new ArrayList<>();
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "SELECT " + EXAM_ID + " FROM " + TABLE + " WHERE " + DISCLOSURE_RANGE + " != "  + DR.CLOSE + " AND ( " + EXAM_NAME + " LIKE ? OR " + EXAM_EXPLANATION + " LIKE ? )";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, "%" + word + "%");
+			pStmt.setString(2, "%" + word + "%");
+			
+			ResultSet rs = pStmt.executeQuery();
+			
+			while(rs.next()) {
+				String examID = rs.getString(EXAM_ID);
+				examIDList.add(this.findExamInfo(examID));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return examIDList;
+	}
+	
+	public List<Exam> findSearchUserExam(String userID) {
+		DisclosureRange DR = new DisclosureRange();
+		List<Exam> examList = new ArrayList<>();
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "SELECT "+ EXAM_ID + " FROM " + TABLE + " WHERE " + DISCLOSURE_RANGE + " != "  + DR.CLOSE + " AND " + USER_ID + " = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, userID);
+			
+			ResultSet rs = pStmt.executeQuery();
+			
+			while(rs.next()) {
+				String examID = rs.getString(EXAM_ID);
+				examList.add(this.findExamInfo(examID));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return examList;
+	}
+	
+	public List<Exam> findUserExam(String userID) {
+		List<Exam> examIDList = new ArrayList<>();
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
 			String sql = "SELECT "+ EXAM_ID + " FROM " + TABLE + " WHERE " + USER_ID + " = ?";
@@ -121,7 +168,7 @@ public class ExamDAO extends Database {
 			
 			while(rs.next()) {
 				String examID = rs.getString(EXAM_ID);
-				examIDList.add(examID);
+				examIDList.add(this.findExamInfo(examID));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();

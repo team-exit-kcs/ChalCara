@@ -21,7 +21,7 @@
     <c:if test="questionNum != 1"><button type="button" onclick="rmQuestionForm(this)">−<c:choose><c:when test="${ExamCreatePage.questionFormat==0}">設問</c:when><c:otherwise>問</c:otherwise></c:choose>を削除</button></c:if>
   </li>
   <li><textarea class="S_ques_area" name="questionExplanation" placeholder = "解説を入力して下さい(任意)"><c:out value="${question.questionExplanation}"/></textarea></li>
-  <li>配点：<input type = "number" required name = "Score" step="0.5" value = <c:out value="${question.allocationOfPoint}">2</c:out>>点</li>
+  <li>配点：<input type = "number" required name = "Score" step="any" value = <c:out value="${question.allocationOfPoint}">2</c:out>>点</li>
 </ul>  
 <%-- 選択 --%>
 <div>

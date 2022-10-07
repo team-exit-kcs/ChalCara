@@ -1,8 +1,8 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,17 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.ExaminationLogic;
+import model.data.Account;
+import model.data.ExaminationPage;
+
 /**
- * Servlet implementation class LogoutServlet
+ * Servlet implementation class ExaminationServlet
  */
-@WebServlet("/LogoutServlet")
-public class LogoutServlet extends HttpServlet {
+@WebServlet("/ExaminationServlet")
+public class ExaminationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogoutServlet() {
+    public ExaminationServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,16 +33,24 @@ public class LogoutServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		ExaminationLogic examLogic = new ExaminationLogic();
 		HttpSession session = request.getSession();
-		session.removeAttribute("LoginUser");
 		
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		out.println("<html>");
-		out.println("<p>ログアウトが完了しました</p>");
-		out.println("<a href=\"/ExamPlatform/HomeServlet\">ホームへ</a>");
-		out.println("</html>");
+		request.setCharacterEncoding("UTF-8");
+		String examID = request.getParameter("examID");
+		Account user = (Account) session.getAttribute("LoginUser");
+		ExaminationPage pageData = examLogic.exequte(examID,user);
+		
+		if(pageData == null){
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/NotFound.jsp");
+			dispatcher.forward(request, response);
+		}else {
+			session.removeAttribute("pageData");
+			session.setAttribute("pageData", pageData);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/ExamGaiyou.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 	/**
