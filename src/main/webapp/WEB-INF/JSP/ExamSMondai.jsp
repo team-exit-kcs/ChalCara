@@ -8,6 +8,7 @@
 <title>試験</title>
 </head>
 <body style="margin: 50px 0">
+<form name="examform" action="/ExamPlatform/CheckAnsServlet" method="post">
 	<div style="text-align: center; background-color: aqua; position: fixed; width: 100%; top: 0; left: 0;">
 		試験時間(残り)：
 		<span id="remainingTime"></span>
@@ -28,6 +29,7 @@
 	</div>
 	</c:forEach>
 	
+</form>
 	
 	<!-- #region JS要素 -->
 	<script>
@@ -38,7 +40,8 @@
 	function QuitExecManually() {
 		if (confirm("本当に終了しますか?")) {
 			//ページのリダイレクト
-			window.location.href = "/ExamPlatform/CheckAnsServlet"
+			document.examform.submit();
+			//window.location.href = "/ExamPlatform/CheckAnsServlet"
 			//alert("ページのリダイレクトする");
 		}
 	}
@@ -47,6 +50,7 @@
 	setTimeout(function () {
 		//ページのリダイレクト or ユーザにPOSTさせる
 		alert("時間切れ");
+		document.examform.submit();
 	}, examtime/*ここに時間(ミリ秒)*/);
 
 	setInterval(function () {
