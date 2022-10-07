@@ -14,7 +14,7 @@ public class BigQuestion implements Serializable {
 	final private int bigQuestionID;
 	final private String bigQuestionSentence;
 	final private List<Question> questionList;
-	
+
 	public BigQuestion(String examID, int bigQuestionID, String bigQuestionSentence, List<Question> questionList) {
 		this.examID = examID;
 		this.bigQuestionID = bigQuestionID;
