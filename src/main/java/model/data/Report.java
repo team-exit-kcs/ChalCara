@@ -9,7 +9,6 @@ public class Report implements Serializable{
 	 * ユーザID
 	 * 試験ID
 	 * 受験日
-	 * 経過時間
 	 * 点数
 	 * 正答率
 	 * 試験名
@@ -19,19 +18,17 @@ public class Report implements Serializable{
 	final private String userID;
 	final private String examID;
 	final private Date examDate;
-	final private Date elapsedTime;
 	final private int score;
 	final private double correctAnswerRate;
 	final private String examName;
 	final private int passingScore;
 	
-	public Report(int reportID, String userID, String examID, Date examDate, Date elapsedTime, int score,
+	public Report(int reportID, String userID, String examID, Date examDate, int score,
 			double correctAnswerRate, String examName, int passingScore) {
 		this.reportID = reportID;
 		this.userID = userID;
 		this.examID = examID;
 		this.examDate = examDate;
-		this.elapsedTime = elapsedTime;
 		this.score = score;
 		this.correctAnswerRate = correctAnswerRate;
 		this.examName = examName;
@@ -52,10 +49,6 @@ public class Report implements Serializable{
 
 	public Date getExamDate() {
 		return examDate;
-	}
-
-	public Date getElapsedTime() {
-		return elapsedTime;
 	}
 
 	public int getScore() {

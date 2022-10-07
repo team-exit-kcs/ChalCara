@@ -39,7 +39,7 @@
 			</p>
 		
 			<c:forEach var="C" items="${Q.choicesList}">
-				<input name='<c:out value="${C.bigQuestionID}"/><c:out value="${C.questionID}"/>' value=<c:out value="${C.choicesID}"/> type="radio">
+				<input name='<c:out value="${C.bigQuestionID}"/>-<c:out value="${C.questionID}"/>' value=<c:out value="${C.choicesID}"/> type="radio">
 				<label>
 					<c:out value="${C.choicesID}"/>.<c:out value="${C.choices}"/>
 				</label>

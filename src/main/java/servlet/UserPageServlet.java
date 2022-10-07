@@ -46,7 +46,7 @@ public class UserPageServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/NotFound.jsp");
 			dispatcher.forward(request, response);
 			
-		}if(userID.equals(user.getUserID())){
+		}if(user != null && userID.equals(user.getUserID())){
 			response.sendRedirect("/ExamPlatform/MypageServlet");
 			
 		}else {

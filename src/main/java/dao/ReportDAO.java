@@ -20,7 +20,6 @@ public class ReportDAO extends Database {
 	final private String EXAM_ID = "ExamID";
 	final private String USER_ID = "UserID";
 	final private String EXAM_DATE = "ExamDate";
-	final private String ELAPSED_TIME = "ElapsedTime";
 	final private String SCORE = "Score";
 	final private String CORRECT_ANSWER_RATE = "CorrectAnswerRate";
 	
@@ -39,7 +38,6 @@ public class ReportDAO extends Database {
 				String userID = rs.getString(USER_ID);
 				String examID = rs.getString(EXAM_ID);
 				Date examDate = rs.getDate(EXAM_DATE);
-				Date elapsedTime = rs.getTime(ELAPSED_TIME);
 				int score = rs.getInt(SCORE);
 				double correctAnswerRate = rs.getDouble(CORRECT_ANSWER_RATE);
 				
@@ -47,7 +45,7 @@ public class ReportDAO extends Database {
 				String examName = exam.getExamName();
 				int passingScore = exam.getPassingScore();
 				
-				report = new Report(reportID, userID, examID, examDate, elapsedTime, score, correctAnswerRate,
+				report = new Report(reportID, userID, examID, examDate, score, correctAnswerRate,
 						examName, passingScore);
 			}
 			
