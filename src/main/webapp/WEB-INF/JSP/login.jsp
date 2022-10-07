@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,20 +15,21 @@
 	<div class="main">
 		<span class="message">Welcome!</span>
 		<h1>ログイン</h1>
-		<form>
+		<form action="/ExamPlatform/LoginServlet" method="post">
 			<div>
 				<label for="input_id">ログインID:</label>
-				<input type="text" id="input_id" name="login_id">
+				<input type="text" required id="input_id" name="id">
 			</div>
 			<div>
 				<label for="input_pw">パスワード:</label>
-				<input type="password" id="input_pw" name="password">
+				<input type="password" required id="input_pw" name="pass">
+				<c:if test="${not empty msg}"><p class="errorMsg"><c:out value="${msg}"/></p></c:if>
 			</div>
 		
 			<input type="submit" value="ログイン">
 		</form>
 	
-		<a href="">アカウントをお持ちでない方はこちら</a>
+		<a href="/ExamPlatform/AccountEntryServlet">アカウントをお持ちでない方はこちら</a>
 	</div>
 </body>
 </html>

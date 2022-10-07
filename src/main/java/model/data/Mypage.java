@@ -9,21 +9,21 @@ public class Mypage implements Serializable {
 	 * ブックマーク試験名リスト
 	 * レポートリスト
 	 */
-	final private List<String> examList;
-	final private List<String> bookmarkList;
+	final private List<Exam> examList;
+	final private List<Exam> bookmarkList;
 	final private List<Report> reportList;
 	
-	public Mypage(List<String> examList, List<String> bookmarkList, List<Report> reportList) {
+	public Mypage(List<Exam> examList, List<Exam> bookmarkList, List<Report> reportList) {
 		this.examList = examList;
 		this.bookmarkList = bookmarkList;
 		this.reportList = reportList;
 	}
 
-	public List<String> getExamList() {
+	public List<Exam> getExamList() {
 		return examList;
 	}
 
-	public List<String> getBookmarkList() {
+	public List<Exam> getBookmarkList() {
 		return bookmarkList;
 	}
 
