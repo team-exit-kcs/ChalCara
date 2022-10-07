@@ -61,11 +61,9 @@
 			</span>
 		</c:forEach>
 	</div>
-	
-	<c:if test="${not empty LoginUser}">
 
-	</c:if>
-	
+	<c:if test="${not empty LoginUser}"><button onclick="location.href='/ExamPlatform/BookmarkServlet?examID=<c:out value="${pageData.exam.examID}"/>'"><c:choose><c:when test="${pageData.bookmark}">ブックマークを外す</c:when><c:otherwise>ブックマーク</c:otherwise></c:choose></button></c:if>
+  
 	<div style="text-align: center;">
 		ブックマーク数：
 		<span>

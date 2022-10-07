@@ -12,16 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-import model.data.Account;
-import model.data.BigQuestion;
-import model.data.Choices;
-import model.data.Exam;
-import model.data.ExaminationPage;
-import model.data.Mypage;
-import model.data.Question;
-import model.data.Report;
-
-
 /**
  * Servlet implementation class TestForwardServlet
  */
@@ -65,7 +55,7 @@ public class TestForwardServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 
-//	/*Account
+	/*Account
 		session.setAttribute("LoginUser",new Account("testUsr","プロフィール","./img/kari.png"));
 //	*/		
 		
