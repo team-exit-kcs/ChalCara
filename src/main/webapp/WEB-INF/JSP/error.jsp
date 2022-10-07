@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>404</title>
+<title>エラー</title>
 </head>
 <body>
-<h1>404</h1>
-<h4>Not Found</h4>
-<p>リクエストされたページが見つかりませんでした</p>
+<h4>エラー</h4>
+<c:if test="${not empty msg}"><p class="errorMsg"><c:out value="${msg}"/></p></c:if>
 <a href="/ExamPlatform/HomeServlet">ホームへ</a>
+</body>
 </body>
 </html>

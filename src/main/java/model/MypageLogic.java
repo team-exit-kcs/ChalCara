@@ -21,7 +21,7 @@ public class MypageLogic {
 		
 		List<Report> reportList = new ArrayList<>();
 		for(int reportID:reportIDList) {
-			reportList.add(rd.findReportInfo(reportID));
+			reportList.add(rd.findReportInfo(userID,reportID));
 		}
 		
 		return new Mypage(examList,bookmarkExamList,reportList);

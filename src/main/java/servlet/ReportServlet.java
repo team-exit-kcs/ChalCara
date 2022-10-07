@@ -10,21 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.UserPageLogic;
+import dao.ReportDAO;
 import model.data.Account;
-import model.data.UserPage;
+import model.data.Report;
 
 /**
- * Servlet implementation class UserPageServlet
+ * Servlet implementation class ReportServlet
  */
-@WebServlet("/UserPageServlet")
-public class UserPageServlet extends HttpServlet {
+@WebServlet("/ReportServlet")
+public class ReportServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserPageServlet() {
+    public ReportServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,26 +33,27 @@ public class UserPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UserPageLogic userPageLogic = new UserPageLogic();
+		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		
-		request.setCharacterEncoding("UTF-8");
-		String userID = request.getParameter("userID");
+		Report report = (Report) session.getAttribute("report");
 		Account user = (Account) session.getAttribute("LoginUser");
+		String reportID = request.getParameter("reportID");
 		
-		UserPage pageData = userPageLogic.exequte(userID);
-		
-		if(pageData == null){
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/NotFound.jsp");
+		if(report != null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/ResultReport.jsp");
 			dispatcher.forward(request, response);
 			
-		}if(user != null && userID.equals(user.getUserID())){
-			response.sendRedirect("/ExamPlatform/MypageServlet");
+		}if(user != null && reportID != null) {
+			ReportDAO reportDAO = new ReportDAO();
 			
+			session.setAttribute("report", reportDAO.findReportInfo(reportID, Integer.parseInt(reportID)));
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/ResultReport.jsp");
+			dispatcher.forward(request, response);
 		}else {
-			request.setAttribute("userPage", pageData);
-			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/userPage.jsp");
+			request.setAttribute("msg", new String("レポート情報が見つかりませんでした"));
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/error.jsp");
 			dispatcher.forward(request, response);
 		}
 	}

@@ -39,7 +39,7 @@
 			</p>
 		
 			<c:forEach var="C" items="${Q.choicesList}">
-				<input name='<c:out value="${C.bigQuestionID}"/><c:out value="${C.questionID}"/>' value=<c:out value="${C.choicesID}"/> type="radio">
+				<input name='<c:out value="${C.bigQuestionID}"/>-<c:out value="${C.questionID}"/>' value=<c:out value="${C.choicesID}"/> type="radio">
 				<label>
 					<c:out value="${C.choicesID}"/>.<c:out value="${C.choices}"/>
 				</label>
@@ -58,7 +58,7 @@
 	function QuitExecManually() {
 		if (confirm("本当に終了しますか?")) {
 			//ページのリダイレクト
-			//ex) window.location.href = "../"
+			window.location.href = "/ExamPlatform/CheckAnsServlet"
 			alert("ページのリダイレクトする");
 		}
 	}

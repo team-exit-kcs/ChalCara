@@ -18,29 +18,27 @@ import model.data.Report;
 public class ReportDAO extends Database {
 	final private String TABLE = "Report";
 	final private String REPORT_ID = "ReportID";
-	final private String EXAM_ID = "ExamID";
 	final private String USER_ID = "UserID";
+	final private String EXAM_ID = "ExamID";
 	final private String EXAM_DATE = "ExamDate";
-	final private String ELAPSED_TIME = "ElapsedTime";
 	final private String SCORE = "Score";
 	final private String CORRECT_ANSWER_RATE = "CorrectAnswerRate";
 	
-	public Report findReportInfo(int reportID) {
+	public Report findReportInfo(String userID, int reportID) {
 		ExamDAO examDAO = new ExamDAO();
 		Report report = null;
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
-			String sql = "SELECT * FROM " + TABLE + " WHERE " + REPORT_ID + " = ?";
+			String sql = "SELECT * FROM " + TABLE + " WHERE " + USER_ID + " = ? AND " + REPORT_ID + " = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setInt(1, reportID);
+			pStmt.setString(1, userID);
+			pStmt.setInt(2, reportID);
 			
 			ResultSet rs = pStmt.executeQuery();
 			
 			if(rs.next()) {
-				String userID = rs.getString(USER_ID);
 				String examID = rs.getString(EXAM_ID);
 				Date examDate = rs.getDate(EXAM_DATE);
-				Date elapsedTime = rs.getTime(ELAPSED_TIME);
 				int score = rs.getInt(SCORE);
 				double correctAnswerRate = rs.getDouble(CORRECT_ANSWER_RATE);
 				
@@ -48,7 +46,7 @@ public class ReportDAO extends Database {
 				String examName = exam.getExamName();
 				int passingScore = exam.getPassingScore();
 				
-				report = new Report(reportID, userID, examID, examDate, elapsedTime, score, correctAnswerRate,
+				report = new Report(reportID, userID, examID, examDate, score, correctAnswerRate,
 						examName, passingScore);
 			}
 			
@@ -60,6 +58,27 @@ public class ReportDAO extends Database {
 		return report;
 	}
 	
+	public int getMAXReportID(String userID) {
+		int id=0;
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "SELECT MAX("+ REPORT_ID + ") AS max FROM " + TABLE + " WHERE " + USER_ID + " = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, userID);
+			
+			ResultSet rs = pStmt.executeQuery();
+			
+			if(rs.next()) {
+				id = rs.getInt("max");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+		
+		return id;
+	}
+
 	public List<Exam> findMonthlyExeTopExam() {
 		DisclosureRange DR = new DisclosureRange();
 		ExamDAO examDAO = new ExamDAO();
@@ -83,7 +102,7 @@ public class ReportDAO extends Database {
 		}
 		return ExamList;
 	}
-	
+
 	public List<Integer> findUserReport(String userID) {
 		List<Integer> reportIDList = new ArrayList<>();
 		
@@ -94,8 +113,9 @@ public class ReportDAO extends Database {
 			
 			ResultSet rs = pStmt.executeQuery();
 			
+			int reportID;
 			while(rs.next()) {
-				int reportID = rs.getInt(REPORT_ID);
+				reportID = rs.getInt(REPORT_ID);
 				reportIDList.add(reportID);
 			}
 		}catch(SQLException e) {
@@ -147,4 +167,28 @@ public class ReportDAO extends Database {
 		return cnt;
 	}
 	
+	public boolean setReport(Report report) {
+		boolean resultSts=false;
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "INSERT INTO " + TABLE + "VALUES(?,?)";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setInt(1, report.getReportID());
+			pStmt.setString(2, report.getUserID());
+			pStmt.setString(3, report.getExamID());
+			pStmt.setDate(4, new java.sql.Date(report.getExamDate().getTime()));
+			pStmt.setInt(6, report.getScore());
+			pStmt.setDouble(6, report.getCorrectAnswerRate());
+			
+			int result = pStmt.executeUpdate();
+			if(result>0) {
+				resultSts=true;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return resultSts;
+	}
 }

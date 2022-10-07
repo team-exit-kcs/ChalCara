@@ -22,14 +22,11 @@
 		問<c:out value="${Q.questionID}"/><br/>
 		<p><c:out value="${Q.questionSentence}"/></p>
 	<c:forEach var="C" items="${Q.choicesList}">
-		<input name='<c:out value="${C.bigQuestionID}"/><c:out value="${C.questionID}"/>' value=<c:out value="${C.choicesID}"/> type="radio">
+		<input name='<c:out value="${C.bigQuestionID}"/>-<c:out value="${C.questionID}"/>' value=<c:out value="${C.choicesID}"/> type="radio">
 		<label><c:out value="${C.choicesID}"/>.<c:out value="${C.choices}"/></label>
 	</c:forEach>
 	</div>
 	</c:forEach>
-	<div style="text-align: center; background-color: aqua; position: fixed; width: 100%; bottom: 0; left: 0;">
-		<button>試験終了</button>
-	</div>
 	
 	
 	<!-- #region JS要素 -->
@@ -41,8 +38,8 @@
 	function QuitExecManually() {
 		if (confirm("本当に終了しますか?")) {
 			//ページのリダイレクト
-			//ex) window.location.href = "../"
-			alert("ページのリダイレクトする");
+			window.location.href = "/ExamPlatform/CheckAnsServlet"
+			//alert("ページのリダイレクトする");
 		}
 	}
 
