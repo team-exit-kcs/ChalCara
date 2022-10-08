@@ -171,13 +171,13 @@ public class ReportDAO extends Database {
 		boolean resultSts=false;
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
-			String sql = "INSERT INTO " + TABLE + "VALUES(?,?)";
+			String sql = "INSERT INTO " + TABLE + "VALUES(?,?,?,?,?,?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setInt(1, report.getReportID());
 			pStmt.setString(2, report.getUserID());
 			pStmt.setString(3, report.getExamID());
 			pStmt.setDate(4, new java.sql.Date(report.getExamDate().getTime()));
-			pStmt.setInt(6, report.getScore());
+			pStmt.setInt(5, report.getScore());
 			pStmt.setDouble(6, report.getCorrectAnswerRate());
 			
 			int result = pStmt.executeUpdate();
