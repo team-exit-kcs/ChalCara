@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,22 +11,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.ExamDAO;
 import model.DisclosureRangeLogic;
-import model.ExaminationLogic;
-import model.data.Account;
+import model.Hash;
 import model.data.ExaminationPage;
 
 /**
- * Servlet implementation class ExaminationServlet
+ * Servlet implementation class LimitedExaminationServlet
  */
-@WebServlet("/ExaminationServlet")
-public class ExaminationServlet extends HttpServlet {
+@WebServlet("/ExaminationServlet/Limited")
+public class LimitedExaminationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ExaminationServlet() {
+    public LimitedExaminationServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,31 +35,35 @@ public class ExaminationServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ExamDAO examDAO = new ExamDAO();
 		DisclosureRangeLogic DR = new DisclosureRangeLogic();
-		ExaminationLogic examLogic = new ExaminationLogic();
 		HttpSession session = request.getSession();
 		
-		request.setCharacterEncoding("UTF-8");
-		String examID = request.getParameter("examID");
-		Account user = (Account) session.getAttribute("LoginUser");
-		ExaminationPage pageData = examLogic.exequte(examID,user);
+		ExaminationPage pageData = (ExaminationPage) session.getAttribute("pageData");
 		
-		if(pageData == null){
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/NotFound.jsp");
-			dispatcher.forward(request, response);
+		if(pageData != null && DR.isLimited(pageData.getExam().getDisclosureRange())) {
+			Hash hash = new Hash();
+			request.setCharacterEncoding("UTF-8");
+			String PASS = null;
+			try {
+				PASS = hash.createHash(request.getParameter("pass"));
+			} catch (NoSuchAlgorithmException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
 			
-		}else {
-			session.removeAttribute("pageData");
-			session.setAttribute("pageData", pageData);
-			
-			if(DR.isLimited(pageData.getExam().getDisclosureRange()) && (user == null || !(pageData.getExam().getUserID().equals(user.getUserID())))) {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/limitedExamForm.jsp");
+			if(examDAO.isLimitedPass(pageData.getExam().getExamID(), PASS)) {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/ExamGaiyou.jsp");
 				dispatcher.forward(request, response);
 				
 			}else {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/ExamGaiyou.jsp");
+				request.setAttribute("msg", new String("エラー：パスワードが正しくありません"));
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/limitedExamForm.jsp");
 				dispatcher.forward(request, response);
 			}
+			
+		}else {
+			response.sendRedirect("/ExamPlatform/ExaminationServlet");
 		}
 	}
 

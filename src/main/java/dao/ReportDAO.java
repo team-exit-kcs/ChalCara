@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import model.DisclosureRange;
+import model.DisclosureRangeLogic;
 import model.data.Exam;
 import model.data.Report;
 
@@ -80,7 +80,7 @@ public class ReportDAO extends Database {
 	}
 
 	public List<Exam> findMonthlyExeTopExam() {
-		DisclosureRange DR = new DisclosureRange();
+		DisclosureRangeLogic DR = new DisclosureRangeLogic();
 		ExamDAO examDAO = new ExamDAO();
 		List<Exam> ExamList = new ArrayList<>();
 		
@@ -92,7 +92,7 @@ public class ReportDAO extends Database {
 			
 			while(rs.next() || ExamList.size() <= 10) {
 				Exam exam = examDAO.findExamInfo(rs.getString(EXAM_ID));
-				if(exam.getDisclosureRange() == DR.OPEN) {
+				if(exam.getDisclosureRange() == DR.getOPEN()) {
 					ExamList.add(exam);
 				}
 			}

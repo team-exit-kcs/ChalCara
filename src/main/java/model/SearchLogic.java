@@ -13,7 +13,7 @@ import model.data.SearchResult;
 public class SearchLogic {
 	public SearchResult exequte(int format, String word) {
 		ExamDAO examDAO = new ExamDAO();
-		DisclosureRange DR = new DisclosureRange();
+		DisclosureRangeLogic DR = new DisclosureRangeLogic();
 		List<Search> resultList = new ArrayList<>();
 		
 		switch(format) {
