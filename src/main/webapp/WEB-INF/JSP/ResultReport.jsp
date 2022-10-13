@@ -66,7 +66,7 @@ document.getElementById("date").innerHTML = year + "/" + month + "/" + day;
 
 <div class = "replay_back">
 <a href = "/ExamPlatform/ExaminationServlet?examID=<c:out value="${report.examID}"/>" id = "replay">もう一度やる</a>
-<a href = "ExamPlatform/HomeServlet" id = "back">ホームに戻る</a>
+<a href = "/ExamPlatform/HomeServlet" id = "back">ホームに戻る</a>
 </div>
 
 <%--<script src="./js/print.js"></script>--%>
