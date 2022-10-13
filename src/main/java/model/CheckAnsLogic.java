@@ -16,6 +16,6 @@ public class CheckAnsLogic {
 			}
 		}
 		
-		return new CheckAns(q.getBigQuestionID(), q.getQuestionID(), q.getQuestionSentence(), q.getAnswer(), userAns, tf, q.getQuestionExplanation(), q.getAllocationOfPoint(), q.getChoicesList());
+		return new CheckAns(q.getQuestionID(), q.getQuestionSentence(), q.getAnswer(), userAns, tf, q.getQuestionExplanation(), q.getAllocationOfPoint(), q.getChoicesList());
 	}
 }

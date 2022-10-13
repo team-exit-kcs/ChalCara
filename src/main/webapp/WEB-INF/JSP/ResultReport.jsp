@@ -62,7 +62,7 @@ document.getElementById("date").innerHTML = year + "/" + month + "/" + day;
 </script> --%>
 </div>
 
-<a href = "#" id = "syousai">詳細</a><br>
+<c:if test="${not empty checkAnsPage}"><a href = "/ExamPlatform/Report/CheckAns" id = "syousai">詳細</a><br></c:if>
 
 <div class = "replay_back">
 <a href = "/ExamPlatform/ExaminationServlet?examID=<c:out value="${report.examID}"/>" id = "replay">もう一度やる</a>

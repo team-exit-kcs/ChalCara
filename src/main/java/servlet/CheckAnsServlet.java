@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import model.CheckAnsLogic;
 import model.CreateReportLogic;
 import model.data.Account;
+import model.data.BQCheckAns;
 import model.data.BigQuestion;
 import model.data.CheckAns;
 import model.data.CheckAnsPage;
@@ -54,11 +55,12 @@ public class CheckAnsServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/error.jsp");
 			dispatcher.forward(request, response);
 		}else {
+			List<BQCheckAns> BQCheckAnsList = new ArrayList<>();
 			List<BigQuestion> bigQuestionList = pageData.getBigQuestionList();
-			List<CheckAns> checkAnsList = new ArrayList<>();;
 			double score = 0;
 			
 			for(BigQuestion bq : bigQuestionList) {
+				List<CheckAns> checkAnsList = new ArrayList<>();
 				for(Question q : bq.getQuestionList()) {
 					String strAns = request.getParameter(q.getBigQuestionID() + "-" + q.getQuestionID());
 					
@@ -69,15 +71,19 @@ public class CheckAnsServlet extends HttpServlet {
 					
 					checkAnsList.add(result);
 				}
+				BQCheckAnsList.add(new BQCheckAns(bq.getBigQuestionID(), bq.getBigQuestionSentence(), checkAnsList));
 			}
-			CheckAnsPage checkAnsPage = new CheckAnsPage(pageData.getExam().getExamID(), (int)score, checkAnsList);
+			CheckAnsPage checkAnsPage = new CheckAnsPage(pageData.getExam().getExamID(), (int)score, BQCheckAnsList);
 			
 			Report report = crl.execute(checkAnsPage, pageData.getExam() , user);
+			
+			session.removeAttribute("checkAnsPage");
+			session.setAttribute("checkAnsPage", checkAnsPage);
 			
 			session.removeAttribute("report");
 			session.setAttribute("report", report);
 			
-			response.sendRedirect("/ExamPlatform/ReportServlet");
+			response.sendRedirect("/ExamPlatform/Report");
 		}
 	}
 

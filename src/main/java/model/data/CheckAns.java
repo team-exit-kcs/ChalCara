@@ -5,7 +5,6 @@ import java.util.List;
 
 public class CheckAns implements Serializable {
 	/*要素
-	 * 大問ID
 	 * 小問ID
 	 * 問題文
 	 * 答え
@@ -15,7 +14,6 @@ public class CheckAns implements Serializable {
 	 * 配点
 	 * 選択肢リスト
 	 */
-	final private int bigQuestionID;
 	final private int questionID;
 	final private String questionSentence;
 	final private int answer;
@@ -25,9 +23,8 @@ public class CheckAns implements Serializable {
 	final private double allocationOfPoint;
 	final private List<Choices> choicesList;
 
-	public CheckAns(int bigQuestionID, int questionID, String questionSentence, int answer, int userAnswer, boolean tf,
+	public CheckAns(int questionID, String questionSentence, int answer, int userAnswer, boolean tf,
 			String questionExplanation, double allocationOfPoint, List<Choices> choicesList) {
-		this.bigQuestionID = bigQuestionID;
 		this.questionID = questionID;
 		this.questionSentence = questionSentence;
 		this.answer = answer;
@@ -36,10 +33,6 @@ public class CheckAns implements Serializable {
 		this.questionExplanation = questionExplanation;
 		this.allocationOfPoint = allocationOfPoint;
 		this.choicesList = choicesList;
-	}
-
-	public int getBigQuestionID() {
-		return bigQuestionID;
 	}
 
 	public int getQuestionID() {

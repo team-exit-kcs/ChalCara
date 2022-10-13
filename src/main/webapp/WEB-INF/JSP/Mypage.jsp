@@ -87,7 +87,7 @@
    <div class = "r_box">
    <c:set var="pattern" value="yyyy/MM/dd" />
    <c:forEach var="report" items="${MypageData.reportList}" end="${maxCnt}">
-   <p class = "test"> 《<fmt:formatDate value="${report.examDate}" pattern="${pattern}"/>》 《<c:out value="${report.reportID}"/>》 《<c:out value="${report.examName}"/>》</p>
+   <p class = "test"> <a href = "/ExamPlatform/Report?reportID=<c:out value="${report.reportID}"/>">《<fmt:formatDate value="${report.examDate}" pattern="${pattern}"/>》 《<c:out value="${report.reportID}"/>》 《<c:out value="${report.examName}"/>》</a></p>
    </c:forEach>
    </div>
    
