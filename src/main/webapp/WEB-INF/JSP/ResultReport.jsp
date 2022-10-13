@@ -8,8 +8,6 @@
 <%@ page import = "java.util.Date" %>
 <%@ page import = "java.text.SimpleDateFormat" %>
 
-<% Report report = (Report) request.getAttribute("ReportData");%>
-
 <!DOCTYPE html>
 <html>
 <head>

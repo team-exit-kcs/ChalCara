@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.CheckAnsLogic;
 import model.CreateReportLogic;
 import model.data.Account;
 import model.data.BigQuestion;
@@ -40,6 +41,7 @@ public class CheckAnsServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		CheckAnsLogic cal = new CheckAnsLogic();
 		CreateReportLogic crl = new CreateReportLogic();
 		HttpSession session = request.getSession();
 		
@@ -58,27 +60,19 @@ public class CheckAnsServlet extends HttpServlet {
 			
 			for(BigQuestion bq : bigQuestionList) {
 				for(Question q : bq.getQuestionList()) {
-					boolean tf = false;
-					
 					String strAns = request.getParameter(q.getBigQuestionID() + "-" + q.getQuestionID());
-					int userAns = 0;
-					if(strAns != null) {
-						userAns = Integer.parseInt(strAns);
-						if(userAns == q.getAnswer()) {
-							tf = true;
-							score += q.getAllocationOfPoint();
-						}
+					
+					CheckAns result = cal.exequte(q, strAns);
+					if(result.isTf()) {
+						score += result.getAllocationOfPoint();
 					}
 					
-					checkAnsList.add(new CheckAns(q.getBigQuestionID(), q.getQuestionID(), q.getQuestionSentence(), q.getAnswer(), userAns, tf, q.getQuestionExplanation(), q.getAllocationOfPoint(), q.getChoicesList()));
+					checkAnsList.add(result);
 				}
 			}
 			CheckAnsPage checkAnsPage = new CheckAnsPage(pageData.getExam().getExamID(), (int)score, checkAnsList);
 			
 			Report report = crl.execute(checkAnsPage, pageData.getExam() , user);
-			
-			session.removeAttribute("checkAnsPage");
-			session.setAttribute("checkAnsPage", checkAnsPage);
 			
 			session.removeAttribute("report");
 			session.setAttribute("report", report);
