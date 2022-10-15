@@ -17,8 +17,11 @@ public class UserPageLogic {
 		
 		if(userID != null) {
 			Account user = accountDAO.findByAccount(userID);
-			List<Exam> examList = examDAO.findSearchUserExam(userID);
-			pageData = new UserPage(user, examList);
+			
+			if(user != null) {
+				List<Exam> examList = examDAO.findSearchUserExam(userID);
+				pageData = new UserPage(user, examList);
+			}
 		}
 		
 		return pageData;
