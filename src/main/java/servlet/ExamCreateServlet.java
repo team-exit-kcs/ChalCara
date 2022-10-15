@@ -83,7 +83,7 @@ public class ExamCreateServlet extends HttpServlet {
 		String limitedPassword;
 		
 		if(DR.isLimited(disclosureRange)) {
-			limitedPassword = request.getParameter("Explanation");
+			limitedPassword = request.getParameter("limitedPASS");
 		}else {
 			limitedPassword = null;
 		}
