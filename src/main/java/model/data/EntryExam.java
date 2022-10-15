@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import dao.ExamDAO;
-import model.DisclosureRange;
+import model.DisclosureRangeLogic;
 import model.Hash;
 
 public class EntryExam extends BaseExam implements Serializable {
@@ -34,7 +34,7 @@ public class EntryExam extends BaseExam implements Serializable {
 				disclosureRange, tagList);
 		
 		Hash hash = new Hash();
-		DisclosureRange DR = new DisclosureRange();
+		DisclosureRangeLogic DR = new DisclosureRangeLogic();
 		if(DR.isLimited(disclosureRange)) {
 			this.limitedPassword = hash.createHash(limitedPassword);
 		}else {

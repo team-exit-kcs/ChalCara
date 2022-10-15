@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.GenreDAO;
 import dao.TagDAO;
-import model.DisclosureRange;
+import model.DisclosureRangeLogic;
 import model.data.Account;
 import model.data.EntryExam;
 import model.data.ExamCreatePage;
@@ -61,7 +61,7 @@ public class ExamCreateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		
-		DisclosureRange DR = new DisclosureRange();
+		DisclosureRangeLogic DR = new DisclosureRangeLogic();
 		Account account = (Account) session.getAttribute("LoginUser");
 		ExamCreatePage examData = (ExamCreatePage) session.getAttribute("ExamCreatePage");
 		

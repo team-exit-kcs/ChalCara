@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import model.DisclosureRange;
+import model.DisclosureRangeLogic;
 import model.data.EntryExam;
 import model.data.Exam;
 
@@ -25,7 +25,7 @@ public class ExamDAO extends Database {
 	final private String EXAM_TIME = "ExamTime";
 	final private String EXAM_EXPLANATION = "ExamExplanation";
 	final private String DISCLOSURE_RANGE = "DisclosureRange";
-	//final private String LIMITED_PASS = "LimitedPassword";
+	final private String LIMITED_PASS = "LimitedPassword";
 	
 	public Exam findExamInfo(String examID) {
 		GenreDAO genreDAO = new GenreDAO();
@@ -69,6 +69,28 @@ public class ExamDAO extends Database {
 		return exam;
 	}
 	
+	public boolean isLimitedPass(String examID, String PASS) {
+		boolean resultSts=false;
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "SELECT " + EXAM_ID + " FROM " + TABLE + " WHERE " + EXAM_ID + " = ? AND " + LIMITED_PASS + " = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, examID);
+			pStmt.setString(2, PASS);
+			
+			ResultSet rs = pStmt.executeQuery();
+			
+			if(rs.next()) {
+				resultSts=true;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return resultSts;
+	}
+	
 	public boolean isID(String id){
 		boolean resultSts=false;
 		
@@ -91,11 +113,11 @@ public class ExamDAO extends Database {
 	}
 	
 	public List<Exam> findNewExam() {
-		DisclosureRange DR = new DisclosureRange();
+		DisclosureRangeLogic DR = new DisclosureRangeLogic();
 		List<Exam> ExamList = new ArrayList<>();
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
-			String sql = "SELECT " + EXAM_ID + " FROM " + TABLE + " WHERE " + DISCLOSURE_RANGE + " = " + DR.OPEN + " ORDER BY " + CREATE_DATE + " DESC LIMIT 10";
+			String sql = "SELECT " + EXAM_ID + " FROM " + TABLE + " WHERE " + DISCLOSURE_RANGE + " = " + DR.getOPEN() + " ORDER BY " + CREATE_DATE + " DESC LIMIT 10";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			
 			ResultSet rs = pStmt.executeQuery();
@@ -112,11 +134,11 @@ public class ExamDAO extends Database {
 	
 
 	public List<Exam> findSearchExam(String word) {
-		DisclosureRange DR = new DisclosureRange();
+		DisclosureRangeLogic DR = new DisclosureRangeLogic();
 		List<Exam> examIDList = new ArrayList<>();
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
-			String sql = "SELECT " + EXAM_ID + " FROM " + TABLE + " WHERE " + DISCLOSURE_RANGE + " != "  + DR.CLOSE + " AND ( " + EXAM_NAME + " LIKE ? OR " + EXAM_EXPLANATION + " LIKE ? )";
+			String sql = "SELECT " + EXAM_ID + " FROM " + TABLE + " WHERE " + DISCLOSURE_RANGE + " = "  + DR.getOPEN() + " AND ( " + EXAM_NAME + " LIKE ? OR " + EXAM_EXPLANATION + " LIKE ? )";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, "%" + word + "%");
 			pStmt.setString(2, "%" + word + "%");
@@ -135,11 +157,11 @@ public class ExamDAO extends Database {
 	}
 	
 	public List<Exam> findSearchUserExam(String userID) {
-		DisclosureRange DR = new DisclosureRange();
+		DisclosureRangeLogic DR = new DisclosureRangeLogic();
 		List<Exam> examList = new ArrayList<>();
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
-			String sql = "SELECT "+ EXAM_ID + " FROM " + TABLE + " WHERE " + DISCLOSURE_RANGE + " != "  + DR.CLOSE + " AND " + USER_ID + " = ?";
+			String sql = "SELECT "+ EXAM_ID + " FROM " + TABLE + " WHERE " + DISCLOSURE_RANGE + " = "  + DR.getOPEN() + " AND " + USER_ID + " = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, userID);
 			
