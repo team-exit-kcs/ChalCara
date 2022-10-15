@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.CheckAnsLogic;
 import model.CreateReportLogic;
 import model.data.Account;
+import model.data.BQCheckAns;
 import model.data.BigQuestion;
 import model.data.CheckAns;
 import model.data.CheckAnsPage;
@@ -40,6 +42,7 @@ public class CheckAnsServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		CheckAnsLogic cal = new CheckAnsLogic();
 		CreateReportLogic crl = new CreateReportLogic();
 		HttpSession session = request.getSession();
 		
@@ -52,28 +55,25 @@ public class CheckAnsServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/error.jsp");
 			dispatcher.forward(request, response);
 		}else {
+			List<BQCheckAns> BQCheckAnsList = new ArrayList<>();
 			List<BigQuestion> bigQuestionList = pageData.getBigQuestionList();
-			List<CheckAns> checkAnsList = new ArrayList<>();;
 			double score = 0;
 			
 			for(BigQuestion bq : bigQuestionList) {
+				List<CheckAns> checkAnsList = new ArrayList<>();
 				for(Question q : bq.getQuestionList()) {
-					boolean tf = false;
-					
 					String strAns = request.getParameter(q.getBigQuestionID() + "-" + q.getQuestionID());
-					int userAns = 0;
-					if(strAns != null) {
-						userAns = Integer.parseInt(strAns);
-						if(userAns == q.getAnswer()) {
-							tf = true;
-							score += q.getAllocationOfPoint();
-						}
+					
+					CheckAns result = cal.exequte(q, strAns);
+					if(result.isTf()) {
+						score += result.getAllocationOfPoint();
 					}
 					
-					checkAnsList.add(new CheckAns(q.getBigQuestionID(), q.getQuestionID(), q.getQuestionSentence(), q.getAnswer(), userAns, tf, q.getQuestionExplanation(), q.getAllocationOfPoint(), q.getChoicesList()));
+					checkAnsList.add(result);
 				}
+				BQCheckAnsList.add(new BQCheckAns(bq.getBigQuestionID(), bq.getBigQuestionSentence(), checkAnsList));
 			}
-			CheckAnsPage checkAnsPage = new CheckAnsPage(pageData.getExam().getExamID(), (int)score, checkAnsList);
+			CheckAnsPage checkAnsPage = new CheckAnsPage(pageData.getExam().getExamID(), (int)score, BQCheckAnsList);
 			
 			Report report = crl.execute(checkAnsPage, pageData.getExam() , user);
 			
@@ -83,7 +83,7 @@ public class CheckAnsServlet extends HttpServlet {
 			session.removeAttribute("report");
 			session.setAttribute("report", report);
 			
-			response.sendRedirect("/ExamPlatform/ReportServlet");
+			response.sendRedirect("/ExamPlatform/Report");
 		}
 	}
 

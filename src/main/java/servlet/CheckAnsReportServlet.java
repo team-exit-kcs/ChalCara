@@ -10,21 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.ReportDAO;
-import model.data.Account;
-import model.data.Report;
+import model.data.CheckAnsPage;
 
 /**
- * Servlet implementation class ReportServlet
+ * Servlet implementation class CheckAnsReportServlet
  */
-@WebServlet("/Report")
-public class ReportServlet extends HttpServlet {
+@WebServlet("/Report/CheckAns")
+public class CheckAnsReportServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReportServlet() {
+    public CheckAnsReportServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,26 +34,22 @@ public class ReportServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		
-		Report report = (Report) session.getAttribute("report");
-		Account user = (Account) session.getAttribute("LoginUser");
-		String reportID = request.getParameter("reportID");
+		CheckAnsPage checkAnsPage = (CheckAnsPage) session.getAttribute("checkAnsPage");
 		
-		if(user != null && reportID != null) {
-			ReportDAO reportDAO = new ReportDAO();
-			
-			session.removeAttribute("report");
-			session.setAttribute("report", reportDAO.findReportInfo(reportID, Integer.parseInt(reportID)));
-			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/ResultReport.jsp");
-			dispatcher.forward(request, response);
-		}if(report != null) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/ResultReport.jsp");
-			dispatcher.forward(request, response);
-			
-		}else {
-			request.setAttribute("msg", new String("レポート情報が見つかりませんでした"));
+		if(checkAnsPage == null) {
+			request.setAttribute("msg", new String("情報が見つかりませんでした"));
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/error.jsp");
 			dispatcher.forward(request, response);
+		}else {
+			if(checkAnsPage.getBQCheckAnsList().get(0).getBigQuestionSentence() == null) {
+				//小問形式
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/SSeigohantei.jsp");
+				dispatcher.forward(request, response);
+			}else {
+				//大問形式
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/BSeigohantei.jsp");
+				dispatcher.forward(request, response);
+			}
 		}
 	}
 
