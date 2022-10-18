@@ -37,7 +37,7 @@
    }--%>
    
 <c:choose>
- <c:when test="${report.score > report.passingScore }">
+ <c:when test="${report.score >= report.passingScore }">
  <h2 id = gouhi>合格</h2>
  </c:when>
  <c:otherwise>
