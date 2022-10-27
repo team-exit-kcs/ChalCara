@@ -51,8 +51,10 @@ public class SearchResultServlet extends HttpServlet {
 				request.setAttribute("msg", new String("検索結果はありませんでした"));
 			}
 			
+			SearchResult newResult = new SearchResult(page, resultList, result.getSearchFormat(), result.getSearchWord());
+			
 			session.removeAttribute("searchResult");
-			session.setAttribute("searchResult", new SearchResult(page, resultList));
+			session.setAttribute("searchResult", newResult);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/searchResult.jsp");
 			dispatcher.forward(request, response);

@@ -135,7 +135,7 @@ public class ExamDAO extends Database {
 
 	public List<Exam> findSearchExam(String word) {
 		DisclosureRangeLogic DR = new DisclosureRangeLogic();
-		List<Exam> examIDList = new ArrayList<>();
+		List<Exam> examList = new ArrayList<>();
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
 			String sql = "SELECT " + EXAM_ID + " FROM " + TABLE + " WHERE " + DISCLOSURE_RANGE + " = "  + DR.getOPEN() + " AND ( " + EXAM_NAME + " LIKE ? OR " + EXAM_EXPLANATION + " LIKE ? )";
@@ -147,13 +147,35 @@ public class ExamDAO extends Database {
 			
 			while(rs.next()) {
 				String examID = rs.getString(EXAM_ID);
-				examIDList.add(this.findExamInfo(examID));
+				examList.add(this.findExamInfo(examID));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
-		return examIDList;
+		return examList;
+	}
+	
+	public List<Exam> findSearchGenreExam(int genreID) {
+		DisclosureRangeLogic DR = new DisclosureRangeLogic();
+		List<Exam> examList = new ArrayList<>();
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "SELECT " + EXAM_ID + " FROM " + TABLE + " WHERE " + DISCLOSURE_RANGE + " = "  + DR.getOPEN() + " AND " + GENRE_ID + " = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setInt(1, genreID);
+			
+			ResultSet rs = pStmt.executeQuery();
+			
+			while(rs.next()) {
+				String examID = rs.getString(EXAM_ID);
+				examList.add(this.findExamInfo(examID));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return examList;
 	}
 	
 	public List<Exam> findSearchUserExam(String userID) {

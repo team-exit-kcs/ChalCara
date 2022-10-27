@@ -8,6 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.DisclosureRangeLogic;
+import model.data.Exam;
+
 public class TagDAO extends Database {
 	final private String TABLE = "Tag";
 	final private String EXAM_ID = "ExamID";
@@ -52,6 +55,33 @@ public class TagDAO extends Database {
 			return null;
 		}
 		return tagList;
+	}
+	
+	public List<Exam> findSearchTagExam(String tag) {
+		ExamDAO examDAO = new ExamDAO();
+		DisclosureRangeLogic DR = new DisclosureRangeLogic();
+		List<Exam> examList = new ArrayList<>();
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "SELECT " + EXAM_ID + " FROM " + TABLE + " WHERE " + TAG + " LIKE ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, "%" + tag + "%");
+			
+			ResultSet rs = pStmt.executeQuery();
+			
+			while(rs.next()) {
+				String examID = rs.getString(EXAM_ID);
+				Exam exam = examDAO.findExamInfo(examID);
+				
+				if(DR.isOpen(exam.getDisclosureRange())) {
+					examList.add(exam);
+				}
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return examList;
 	}
 	
 	public boolean setTag(String examID,List<String> tagList) {
