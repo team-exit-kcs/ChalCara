@@ -65,7 +65,7 @@ public class TagDAO extends Database {
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
 			String sql = "SELECT " + EXAM_ID + " FROM " + TABLE + " WHERE " + TAG + " LIKE ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setString(1, "%" + tag + "%");
+			pStmt.setString(1, tag);
 			
 			ResultSet rs = pStmt.executeQuery();
 			

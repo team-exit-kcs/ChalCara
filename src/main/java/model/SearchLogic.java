@@ -9,20 +9,23 @@ import dao.TagDAO;
 import model.data.Account;
 import model.data.Exam;
 import model.data.Search;
+import model.data.SearchFilterData;
 import model.data.SearchResult;
 
 public class SearchLogic {
-	public SearchResult exequte(int format, String word) {
+	public SearchResult exequte(int format, String word, SearchFilterData searchFilter) {
 		ExamDAO examDAO = new ExamDAO();
 		AccountDAO accountDAO = new AccountDAO();
 		TagDAO tagDAO = new TagDAO();
 		
+		SearchFilterLogic searchFilterLogic = new SearchFilterLogic();
 		DisclosureRangeLogic DR = new DisclosureRangeLogic();
 		List<Search> resultList = new ArrayList<>();
 		
 		switch(format) {
 		case 1:
 			List<Exam> examList1 = examDAO.findSearchExam(word);
+			examList1 = searchFilterLogic.exequte(examList1, searchFilter);
 			for(Exam exam : examList1) {
 				resultList.add(new Search("/ExamPlatform/img/exam.png", "/ExamPlatform/ExaminationServlet?examID=" + exam.getExamID(), exam.getExamName()));
 			}
@@ -43,6 +46,7 @@ public class SearchLogic {
 			}
 			
 			List<Exam> examList3 = examDAO.findSearchUserExam(word);
+			examList3 = searchFilterLogic.exequte(examList3, searchFilter);
 			for(Exam exam : examList3) {
 				resultList.add(new Search("/ExamPlatform/img/exam.png", "/ExamPlatform/ExaminationServlet?examID=" + exam.getExamID(), exam.getExamName()));
 			}
@@ -50,6 +54,7 @@ public class SearchLogic {
 			
 		case 4:
 			List<Exam> examList4 = tagDAO.findSearchTagExam(word);
+			examList4 = searchFilterLogic.exequte(examList4, searchFilter);
 			for(Exam exam : examList4) {
 				resultList.add(new Search("/ExamPlatform/img/exam.png", "/ExamPlatform/ExaminationServlet?examID=" + exam.getExamID(), exam.getExamName()));
 			}
@@ -57,6 +62,7 @@ public class SearchLogic {
 			
 		case 5:
 			List<Exam> examList5 = examDAO.findSearchGenreExam(Integer.parseInt(word));
+			examList5 = searchFilterLogic.exequte(examList5, searchFilter);
 			for(Exam exam : examList5) {
 				resultList.add(new Search("/ExamPlatform/img/exam.png", "/ExamPlatform/ExaminationServlet?examID=" + exam.getExamID(), exam.getExamName()));
 			}

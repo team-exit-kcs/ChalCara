@@ -88,6 +88,5 @@ public class BaseExam implements Serializable{
 	public List<String> getTagList() {
 		return tagList;
 	}
-	
 
 }
