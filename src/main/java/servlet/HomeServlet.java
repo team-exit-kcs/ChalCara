@@ -17,7 +17,7 @@ import model.data.HomeData;
 /**
  * Servlet implementation class HomeServlet
  */
-@WebServlet("/Home")
+@WebServlet("/HomeServlet")
 public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,9 +33,11 @@ public class HomeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		BookmarkDAO BD = new BookmarkDAO();
 		ExamDAO ED= new ExamDAO();
 		ReportDAO RD= new ReportDAO();
+		
 		HomeData HD =new HomeData(ED.findNewExam(),BD.findBookmarkTopExam(),RD.findMonthlyExeTopExam());
 		request.setAttribute("HomeData",HD);
 		

@@ -30,32 +30,30 @@
 <input type = "radio" name = "root" id = "acs" value = "select_3"  onclick="formSwitch()" ><label id = "acs">月間実行回数順</label>
 </div>
 
-<c:set var = "sinList" value ="${homeData}" scope = "request" />
-<c:set var = "bookList" value ="" scope = "request" />
-<c:set var = "acsList" value ="" scope = "request" />
+<c:set var = "sinList" value ="${HomeData.newExamList}" scope = "request" />
+<c:set var = "bookList" value ="${HomeData.monthlytopExamList}" scope = "request" />
+<c:set var = "acsList" value ="${HomeData.bookmarkExamList}" scope = "request" />
 <c:set var="pattern" value="yyyy/MM/dd" />
 
 <div id = "box1">
 <c:forEach var = "v" items = "${sinList}" varStatus = "st" begin = "0" end = "9"  step = "1">
-<p id = "Record"><fmt:formatDate value="${v.createDate}" pattern="${pattern}"/>　　　　　<c:out value = "${v.userID}"/>　　　　　　　　　　　<a href = "#" id = "exam"><c:out value = "${v.examName}"/></a></p>
+<p id = "Record"><fmt:formatDate value="${v.createDate}" pattern="${pattern}"/>　　　　　<c:out value = "${v.userID}"/>　　　　　　　　　　　<a href = "/ExamPlatform/ExaminationServlet?examID=<c:out value = "${v.examID}"/>" id = "exam"><c:out value = "${v.examName}"/></a></p>
 </c:forEach>
 </div>
 
 <div id = "box2">
 <c:forEach var = "v" items = "${bookList}" varStatus = "st" begin = "0" end = "9" step = "1">
-<p id = "Record"><fmt:formatDate value="${v.createDate}" pattern="${pattern}"/>　　　　　<c:out value = "${v.userID}"/>　　　　　　　　　　　<a href = "#" id = "exam"><c:out value = "${v.examName}"/></a></p>
+<p id = "Record"><fmt:formatDate value="${v.createDate}" pattern="${pattern}"/>　　　　　<c:out value = "${v.userID}"/>　　　　　　　　　　　<a href = "/ExamPlatform/ExaminationServlet?examID=<c:out value = "${v.examID}"/>" id = "exam"><c:out value = "${v.examName}"/></a></p>
 </c:forEach>
 </div>
 
 <div id = "box3">
 <c:forEach var = "v" items = "${acsList}" varStatus = "st" begin = "0" end = "9"  step = "1">
-<p id = "Record"><fmt:formatDate value="${v.createDate}" pattern="${pattern}"/>　　　　　<c:out value = "${v.userID}"/>　　　　　　　　　　　<a href = "#" id = "exam"><c:out value = "${v.examName}"/></a></p>
+<p id = "Record"><fmt:formatDate value="${v.createDate}" pattern="${pattern}"/>　　　　　<c:out value = "${v.userID}"/>　　　　　　　　　　　<a href = "/ExamPlatform/ExaminationServlet?examID=<c:out value = "${v.examID}"/>" id = "exam"><c:out value = "${v.examName}"/></a></p>
 </c:forEach>
 
 </div>
-
-
-<a href = "#">1</a>
+<script src="/ExamPlatform/js/Category.js">formSwitch();</script>
 
 <!-- 
 </main>
