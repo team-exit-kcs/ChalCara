@@ -8,15 +8,19 @@ public class CheckAnsPage implements Serializable {
 	 * 試験ID
 	 * 点数
 	 * 正誤判定リスト
+	 * 誤答数
 	 */
 	final private String examID;
 	final private int score;
 	final private List<BQCheckAns> BQCheckAnsList;
-	
-	public CheckAnsPage(String examID, int score, List<BQCheckAns> BQCheckAnsList) {
+	final private int miss;
+
+	public CheckAnsPage(String examID, int score, List<BQCheckAns> bQCheckAnsList, int miss) {
+		super();
 		this.examID = examID;
 		this.score = score;
-		this.BQCheckAnsList = BQCheckAnsList;
+		BQCheckAnsList = bQCheckAnsList;
+		this.miss = miss;
 	}
 
 	public String getExamID() {
@@ -29,6 +33,10 @@ public class CheckAnsPage implements Serializable {
 
 	public int getScore() {
 		return score;
+	}
+
+	public int getMiss() {
+		return miss;
 	}
 	
 }

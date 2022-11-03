@@ -13,6 +13,7 @@ public class Report implements Serializable{
 	 * 正答率
 	 * 試験名
 	 * 合格点
+	 * やり直し問題か　true やり直しではない false　やり直し
 	 */
 	final private int reportID;
 	final private String userID;
@@ -22,9 +23,11 @@ public class Report implements Serializable{
 	final private double correctAnswerRate;
 	final private String examName;
 	final private int passingScore;
-	
-	public Report(int reportID, String userID, String examID, Date examDate, int score,
-			double correctAnswerRate, String examName, int passingScore) {
+	final private boolean notRedoExam;
+
+	public Report(int reportID, String userID, String examID, Date examDate, int score, double correctAnswerRate,
+			String examName, int passingScore, boolean notRedoExam) {
+		super();
 		this.reportID = reportID;
 		this.userID = userID;
 		this.examID = examID;
@@ -33,6 +36,11 @@ public class Report implements Serializable{
 		this.correctAnswerRate = correctAnswerRate;
 		this.examName = examName;
 		this.passingScore = passingScore;
+		this.notRedoExam = notRedoExam;
+	}
+
+	public boolean isNotRedoExam() {
+		return notRedoExam;
 	}
 
 	public int getReportID() {

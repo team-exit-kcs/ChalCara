@@ -37,11 +37,18 @@
    }--%>
    
 <c:choose>
- <c:when test="${report.score >= report.passingScore }">
- <h2 id = gouhi>合格</h2>
+ <c:when test="${report.notRedoExam}">
+ 	<c:choose>
+ 	<c:when test="${report.score >= report.passingScore }">
+ 	<h2 id = gouhi>合格</h2>
+ 	</c:when>
+	 <c:otherwise>
+ 	<h2 id = gouhi>不合格</h2>
+ 	</c:otherwise>
+	</c:choose>
  </c:when>
  <c:otherwise>
- <h2 id = gouhi>不合格</h2>
+ <h2 id = gouhi>合否なし</h2>
  </c:otherwise>
 </c:choose>
 

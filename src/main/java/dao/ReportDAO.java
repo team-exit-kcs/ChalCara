@@ -47,7 +47,7 @@ public class ReportDAO extends Database {
 				int passingScore = exam.getPassingScore();
 				
 				report = new Report(reportID, userID, examID, examDate, score, correctAnswerRate,
-						examName, passingScore);
+						examName, passingScore ,true);
 			}
 			
 		}catch(SQLException e) {
