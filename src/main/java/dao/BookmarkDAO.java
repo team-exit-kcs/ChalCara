@@ -55,8 +55,9 @@ public class BookmarkDAO extends Database{
 			
 			ResultSet rs = pStmt.executeQuery();
 			
-			while(rs.next() || ExamList.size() <= 10) {
-				Exam exam = examDAO.findExamInfo(rs.getString(EXAM_ID));
+			while(rs.next() && ExamList.size() <= 10) {
+				String examID = rs.getString(EXAM_ID);
+				Exam exam = examDAO.findExamInfo(examID);
 				if(exam.getDisclosureRange() == DR.getOPEN()) {
 					ExamList.add(exam);
 				}
