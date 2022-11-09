@@ -30,7 +30,7 @@ public class ExaminationLogic {
 			if(exam != null) {
 				/*大問０(初期値)　小問１  大問の問題文がnullの場合は小問のみのため問題文の値で判定*/
 				int questionFormat = (bigQuestionList.get(0).getBigQuestionSentence() == null ? 1 : 0);
-				pageData = new ExaminationPage(exam,questionFormat,bigQuestionList,bookmark);
+				pageData = new ExaminationPage(exam,questionFormat,bigQuestionList,bookmark, true);
 			}
 		}
 		

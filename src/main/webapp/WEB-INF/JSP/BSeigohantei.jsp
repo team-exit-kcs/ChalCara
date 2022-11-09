@@ -52,6 +52,7 @@ td {
 	</c:forEach>
 	
 		<div style="margin-top: 20px">
+			<c:if test="${checkAnsPage.miss > 0}"><a href="/ExamPlatform/ConductTheExamServlet/redo">間違った問題をやり直す</a></c:if>
 			<a href="/ExamPlatform/Report">レポートに戻る</a>
 		</div>
 	</div>
