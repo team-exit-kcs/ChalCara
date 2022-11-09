@@ -82,8 +82,8 @@ public class SearchServlet extends HttpServlet {
 			userIDFilterList = new ArrayList<>(Arrays.asList(request.getParameterValues("userIDFilter")));
 			userIDFilterList.removeAll(Arrays.asList("",null));
 		}
-		if(request.getParameter("examFormatfilter") != null) {
-			examFormatFilter = Integer.parseInt(request.getParameter("examFormatfilter"));
+		if(request.getParameter("examFormatFilter") != null) {
+			examFormatFilter = Integer.parseInt(request.getParameter("examFormatFilter"));
 		}
 		SearchFilterData searchFilter = new SearchFilterData(genreIDFilterList, tagFilterList, userIDFilterList, examFormatFilter);
 		
