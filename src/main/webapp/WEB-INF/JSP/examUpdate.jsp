@@ -12,7 +12,7 @@
    
 <!DOCTYPE html>
 
-<c:set var="questionList" value="${ExaminationPage.exam}" />
+<c:set var="questionList" value="${ExaminationPage.bigQuestionList[0].questionList}" />
 
 <html>
 <head>

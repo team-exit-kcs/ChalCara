@@ -2,9 +2,6 @@ package test;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,12 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import model.data.BigQuestion;
-import model.data.Choices;
-import model.data.Exam;
-import model.data.ExaminationPage;
-import model.data.Question;
 
 
 /**
@@ -140,7 +131,7 @@ public class TestForwardServlet extends HttpServlet {
 		session.setAttribute("ExamCreatePage", new ExamCreatePage(genreList,tagList,entryExam,0,bigQuestionList));
 //	*/
 		
-//	/*試験実行 小問
+	/*試験実行 小問
 		List<String> tagList = new ArrayList<>();
 		tagList.add("IT");
 		tagList.add("情報処理技術者試験");
