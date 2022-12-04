@@ -33,12 +33,12 @@ public class ConductTheExamServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		
-		ExaminationPage pageData = (ExaminationPage) session.getAttribute("pageData");
+		ExaminationPage examinationPage = (ExaminationPage) session.getAttribute("pageData");
 		
-		if(pageData == null){
+		if(examinationPage == null){
 			response.sendRedirect("/ExamPlatform/ExaminationServlet");
 		}else {
-			if(pageData.getQuestionFormat()==0) {
+			if(examinationPage.getExam().getQuestionFormat()==0) {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/ExamMondai.jsp");
 				dispatcher.forward(request, response);
 			}else {

@@ -47,7 +47,7 @@ public class ConductTheRedoExamServlet extends HttpServlet {
 			session.removeAttribute("pageData");
 			session.setAttribute("pageData", pageData);
 			
-			if(pageData.getQuestionFormat()==0) {
+			if(pageData.getExam().getQuestionFormat()==0) {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/ExamMondai.jsp");
 				dispatcher.forward(request, response);
 			}else {

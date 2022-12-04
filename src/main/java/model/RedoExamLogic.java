@@ -28,7 +28,7 @@ public class RedoExamLogic {
 			}
 		}
 		
-		ExaminationPage newExaminationPage = new ExaminationPage(examinationPage.getExam(), examinationPage.getQuestionFormat(), newBigQuestionList, examinationPage.isBookmark(), false);
+		ExaminationPage newExaminationPage = new ExaminationPage(examinationPage.getExam(), newBigQuestionList, examinationPage.isBookmark(), false);
 		return newExaminationPage;
 	}
 }

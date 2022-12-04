@@ -17,6 +17,9 @@ public class Exam extends BaseExam implements Serializable{
 	 * 試験概要
 	 * 公開範囲
 	 * タグリスト
+	 * ゲーム使用可否
+	 * 情報収集可否
+	 * 試験問題形式　大問０(初期値)　小問１
 	 * ジャンル名
 	 * 実行回数
 	 * ブックマーク数
@@ -27,9 +30,9 @@ public class Exam extends BaseExam implements Serializable{
 	
 	public Exam(String examID, String userID, int genreID, String examName, Date createDate, Date updateDate,
 			int passingScore, int examTime, String examExplanation, int disclosureRange, List<String> tagList,
-			String genreName, int exeCount, int bookmarkCount) {
+			boolean useGame, boolean getInfo, int questionFormat, String genreName, int exeCount, int bookmarkCount) {
 		super(examID, userID, genreID, examName, createDate, updateDate, passingScore, examTime, examExplanation,
-				disclosureRange, tagList);
+				disclosureRange, tagList, useGame, getInfo, questionFormat);
 		this.genreName = genreName;
 		this.exeCount = exeCount;
 		this.bookmarkCount = bookmarkCount;

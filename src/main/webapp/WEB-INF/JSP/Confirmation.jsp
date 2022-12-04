@@ -33,18 +33,36 @@
 		<c:otherwise>非公開</c:otherwise>
 	</c:choose>
 </p><br>
+<p>問題形式：
+	<c:choose>
+		<c:when test="${ExamCreatePage.entryExam.questionFormat == 0}">大問</c:when>
+		<c:when test="${ExamCreatePage.entryExam.questionFormat == 1}">小問</c:when>
+	</c:choose>
+</p><br>
 <p>試験時間：<c:out value="${ExamCreatePage.entryExam.examTime}" /></p><br>
 <p>合格点：<c:out value="${ExamCreatePage.entryExam.passingScore}" /></p><br>
 <p>説明文:<c:out value="${ExamCreatePage.entryExam.examExplanation}" /></p><br>
+<p>受験データの収集:
+	<c:choose>
+		<c:when test="${ExamCreatePage.entryExam.getInfo}">する</c:when>
+		<c:otherwise>しない</c:otherwise>
+	</c:choose>
+</p><br>
+<p>ゲームでの使用:
+	<c:choose>
+		<c:when test="${ExamCreatePage.entryExam.useGame}">許可する</c:when>
+		<c:otherwise>許可しない</c:otherwise>
+	</c:choose>
+</p><br>
 <p>問題一覧<br>
 <c:forEach var="BQ" items="${ExamCreatePage.bigQuestionList}">
-	<c:if test="${ExamCreatePage.questionFormat == 0}">
+	<c:if test="${ExamCreatePage.entryExam.questionFormat == 0}">
 		<span>問${BQ.bigQuestionID}</span><br>
 		<span>${BQ.bigQuestionSentence}</span><br>
 	</c:if>
 	<c:forEach var="Q" items="${BQ.questionList}">
 		<c:choose>
-			<c:when test="${ExamCreatePage.questionFormat == 0}">＜設問${Q.questionID}＞<br></c:when>
+			<c:when test="${ExamCreatePage.entryExam.questionFormat == 0}">＜設問${Q.questionID}＞<br></c:when>
 			<c:otherwise><span>問${Q.questionID}</span><br></c:otherwise>
 		</c:choose>
 		<span>${Q.questionSentence}</span><br>

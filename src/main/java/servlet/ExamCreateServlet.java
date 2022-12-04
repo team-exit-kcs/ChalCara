@@ -76,30 +76,38 @@ public class ExamCreateServlet extends HttpServlet {
 		int examTime = Integer.parseInt(request.getParameter("examTime"));;
 		String examExplanation = request.getParameter("Explanation");
 		int disclosureRange = Integer.parseInt(request.getParameter("OpenRange"));
+		int questionFormat = Integer.parseInt(request.getParameter("QuestionFormat"));
 		
 		String[] arrayTag = request.getParameterValues("tag");
 		List<String> examTagList = new ArrayList<>(Arrays.asList(arrayTag));
 		
-		String limitedPassword;
-		
+		String limitedPassword = null;
 		if(DR.isLimited(disclosureRange)) {
 			limitedPassword = request.getParameter("limitedPASS");
-		}else {
-			limitedPassword = null;
+		}
+		
+		String useGameCheck = request.getParameter("useGame");
+		boolean useGame = false;
+		if(DR.isOpen(disclosureRange) && questionFormat == 1 && useGameCheck != null && useGameCheck.equals("true")) {
+			useGame = true;
+		}
+		
+		String getInfoCheck = request.getParameter("getInfo");
+		boolean getInfo = false;
+		if(getInfoCheck != null && getInfoCheck.equals("true")) {
+			getInfo = true;
 		}
 		
 		EntryExam entry=null;
 		try {
-			entry = new EntryExam(userID, genreID, examName, createDate, updateDate, passingScore, 
-					examTime, examExplanation, disclosureRange, examTagList, limitedPassword);
+			entry = new EntryExam(userID, genreID, examName, createDate, updateDate, passingScore, examTime,
+					examExplanation, disclosureRange, examTagList, useGame, getInfo, questionFormat, limitedPassword);
 		} catch (NoSuchAlgorithmException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 		
-		int questionFormat = Integer.parseInt(request.getParameter("QuestionFormat"));
-		
-		ExamCreatePage newExamData = new ExamCreatePage(examData, entry, questionFormat);
+		ExamCreatePage newExamData = new ExamCreatePage(examData, entry);
 		session.removeAttribute("ExamCreatePage");
 		session.setAttribute("ExamCreatePage", newExamData);
 		
