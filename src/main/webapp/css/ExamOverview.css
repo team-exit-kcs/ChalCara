@@ -25,6 +25,11 @@ div.main {
 	text-overflow: ellipsis;
 }
 
+#pass_reset{
+	position:relative;
+	bottom:20px;
+}
+
 label {
 	font-size:20px;
 }
