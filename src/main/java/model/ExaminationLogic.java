@@ -17,6 +17,7 @@ public class ExaminationLogic {
 		BookmarkDAO bookmarkDAO = new BookmarkDAO();
 		
 		ExaminationPage pageData = null;
+		boolean useInfo = false;
 		boolean bookmark = false;
 		
 		if(examID != null) {
@@ -24,11 +25,12 @@ public class ExaminationLogic {
 			List<BigQuestion> bigQuestionList = bigQuestionDAO.findBigQuestion(examID);
 			
 			if(user != null) {
+				useInfo = user.isUseInfoDefault();
 				bookmark = bookmarkDAO.isBookmark(examID, user.getUserID());
 			}
 			
 			if(exam != null) {
-				pageData = new ExaminationPage(exam,bigQuestionList,bookmark, true);
+				pageData = new ExaminationPage(exam,bigQuestionList,bookmark,useInfo,true);
 			}
 		}
 		

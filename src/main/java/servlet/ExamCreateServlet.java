@@ -92,16 +92,10 @@ public class ExamCreateServlet extends HttpServlet {
 			useGame = true;
 		}
 		
-		String getInfoCheck = request.getParameter("getInfo");
-		boolean getInfo = false;
-		if(getInfoCheck != null && getInfoCheck.equals("true")) {
-			getInfo = true;
-		}
-		
 		EntryExam entry=null;
 		try {
 			entry = new EntryExam(userID, genreID, examName, createDate, updateDate, passingScore, examTime,
-					examExplanation, disclosureRange, examTagList, useGame, getInfo, questionFormat, limitedPassword);
+					examExplanation, disclosureRange, examTagList, useGame, questionFormat, limitedPassword);
 		} catch (NoSuchAlgorithmException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();

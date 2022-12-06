@@ -78,7 +78,10 @@ public class CheckAnsServlet extends HttpServlet {
 			}
 			CheckAnsPage checkAnsPage = new CheckAnsPage(pageData.getExam().getExamID(), (int)score, BQCheckAnsList, miss);
 			
-			Report report = crl.execute(checkAnsPage, pageData.getExam() , user, pageData.isNotRedoExam());
+			int useTime = Integer.parseInt(request.getParameter("time"));
+			
+			
+			Report report = crl.execute(checkAnsPage, pageData.getExam() , user, useTime, pageData.isUseInfo(), pageData.isNotRedoExam());
 			
 			session.removeAttribute("checkAnsPage");
 			session.setAttribute("checkAnsPage", checkAnsPage);

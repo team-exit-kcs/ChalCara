@@ -38,6 +38,17 @@ public class ConductTheExamServlet extends HttpServlet {
 		if(examinationPage == null){
 			response.sendRedirect("/ExamPlatform/ExaminationServlet");
 		}else {
+			//UseInfo取得しpageDataを更新　
+			String useInfoCheck = request.getParameter("useInfo");
+			boolean useInfo = false;
+			if(useInfoCheck != null && useInfoCheck.equals("true")) {
+				useInfo = true;
+			}
+			
+			ExaminationPage newExaminationPage = new ExaminationPage(examinationPage.getExam(), examinationPage.getBigQuestionList(), examinationPage.isBookmark(), useInfo, examinationPage.isNotRedoExam());
+			session.removeAttribute("pageData");
+			session.setAttribute("pageData", newExaminationPage);
+			
 			if(examinationPage.getExam().getQuestionFormat()==0) {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/ExamMondai.jsp");
 				dispatcher.forward(request, response);

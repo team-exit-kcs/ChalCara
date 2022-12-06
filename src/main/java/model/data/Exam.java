@@ -30,9 +30,9 @@ public class Exam extends BaseExam implements Serializable{
 	
 	public Exam(String examID, String userID, int genreID, String examName, Date createDate, Date updateDate,
 			int passingScore, int examTime, String examExplanation, int disclosureRange, List<String> tagList,
-			boolean useGame, boolean getInfo, int questionFormat, String genreName, int exeCount, int bookmarkCount) {
+			boolean useGame, int questionFormat, String genreName, int exeCount, int bookmarkCount) {
 		super(examID, userID, genreID, examName, createDate, updateDate, passingScore, examTime, examExplanation,
-				disclosureRange, tagList, useGame, getInfo, questionFormat);
+				disclosureRange, tagList, useGame, questionFormat);
 		this.genreName = genreName;
 		this.exeCount = exeCount;
 		this.bookmarkCount = bookmarkCount;

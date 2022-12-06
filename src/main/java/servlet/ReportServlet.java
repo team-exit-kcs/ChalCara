@@ -44,7 +44,7 @@ public class ReportServlet extends HttpServlet {
 			ReportDAO reportDAO = new ReportDAO();
 			
 			session.removeAttribute("report");
-			session.setAttribute("report", reportDAO.findReportInfo(reportID, Integer.parseInt(reportID)));
+			session.setAttribute("report", reportDAO.findReportInfo(user.getUserID(), Integer.parseInt(reportID)));
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/ResultReport.jsp");
 			dispatcher.forward(request, response);

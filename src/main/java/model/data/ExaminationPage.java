@@ -13,14 +13,17 @@ public class ExaminationPage implements Serializable {
 	final private Exam exam;
 	final private List<BigQuestion> bigQuestionList;
 	final private boolean bookmark;
+	final private boolean useInfo;
 	final private boolean notRedoExam;
 	
-	public ExaminationPage(Exam exam, List<BigQuestion> bigQuestionList, boolean bookmark,
+
+	public ExaminationPage(Exam exam, List<BigQuestion> bigQuestionList, boolean bookmark, boolean useInfo,
 			boolean notRedoExam) {
 		super();
 		this.exam = exam;
 		this.bigQuestionList = bigQuestionList;
 		this.bookmark = bookmark;
+		this.useInfo = useInfo;
 		this.notRedoExam = notRedoExam;
 	}
 
@@ -38,6 +41,10 @@ public class ExaminationPage implements Serializable {
 
 	public boolean isNotRedoExam() {
 		return notRedoExam;
+	}
+
+	public boolean isUseInfo() {
+		return useInfo;
 	}
 	
 }

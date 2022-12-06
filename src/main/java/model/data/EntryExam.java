@@ -23,7 +23,6 @@ public class EntryExam extends BaseExam implements Serializable {
 	 * 公開範囲
 	 * タグリスト
 	 * ゲーム使用可否
-	 * 情報収集可否
 	 * 試験問題形式　大問０(初期値)　小問１
 	 * 限定公開PASS　限定公開以外はNULL
 	 */
@@ -31,10 +30,10 @@ public class EntryExam extends BaseExam implements Serializable {
 
 	public EntryExam(String userID, int genreID, String examName, Date createDate, Date updateDate,
 			int passingScore, int examTime, String examExplanation, int disclosureRange, List<String> tagList,
-			boolean useGame, boolean getInfo, int questionFormat, String limitedPassword) throws NoSuchAlgorithmException {
+			boolean useGame, int questionFormat, String limitedPassword) throws NoSuchAlgorithmException {
 		
 		super(createExamID(userID, examName), userID, genreID, examName, createDate, updateDate, passingScore, examTime, examExplanation,
-				disclosureRange, tagList, useGame, getInfo, questionFormat);
+				disclosureRange, tagList, useGame, questionFormat);
 		
 		Hash hash = new Hash();
 		DisclosureRangeLogic DR = new DisclosureRangeLogic();
@@ -47,9 +46,9 @@ public class EntryExam extends BaseExam implements Serializable {
 
 	public EntryExam(String userID, int genreID, String examName, Date createDate, Date updateDate,
 			int passingScore, int examTime, String examExplanation, int disclosureRange, List<String> tagList,
-			boolean useGame, boolean getInfo, int questionFormat) throws NoSuchAlgorithmException {
+			boolean useGame, int questionFormat) throws NoSuchAlgorithmException {
 		super(createExamID(userID, examName), userID, genreID, examName, createDate, updateDate, passingScore, examTime, examExplanation,
-				disclosureRange, tagList, useGame, getInfo, questionFormat);
+				disclosureRange, tagList, useGame, questionFormat);
 		this.limitedPassword = null;
 	}
 	

@@ -78,11 +78,6 @@
           </div>
           
           <div>
-          	<label>
-    			<input type="checkbox" name="getInfo" value="true" <c:if test="${ExamCreatePage.entryExam.getInfo}">checked="checked"</c:if>>
-   				受験データを収集する
-  			</label>
-  			<br>
   			<label>
     			<input type="checkbox" id="useGame" name="useGame" value="true" <c:if test="${ExamCreatePage.entryExam.useGame}">checked="checked"</c:if>>
    				ゲームの問題としての使用を許可する

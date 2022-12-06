@@ -18,7 +18,6 @@ public class BaseExam implements Serializable{
 	 * 公開範囲
 	 * タグリスト
 	 * ゲーム使用可否
-	 * 情報収集可否
 	 * 試験問題形式　大問０(初期値)　小問１
 	 */
 	final private String examID;
@@ -33,11 +32,10 @@ public class BaseExam implements Serializable{
 	final private int disclosureRange;
 	final private List<String> tagList;
 	final private boolean useGame;
-	final private boolean getInfo;
 	final private int questionFormat;
 	
 	public BaseExam(String examID, String userID, int genreID, String examName, Date createDate, Date updateDate,
-			int passingScore, int examTime, String examExplanation, int disclosureRange, List<String> tagList, boolean useGame, boolean getInfo, int questionFormat) {
+			int passingScore, int examTime, String examExplanation, int disclosureRange, List<String> tagList, boolean useGame, int questionFormat) {
 		this.examID = examID;
 		this.userID = userID;
 		this.genreID = genreID;
@@ -50,7 +48,6 @@ public class BaseExam implements Serializable{
 		this.disclosureRange = disclosureRange;
 		this.tagList = tagList;
 		this.useGame = useGame;
-		this.getInfo = getInfo;
 		this.questionFormat = questionFormat;
 	}
 
@@ -100,10 +97,6 @@ public class BaseExam implements Serializable{
 
 	public int getQuestionFormat() {
 		return questionFormat;
-	}
-
-	public boolean isGetInfo() {
-		return getInfo;
 	}
 
 	public boolean isUseGame() {

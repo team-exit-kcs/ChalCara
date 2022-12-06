@@ -16,12 +16,13 @@ public class AccountDAO extends Database {
 	final private String PASS = "Password";
 	final private String PROFILE = "Profile";
 	final private String ICON = "Icon";
+	final private String USE_INFO_D = "UseInfoDefault";
 	
 	public Account findByAccount(Login login) {
 		Account account = null;
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
-			String sql = "SELECT " + USER_ID + "," + PROFILE + "," + ICON + " FROM " + TABLE + " WHERE " + USER_ID + " = ? AND " + PASS + " = ?";
+			String sql = "SELECT " + USER_ID + "," + PROFILE + "," + ICON + "," + USE_INFO_D + " FROM " + TABLE + " WHERE " + USER_ID + " = ? AND " + PASS + " = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, login.getUserID());
 			pStmt.setString(2, login.getPASS());
@@ -32,7 +33,8 @@ public class AccountDAO extends Database {
 				String userID = rs.getString(USER_ID);
 				String profile = rs.getString(PROFILE);
 				String icon = rs.getString(ICON);
-				account = new Account(userID,profile,icon);
+				boolean useInfoD = rs.getBoolean(USE_INFO_D);
+				account = new Account(userID,profile,icon,useInfoD);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -46,7 +48,7 @@ public class AccountDAO extends Database {
 		Account account = null;
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
-			String sql = "SELECT " + USER_ID + "," + PROFILE + "," + ICON + " FROM " + TABLE + " WHERE " + USER_ID + " = ?";
+			String sql = "SELECT " + USER_ID + "," + PROFILE + "," + ICON + "," + USE_INFO_D + " FROM " + TABLE + " WHERE " + USER_ID + " = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, ID);
 
@@ -57,7 +59,8 @@ public class AccountDAO extends Database {
 				String userID = rs.getString(USER_ID);
 				String profile = rs.getString(PROFILE);
 				String icon = rs.getString(ICON);
-				account = new Account(userID,profile,icon);
+				boolean useInfoD = rs.getBoolean(USE_INFO_D);
+				account = new Account(userID,profile,icon,useInfoD);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -88,14 +91,15 @@ public class AccountDAO extends Database {
 		return resultSts;
 	}
 	
-	public boolean updProfile(String id, String profile) {
+	public boolean updAccount(String id, String profile, boolean useInfoD) {
 		boolean resultSts=false;
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
-			String sql = "UPDATE " + TABLE + " SET " + PROFILE + " = ? WHERE " + USER_ID + " = ?";
+			String sql = "UPDATE " + TABLE + " SET " + PROFILE + " = ?, " + USE_INFO_D + " = ? WHERE " + USER_ID + " = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, profile);
-			pStmt.setString(2, id);
+			pStmt.setBoolean(2, useInfoD);
+			pStmt.setString(3, id);
 			
 			int result = pStmt.executeUpdate();
 			
@@ -155,12 +159,13 @@ public class AccountDAO extends Database {
 		boolean resultSts=false;
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
-			String sql = "INSERT INTO " + TABLE + " VALUES(?,?,?,?)";
+			String sql = "INSERT INTO " + TABLE + " VALUES(?,?,?,?,?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, login.getUserID());
 			pStmt.setString(2, login.getPASS());
 			pStmt.setString(3, "/ExamPlatform/img/kari.png");
 			pStmt.setString(4, "");
+			pStmt.setBoolean(5, false);
 			
 			int result = pStmt.executeUpdate();
 			if(result>0) {

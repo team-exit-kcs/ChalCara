@@ -22,6 +22,8 @@ public class ReportDAO extends Database {
 	final private String EXAM_ID = "ExamID";
 	final private String EXAM_DATE = "ExamDate";
 	final private String SCORE = "Score";
+	final private String USE_TIME = "UseTime";
+	final private String USE_INFO = "UseInfo";
 	final private String CORRECT_ANSWER_RATE = "CorrectAnswerRate";
 	
 	public Report findReportInfo(String userID, int reportID) {
@@ -40,6 +42,8 @@ public class ReportDAO extends Database {
 				String examID = rs.getString(EXAM_ID);
 				Date examDate = rs.getDate(EXAM_DATE);
 				int score = rs.getInt(SCORE);
+				int useTime = rs.getInt(USE_TIME);
+				boolean useInfo = rs.getBoolean(USE_INFO);
 				double correctAnswerRate = rs.getDouble(CORRECT_ANSWER_RATE);
 				
 				Exam exam = examDAO.findExamInfo(examID);
@@ -47,7 +51,7 @@ public class ReportDAO extends Database {
 				int passingScore = exam.getPassingScore();
 				
 				report = new Report(reportID, userID, examID, examDate, score, correctAnswerRate,
-						examName, passingScore ,true);
+						examName, passingScore, useTime, useInfo ,true);
 			}
 			
 		}catch(SQLException e) {
@@ -172,7 +176,7 @@ public class ReportDAO extends Database {
 		boolean resultSts=false;
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
-			String sql = "INSERT INTO " + TABLE + " VALUES(?,?,?,?,?,?)";
+			String sql = "INSERT INTO " + TABLE + " VALUES(?,?,?,?,?,?,?,?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setInt(1, report.getReportID());
 			pStmt.setString(2, report.getUserID());
@@ -180,6 +184,8 @@ public class ReportDAO extends Database {
 			pStmt.setDate(4, new java.sql.Date(report.getExamDate().getTime()));
 			pStmt.setInt(5, report.getScore());
 			pStmt.setDouble(6, report.getCorrectAnswerRate());
+			pStmt.setInt(7, report.getUseTime());
+			pStmt.setBoolean(8, report.isUseInfo());
 			
 			int result = pStmt.executeUpdate();
 			if(result>0) {
