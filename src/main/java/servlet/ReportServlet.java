@@ -12,8 +12,11 @@ import javax.servlet.http.HttpSession;
 
 import dao.ReportDAO;
 import model.CheckAnsPageLogic;
+import model.ExaminationLogic;
+import model.RedoExamLogic;
 import model.data.Account;
 import model.data.CheckAnsPage;
+import model.data.ExaminationPage;
 import model.data.Report;
 
 /**
@@ -56,6 +59,14 @@ public class ReportServlet extends HttpServlet {
 				CheckAnsPage checkAnsPage = capl.execute(user.getUserID(), report);
 				if(checkAnsPage != null) {
 					session.setAttribute("checkAnsPage", checkAnsPage);
+					
+					ExaminationLogic EL = new ExaminationLogic();
+					RedoExamLogic REL = new RedoExamLogic();
+					
+					ExaminationPage examinationPage = REL.exequte(EL.exequte(report.getExamID(), user), checkAnsPage);
+					session.removeAttribute("pageData");
+					session.setAttribute("pageData", examinationPage);
+					
 				}
 			}
 			

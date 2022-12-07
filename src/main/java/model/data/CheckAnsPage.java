@@ -15,7 +15,6 @@ public class CheckAnsPage implements Serializable {
 	final private int score;
 	final private List<BQCheckAns> BQCheckAnsList;
 	final private int miss;
-	final private boolean afterExam;
 
 	public CheckAnsPage(String examID, int score, List<BQCheckAns> bQCheckAnsList, int miss) {
 		super();
@@ -23,16 +22,6 @@ public class CheckAnsPage implements Serializable {
 		this.score = score;
 		BQCheckAnsList = bQCheckAnsList;
 		this.miss = miss;
-		this.afterExam = true;
-	}
-
-	public CheckAnsPage(String examID, int score, List<BQCheckAns> bQCheckAnsList, int miss, boolean afterExam) {
-		super();
-		this.examID = examID;
-		this.score = score;
-		BQCheckAnsList = bQCheckAnsList;
-		this.miss = miss;
-		this.afterExam = afterExam;
 	}
 
 	public String getExamID() {
@@ -49,10 +38,6 @@ public class CheckAnsPage implements Serializable {
 
 	public int getMiss() {
 		return miss;
-	}
-
-	public boolean isAfterExam() {
-		return afterExam;
 	}
 	
 }
