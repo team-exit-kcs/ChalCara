@@ -59,7 +59,7 @@ public class ReportServlet extends HttpServlet {
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/ResultReport.jsp");
 			dispatcher.forward(request, response);
-		}if(report != null) {
+		}else if(report != null) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/ResultReport.jsp");
 			dispatcher.forward(request, response);
 			
