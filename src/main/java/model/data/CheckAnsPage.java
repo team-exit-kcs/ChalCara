@@ -9,11 +9,13 @@ public class CheckAnsPage implements Serializable {
 	 * 点数
 	 * 正誤判定リスト
 	 * 誤答数
+	 * 試験後かどうか？　試験後true/履歴からfalse
 	 */
 	final private String examID;
 	final private int score;
 	final private List<BQCheckAns> BQCheckAnsList;
 	final private int miss;
+	final private boolean afterExam;
 
 	public CheckAnsPage(String examID, int score, List<BQCheckAns> bQCheckAnsList, int miss) {
 		super();
@@ -21,6 +23,16 @@ public class CheckAnsPage implements Serializable {
 		this.score = score;
 		BQCheckAnsList = bQCheckAnsList;
 		this.miss = miss;
+		this.afterExam = true;
+	}
+
+	public CheckAnsPage(String examID, int score, List<BQCheckAns> bQCheckAnsList, int miss, boolean afterExam) {
+		super();
+		this.examID = examID;
+		this.score = score;
+		BQCheckAnsList = bQCheckAnsList;
+		this.miss = miss;
+		this.afterExam = afterExam;
 	}
 
 	public String getExamID() {
@@ -37,6 +49,10 @@ public class CheckAnsPage implements Serializable {
 
 	public int getMiss() {
 		return miss;
+	}
+
+	public boolean isAfterExam() {
+		return afterExam;
 	}
 	
 }

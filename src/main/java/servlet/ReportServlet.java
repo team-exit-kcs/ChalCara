@@ -46,8 +46,10 @@ public class ReportServlet extends HttpServlet {
 			ReportDAO reportDAO = new ReportDAO();
 			CheckAnsPageLogic capl = new CheckAnsPageLogic();
 			
+			report = reportDAO.findReportInfo(user.getUserID(), Integer.parseInt(reportID));
+			
 			session.removeAttribute("report");
-			session.setAttribute("report", reportDAO.findReportInfo(user.getUserID(), Integer.parseInt(reportID)));
+			session.setAttribute("report", report);
 			
 			session.removeAttribute("checkAnsPage");
 			if(report != null) {

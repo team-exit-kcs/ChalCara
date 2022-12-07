@@ -53,7 +53,7 @@ td {
 	</c:forEach>
 	<p>注意：試験作成者が試験を更新した場合このページは表示できなくなります。必要な場合は印刷などを行ってください。</p>
 		<div style="margin-top: 20px">
-			<c:if test="${checkAnsPage.miss > 0}"><a href="/ExamPlatform/ConductTheExamServlet/redo">間違った問題をやり直す</a></c:if>
+			<c:if test="${checkAnsPage.miss > 0 && checkAnsPage.afterExam}"><a href="/ExamPlatform/ConductTheExamServlet/redo">間違った問題をやり直す</a></c:if>
 			<a href="/ExamPlatform/Report">レポートに戻る</a>
 		</div>
 	</div>

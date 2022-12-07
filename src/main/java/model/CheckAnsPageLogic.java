@@ -62,7 +62,7 @@ public class CheckAnsPageLogic {
 				}
 				
 				if(!BQCheckAnsList.isEmpty()) {
-					checkAnsPage = new CheckAnsPage(report.getExamID(), (int)score, BQCheckAnsList, miss);
+					checkAnsPage = new CheckAnsPage(report.getExamID(), (int)score, BQCheckAnsList, miss, false);
 				}
 			}
 		}
