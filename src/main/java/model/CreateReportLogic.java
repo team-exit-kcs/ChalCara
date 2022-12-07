@@ -3,6 +3,7 @@ package model;
 import java.util.Date;
 
 import dao.ReportDAO;
+import dao.UserAnsDAO;
 import model.data.Account;
 import model.data.CheckAnsPage;
 import model.data.Exam;
@@ -11,6 +12,7 @@ import model.data.Report;
 public class CreateReportLogic {
 	public Report execute(CheckAnsPage cap, Exam exam, Account user, int useTime, boolean useInfo, boolean NotRedoExam) {
 		ReportDAO reportDAO = new ReportDAO();
+		UserAnsDAO userAnsDAO = new UserAnsDAO();
 		int reportID = 0;
 		String userID = null;
 		
@@ -24,6 +26,7 @@ public class CreateReportLogic {
 		
 		if(reportID > 0 && NotRedoExam) {
 			reportDAO.setReport(newReport);
+			userAnsDAO.setUserAns(userID, reportID, cap.getBQCheckAnsList());
 		}
 		
 		return newReport;
