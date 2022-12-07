@@ -16,9 +16,9 @@
 
 <div>
  <ul class = "B_question">
-  <li><label for="s_toi"><c:choose><c:when test="${ExamCreatePage.questionFormat==0}">＜設問<c:out value="${questionNum}"/>＞</c:when><c:otherwise>問<c:out value="${questionNum}"/>.</c:otherwise></c:choose></label></li><li>
+  <li><label for="s_toi"><c:choose><c:when test="${ExamCreatePage.entryExam.questionFormat==0}">＜設問<c:out value="${questionNum}"/>＞</c:when><c:otherwise>問<c:out value="${questionNum}"/>.</c:otherwise></c:choose></label></li><li>
     <textarea class="S_ques_area" required name="question" placeholder = "問題文を入力して下さい"><c:out value="${question.questionSentence}" /></textarea>
-    <c:if test="questionNum != 1"><button type="button" onclick="rmQuestionForm(this)">−<c:choose><c:when test="${ExamCreatePage.questionFormat==0}">設問</c:when><c:otherwise>問</c:otherwise></c:choose>を削除</button></c:if>
+    <c:if test="questionNum != 1"><button type="button" onclick="rmQuestionForm(this)">−<c:choose><c:when test="${ExamCreatePage.entryExam.questionFormat==0}">設問</c:when><c:otherwise>問</c:otherwise></c:choose>を削除</button></c:if>
   </li>
   <li><textarea class="S_ques_area" name="questionExplanation" placeholder = "解説を入力して下さい(任意)"><c:out value="${question.questionExplanation}"/></textarea></li>
   <li>配点：<input type = "number" required name = "Score" step="any" value = <c:out value="${question.allocationOfPoint}">2</c:out>>点</li>
@@ -30,19 +30,19 @@
  <c:choose>
      <c:when test="${empty question}">
      	<li class = "Select">
-    		<label><input type="radio" required name="Select_ans[<c:choose><c:when test="${ExamCreatePage.questionFormat==0}">問<c:out value="${bigQuestionNum}"/>.</c:when><c:otherwise>小問</c:otherwise></c:choose>][<c:choose><c:when test="${ExamCreatePage.questionFormat==0}">＜設問<c:out value="${questionNum}"/>＞</c:when><c:otherwise>問<c:out value="${questionNum}"/>.</c:otherwise></c:choose>]" value=1><span>1．</span></label>
+    		<label><input type="radio" required name="Select_ans[<c:choose><c:when test="${ExamCreatePage.entryExam.questionFormat==0}">問<c:out value="${bigQuestionNum}"/>.</c:when><c:otherwise>小問</c:otherwise></c:choose>][<c:choose><c:when test="${ExamCreatePage.entryExam.questionFormat==0}">＜設問<c:out value="${questionNum}"/>＞</c:when><c:otherwise>問<c:out value="${questionNum}"/>.</c:otherwise></c:choose>]" value=1><span>1．</span></label>
   		    <input type="text" required class="Select_text" name="Select_text" />
   		</li>
   
  		 <li class = "Select">
-    		<label><input type="radio" required name="Select_ans[<c:choose><c:when test="${ExamCreatePage.questionFormat==0}">問<c:out value="${bigQuestionNum}"/>.</c:when><c:otherwise>小問</c:otherwise></c:choose>][<c:choose><c:when test="${ExamCreatePage.questionFormat==0}">＜設問<c:out value="${questionNum}"/>＞</c:when><c:otherwise>問<c:out value="${questionNum}"/>.</c:otherwise></c:choose>]" value=2><span>2．</span></label>
+    		<label><input type="radio" required name="Select_ans[<c:choose><c:when test="${ExamCreatePage.entryExam.questionFormat==0}">問<c:out value="${bigQuestionNum}"/>.</c:when><c:otherwise>小問</c:otherwise></c:choose>][<c:choose><c:when test="${ExamCreatePage.entryExam.questionFormat==0}">＜設問<c:out value="${questionNum}"/>＞</c:when><c:otherwise>問<c:out value="${questionNum}"/>.</c:otherwise></c:choose>]" value=2><span>2．</span></label>
   		    <input type="text" required class="Select_text" name="Select_text" />
   		</li>
      </c:when>
      <c:otherwise>
      	<c:forEach var="choices" items="${question.choicesList}">
      		<li class = "Select">
-    		<label><input type="radio" required name="Select_ans[<c:choose><c:when test="${ExamCreatePage.questionFormat==0}">問<c:out value="${bigQuestionNum}"/>.</c:when><c:otherwise>小問</c:otherwise></c:choose>][<c:choose><c:when test="${ExamCreatePage.questionFormat==0}">＜設問<c:out value="${questionNum}"/>＞</c:when><c:otherwise>問<c:out value="${questionNum}"/>.</c:otherwise></c:choose>]" value=<c:out value="${choices.choicesID}"/> <c:if test="${choices.choicesID == question.answer}">checked="checked"</c:if>><span><c:out value="${choices.choicesID}"/>．</span></label>
+    		<label><input type="radio" required name="Select_ans[<c:choose><c:when test="${ExamCreatePage.entryExam.questionFormat==0}">問<c:out value="${bigQuestionNum}"/>.</c:when><c:otherwise>小問</c:otherwise></c:choose>][<c:choose><c:when test="${ExamCreatePage.entryExam.questionFormat==0}">＜設問<c:out value="${questionNum}"/>＞</c:when><c:otherwise>問<c:out value="${questionNum}"/>.</c:otherwise></c:choose>]" value=<c:out value="${choices.choicesID}"/> <c:if test="${choices.choicesID == question.answer}">checked="checked"</c:if>><span><c:out value="${choices.choicesID}"/>．</span></label>
     		<input type="text" required class="Select_text" name="Select_text" value=<c:out value="${choices.choices}"/> /> <c:if test="${choices.choicesID >= 2}"><button type="button" onclick="rmChoicesForm(this)">−選択肢を削除</button></c:if>
      	</c:forEach>
      </c:otherwise>

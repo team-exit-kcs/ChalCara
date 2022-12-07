@@ -102,7 +102,15 @@
 		</div>
 		<br>
 		<div>
-			<button onclick="location.href='/ExamPlatform/ConductTheExamServlet'">試験開始</button>
+			<form action="/ExamPlatform/ConductTheExamServlet" method="post">
+			<c:if test="${not empty LoginUser}">
+				<label>
+    				<input type="checkbox" id="useInfo" name="useInfo" value="true" <c:if test="${LoginUser.useInfoDefault}">checked="checked"</c:if>>
+  					 	受験情報を試験作成者に送信する
+				</label><br>
+			</c:if>
+			<input type="submit" value="試験開始">
+			</form>
 		</div>
 	</div>
 </body>

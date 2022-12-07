@@ -62,7 +62,7 @@ public class AccountEntryServlet extends HttpServlet {
 			}
 			
 			HttpSession session = request.getSession();
-			session.setAttribute("LoginUser",new Account(userID,"","./img/kari.png"));
+			session.setAttribute("LoginUser",new Account(userID,"","./img/kari.png",false));
 			
 			response.sendRedirect("/ExamPlatform/MypageServlet");
 		}

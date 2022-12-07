@@ -10,6 +10,7 @@
 <body style="margin: 50px 0">
 <form name="examform" action="/ExamPlatform/CheckAnsServlet" method="post">
 	<div style="text-align: center; background-color: aqua; position: fixed; width: 100%; top: 0; left: 0;">
+		<input type="hidden" name="time" id="time" value="0">
 		試験時間(残り)：
 		<span id="remainingTime"></span>
 		
@@ -55,6 +56,7 @@
 	const examtime = <c:out value="${pageData.exam.examTime}"/> * 60 * 1000;
 	//const examtime = 0.25 * 60 * 1000;
 	let time = Math.floor(examtime / 1000);
+	let useTime = time;
 	
 	function QuitExecManually() {
 		if (confirm("本当に終了しますか?")) {
@@ -76,6 +78,7 @@
 		if (time > 0) {
 			--time;
 			document.getElementById("remainingTime").textContent = "" + zeroPad(Math.floor(time / 60)) + ":" + zeroPad(time % 60);
+			document.getElementById("time").value = Math.floor((useTime - time) / 60);
 		}
 	}, 1000);
 

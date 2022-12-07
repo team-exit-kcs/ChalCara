@@ -3,14 +3,16 @@ package model;
 import java.util.Date;
 
 import dao.ReportDAO;
+import dao.UserAnsDAO;
 import model.data.Account;
 import model.data.CheckAnsPage;
 import model.data.Exam;
 import model.data.Report;
 
 public class CreateReportLogic {
-	public Report execute(CheckAnsPage cap, Exam exam, Account user, boolean NotRedoExam) {
+	public Report execute(CheckAnsPage cap, Exam exam, Account user, int useTime, boolean useInfo, boolean NotRedoExam) {
 		ReportDAO reportDAO = new ReportDAO();
+		UserAnsDAO userAnsDAO = new UserAnsDAO();
 		int reportID = 0;
 		String userID = null;
 		
@@ -20,10 +22,11 @@ public class CreateReportLogic {
 		}
 		
 		double correctAnswerRate = ((int)((cap.getScore() / (double)exam.getPassingScore()) * 10000)) / 100.0;
-		Report newReport = new Report(reportID, userID, cap.getExamID(), new Date(), cap.getScore(), correctAnswerRate, exam.getExamName(), exam.getPassingScore() ,NotRedoExam);
+		Report newReport = new Report(reportID, userID, cap.getExamID(), new Date(), cap.getScore(), correctAnswerRate, exam.getExamName(), exam.getPassingScore(), useTime, useInfo,NotRedoExam);
 		
 		if(reportID > 0 && NotRedoExam) {
 			reportDAO.setReport(newReport);
+			userAnsDAO.setUserAns(userID, reportID, cap.getBQCheckAnsList());
 		}
 		
 		return newReport;
