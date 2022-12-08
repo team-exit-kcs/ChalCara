@@ -108,11 +108,11 @@ public class ReportDAO extends Database {
 		return ExamList;
 	}
 
-	public List<Integer> findUserReport(String userID) {
-		List<Integer> reportIDList = new ArrayList<>();
+	public List<Report> findUserReport(String userID) {
+		List<Report> reportList = new ArrayList<>();
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
-			String sql = "SELECT "+ REPORT_ID + " FROM " + TABLE + " WHERE " + USER_ID + " = ?";
+			String sql = "SELECT "+ REPORT_ID + " FROM " + TABLE + " WHERE " + USER_ID + " = ? ORDER BY " + REPORT_ID + " DESC";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, userID);
 			
@@ -121,13 +121,13 @@ public class ReportDAO extends Database {
 			int reportID;
 			while(rs.next()) {
 				reportID = rs.getInt(REPORT_ID);
-				reportIDList.add(reportID);
+				reportList.add(findReportInfo(userID, reportID));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
-		return reportIDList;
+		return reportList;
 	}
 	
 	public int getUserCount(String examID) {

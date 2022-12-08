@@ -38,7 +38,7 @@ public class MypageServlet extends HttpServlet {
 		Account account = (Account) session.getAttribute("LoginUser");
 		MypageLogic ml = new MypageLogic();
 		Mypage m = ml.exequte(account.getUserID());
-		request.setAttribute("MypageData", m);
+		session.setAttribute("MypageData", m);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/Mypage.jsp");
 		dispatcher.forward(request, response);
 	}
