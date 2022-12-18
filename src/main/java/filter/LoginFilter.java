@@ -20,7 +20,7 @@ import model.data.Account;
  * Servlet Filter implementation class LoginFilter
  */
 
-@WebFilter(urlPatterns={"/MypageServlet/*", "/LogoutServlet", "/ExamCreateServlet/*", "/BookmarkServlet", "/UpdAccountServlet/*"})
+@WebFilter(urlPatterns={"/MypageServlet/*", "/LogoutServlet", "/ExamCreateServlet/*", "/BookmarkServlet", "/UpdAccountServlet/*", "/ExamStatsServlet"})
 
 public class LoginFilter extends HttpFilter implements Filter {
        

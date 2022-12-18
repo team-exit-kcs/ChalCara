@@ -33,6 +33,13 @@
 	</div>
 	<br>
 	
+	<div class = "createUser" style="text-align: right;">
+		<span>
+			<c:if test="${LoginUser.userID == pageData.exam.userID}"><a href="/ExamPlatform/ExamStatsServlet?examID=<c:out value="${pageData.exam.examID}"/>">統計</a></c:if>
+		</span>
+	</div>
+	<br>
+	
 	<div style="text-align: center">
 		試験作成日：
 		<span>
