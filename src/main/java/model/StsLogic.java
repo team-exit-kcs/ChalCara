@@ -80,7 +80,7 @@ public class StsLogic {
 					int ansCnt = uad.getAnsCount(exam,noChoices);
 					double selectRate = 0;
 					if(ansCnt > 0) {
-						selectRate = ((int)(ansCnt/infoUserCnt*1000))/10;
+						selectRate = ((int)((double)ansCnt/infoUserCnt*1000.0))/10.0;
 					}
 					cStsList.add(new ChoicesSts(noChoices, selectRate, ansCnt));
 				}
@@ -89,7 +89,7 @@ public class StsLogic {
 					int ansCnt = uad.getAnsCount(exam,choices);
 					double selectRate = 0;
 					if(ansCnt > 0) {
-						selectRate = ((int)(ansCnt/infoUserCnt*1000))/10;
+						selectRate = ((int)((double)ansCnt/infoUserCnt*1000.0))/10.0;
 					}
 					cStsList.add(new ChoicesSts(choices, selectRate, ansCnt));
 				}
