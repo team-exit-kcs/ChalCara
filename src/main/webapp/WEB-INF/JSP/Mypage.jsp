@@ -19,28 +19,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <link rel="stylesheet" href="./css/Mypage.css">
-<link rel="stylesheet" href="./css/ress.css">
 <jsp:include page="./title.jsp" />
 </head>
 <body>
 <main>
 <jsp:include page="./header.jsp" />
-<h2 class="mi_1">マイページ</h2>
+<div class = "container-fluid">
+<h2 id = "mi"class="text-center w-auto h-auto">マイページ</h2>
+<div class = "root_1  container d-flex w-auto h-auto">
 
-<div class = "root_1">
-
-<div class="r1_item_1">
+<div class="r1_item_1 justify-content-start">
   <span>
-    <img src="<c:out value="${LoginUser.icon}"/> "height="220" width="220" alt="User Icon">
+    <img src="img/kari.png"height="220" width="220" alt="User Icon">
   </span>
 </div>
-<div class="r1_item_2">
+<div class="r1_item_2 justify-content-center">
     <p>ユーザID : <c:out value="${LoginUser.userID}"/></p>
     <br/><a class = "UpdAccount" href = "/ExamPlatform/UpdAccountServlet" >アカウント設定</a>
 </div>
-<div class="r1_item_3">
+<div class="r1_item_3 justify-content-end">
     <p><c:out value="${LoginUser.profile}"/></p>
 </div>
 
@@ -50,8 +50,8 @@
 <h2 class="mi_2">試験一覧</h2>
 <a class = "Create_exam" href = "/ExamPlatform/ExamCreateServlet" >試験問題を作成</a>
 <a href = "/ExamCreateServlet"></a>
-
 </div>
+
 <div class="box_1">
 
 <c:forEach var="exam" items="${MypageData.examList}" end="${maxCnt}">
@@ -95,11 +95,12 @@
 
 <div class = "miru_br">
 
-<div class = "miru_b"><p class = "miru"><a href = "#">もっとみる</a></p></div>
-<div class = "miru_r"><p class = "miru"><a href = "#">もっとみる</a></p></div>
+<div class = "miru_b"><p class = "miru_1"><a href = "#">もっとみる</a></p></div>
+<div class = "miru_r"><p class = "miru_2"><a href = "#">もっとみる</a></p></div>
 
 </div>
-
+</div>
 </main>
+
 </body>
 </html>
