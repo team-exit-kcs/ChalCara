@@ -122,6 +122,7 @@
 <p class = "miru_2"><a href = "#">もっとみる</a></p>
 </div>
 </div>
+</div>
 </main>
 
 </body>
