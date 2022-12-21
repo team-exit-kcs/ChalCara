@@ -155,17 +155,19 @@ public class ReportDAO extends Database {
 		List<Report> reportList = new ArrayList<>();
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
-			String sql = "SELECT " + REPORT_ID + " FROM " + TABLE + " WHERE " + EXAM_ID + " = ? AND " + USE_INFO + " = true AND " + EXAM_DATE + " >= ?";
+			String sql = "SELECT " + REPORT_ID + " , " + USER_ID + " FROM " + TABLE + " WHERE " + EXAM_ID + " = ? AND " + USE_INFO + " = true AND " + EXAM_DATE + " >= ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, exam.getExamID());
 			pStmt.setDate(2, new java.sql.Date(exam.getUpdateDate().getTime()));
 			
 			ResultSet rs = pStmt.executeQuery();
 			
+			String userID;
 			int reportID;
 			while(rs.next()) {
+				userID = rs.getString(USER_ID);
 				reportID = rs.getInt(REPORT_ID);
-				reportList.add(findReportInfo(exam.getUserID(), reportID));
+				reportList.add(findReportInfo(userID, reportID));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();

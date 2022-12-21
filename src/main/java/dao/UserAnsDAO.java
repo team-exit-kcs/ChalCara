@@ -60,7 +60,7 @@ public class UserAnsDAO extends Database {
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
 			String sql = "SELECT COUNT(*) AS cnt FROM " + TABLE + " AS UA JOIN " + REPORT_TABLE + " AS R ON UA." + REPORT_ID + " = R." + REPORT_ID +
-					" WHERE R." + EXAM_ID + " = ? AND R." + USE_INFO + " = true AND R." + EXAM_DATE + " >= ? AND UA."
+					" AND UA." + USER_ID + " = R." + USER_ID + " WHERE R." + EXAM_ID + " = ? AND R." + USE_INFO + " = true AND R." + EXAM_DATE + " >= ? AND UA."
 					+ BIG_QUESTION_ID + " = ? AND UA."+ QUESTION_ID + " = ? AND UA." + USER_ANS + " = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, choices.getExamID());
