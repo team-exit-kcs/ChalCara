@@ -2,6 +2,9 @@ package test;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.data.Account;
+
+import model.data.Exam;
+import model.data.HomeData;
 
 
 /**
@@ -55,18 +60,39 @@ public class TestForwardServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		
-  /*Home
+//  /*Home
+		String[] name = {"新着","ブクマ","月間"};
 		List<Exam> newExamList = new ArrayList<>();
+		int i=0;
+		newExamList.add(new Exam("", "sato", 1, name[i]+1, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
+		newExamList.add(new Exam("", "hoge", 1, name[i]+2, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
+		newExamList.add(new Exam("", "root", 1, name[i]+3, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
+		newExamList.add(new Exam("", "sudo", 1, name[i]+4, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
+		newExamList.add(new Exam("", "aaaa", 1, name[i]+5, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
+		newExamList.add(new Exam("", "test", 1, name[i]+6, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
+		newExamList.add(new Exam("", "cafe", 1, name[i]+7, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
 		
-		newExamList.add(new Exam("", "sato", 1, "ITパスポート", new Date(), new Date(),60, 60, "", 1, null,"", 1000, 50));
-		newExamList.add(new Exam("", "hoge", 1, "基本情報技術者試験", new Date(), new Date(),60, 60, "", 1, null,"", 1000, 50));
-		newExamList.add(new Exam("", "root", 1, "’ or 'A' = 'A", new Date(), new Date(),60, 60, "", 1, null,"", 1000, 50));
-		newExamList.add(new Exam("", "sudo", 1, "定番クイズ10選", new Date(), new Date(),60, 60, "", 1, null,"", 1000, 50));
-		newExamList.add(new Exam("", "aaaa", 1, "１", new Date(), new Date(),60, 60, "", 1, null,"", 1000, 50));
-		newExamList.add(new Exam("", "test", 1, "簿記　勘定科目", new Date(), new Date(),60, 60, "", 1, null,"", 1000, 50));
-		newExamList.add(new Exam("", "cafe", 1, "英単語", new Date(), new Date(),60, 60, "", 1, null,"", 1000, 50));
+		List<Exam> mExamList = new ArrayList<>();
+		i=1;
+		mExamList.add(new Exam("", "sato", 1, name[i]+1, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
+		mExamList.add(new Exam("", "hoge", 1, name[i]+2, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
+		mExamList.add(new Exam("", "root", 1, name[i]+3, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
+		mExamList.add(new Exam("", "sudo", 1, name[i]+4, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
+		mExamList.add(new Exam("", "aaaa", 1, name[i]+5, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
+		mExamList.add(new Exam("", "test", 1, name[i]+6, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
+		mExamList.add(new Exam("", "cafe", 1, name[i]+7, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
 		
-		session.setAttribute("homeData",newExamList);
+		List<Exam> bExamList = new ArrayList<>();
+		i=2;
+		bExamList.add(new Exam("", "sato", 1, name[i]+1, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
+		bExamList.add(new Exam("", "hoge", 1, name[i]+2, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
+		bExamList.add(new Exam("", "root", 1, name[i]+3, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
+		bExamList.add(new Exam("", "sudo", 1, name[i]+4, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
+		bExamList.add(new Exam("", "aaaa", 1, name[i]+5, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
+		bExamList.add(new Exam("", "test", 1, name[i]+6, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
+		bExamList.add(new Exam("", "cafe", 1, name[i]+7, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
+		
+		session.setAttribute("HomeData",new HomeData(newExamList,mExamList,bExamList));
 //	*/
 		
 	/*Account
