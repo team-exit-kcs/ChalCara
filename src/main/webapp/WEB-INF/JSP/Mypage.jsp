@@ -64,41 +64,7 @@
 </div>
 
 <p class = "miru"><a href = "#">もっとみる</a></p>
-<!-- 
-<div class = "mi_root">
 
-<div class = "book">
-<h2>ブックマーク一覧</h2>
-</div>
-<div class = "repo">
-<h2>レポート一覧</h2>
-</div>
-
-</div>
-
-<div class = "box_root">
-
-   <div class = "b_box">
-   <c:forEach var="bookmark" items="${MypageData.bookmarkList}" end="${maxCnt}">
-   <p class = "b_exam"><a href = "/ExamPlatform/ExaminationServlet?examID=<c:out value="${bookmark.examID}"/>"><c:out value="${bookmark.examName}"/></a></p>
-   </c:forEach>
-   </div>
-
-   <div class = "r_box">
-   <c:set var="pattern" value="yyyy/MM/dd" />
-   <c:forEach var="report" items="${MypageData.reportList}" end="${maxCnt}">
-   <p class = "test"> <a href = "/ExamPlatform/Report?reportID=<c:out value="${report.reportID}"/>">《<fmt:formatDate value="${report.examDate}" pattern="${pattern}"/>》 《<c:out value="${report.reportID}"/>》 《<c:out value="${report.examName}"/>》</a></p>
-   </c:forEach>
-   </div>
-   
-</div>
-
-<div class = "miru_br">
-
-<div class = "miru_b"><p class = "miru_1"><a href = "#">もっとみる</a></p></div>
-<div class = "miru_r"><p class = "miru_2"><a href = "#">もっとみる</a></p></div>
-
-</div> -->
 <div class = "mi_root row">
 
 <div class = "book col-6 mt-5">
