@@ -37,10 +37,9 @@
     font-family: serif;
     font-size: 20px;
     font-weight: bold;
-    margin-left: 5em;
     border:3px solid #000000;
     border-radius:10px;
-    padding: 40px 10em;
+    padding: 40px 5em;
 }
 
 .mi_2 {
@@ -150,35 +149,15 @@
 .miru_1 {
 	text-align: right;
 	font-size: 18px;
-	margin-right:1em;
-	margin-bottom: 2em;
-	
-}
-
-.miru_1:hover {
-    background-position: 0;
-    color: #fff;
+	margin: 15px 15%;
 }
 
 .miru_2 {
 	text-align: right;
 	font-size: 18px;
-	margin-right: 12em;
-	margin-left:3em;
-	
+	margin: 15px 15%;
 }
-
-.miru_2:hover {
-    background-position: 0;
-    color: #fff;
-}
-
-.mi_root{
-	display: flex;
-	justify-content: space-between;
-	margin-bottom: 50px;
-}
-
+/*
 .book{
 	text-align:center;
 	width: 50%;
@@ -256,7 +235,38 @@
 	text-align: right;
 	font-size: 26px;
 }
+*/
 
+.b_box{
+	border:3px solid #000000;
+	border-radius:10px;
+    padding: 5em 10px;
+    margin: 0 15%
+}
+
+.b_mi{
+	text-align:center;
+	font-family: serif;
+	border-bottom:2px solid #000000;
+	margin-right: 45%;
+	margin-left: 15%;
+	margin-bottom: 50px;
+}
+
+.r_mi{
+	text-align:center;
+	font-family: serif;
+	border-bottom:2px solid #000000;
+	margin-right: 50%;
+	margin-left: 15%;
+	margin-bottom: 50px;
+}
+.r_box{
+	border:3px solid #000000;
+	border-radius:10px;
+    padding: 5em 15px;
+    margin: 0 15%
+}
 .test::after {
 	content:"/";
 	padding-left:20px;

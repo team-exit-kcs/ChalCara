@@ -31,16 +31,16 @@
 <h2 id = "mi"class="text-center w-auto h-auto">マイページ</h2>
 <div class = "root_1  container d-flex w-auto h-auto">
 
-<div class="r1_item_1 justify-content-start">
+<div class="r1_item_1 col-4 mt-5">
   <span>
     <img src="img/kari.png"height="220" width="220" alt="User Icon">
   </span>
 </div>
-<div class="r1_item_2 justify-content-center">
+<div class="r1_item_2 col-4 mt-5">
     <p>ユーザID : <c:out value="${LoginUser.userID}"/></p>
     <br/><a class = "UpdAccount" href = "/ExamPlatform/UpdAccountServlet" >アカウント設定</a>
 </div>
-<div class="r1_item_3 justify-content-end">
+<div class="r1_item_3 col-4 mt-5">
     <p><c:out value="${LoginUser.profile}"/></p>
 </div>
 
@@ -64,7 +64,7 @@
 </div>
 
 <p class = "miru"><a href = "#">もっとみる</a></p>
-
+<!-- 
 <div class = "mi_root">
 
 <div class = "book">
@@ -98,6 +98,28 @@
 <div class = "miru_b"><p class = "miru_1"><a href = "#">もっとみる</a></p></div>
 <div class = "miru_r"><p class = "miru_2"><a href = "#">もっとみる</a></p></div>
 
+</div> -->
+<div class = "mi_root row">
+
+<div class = "book col-6 mt-5">
+<h2 class = "b_mi">ブックマーク一覧</h2>
+<div class = "b_box">
+   <c:forEach var="bookmark" items="${MypageData.bookmarkList}" end="${maxCnt}">
+   <p class = "b_exam"><a href = "/ExamPlatform/ExaminationServlet?examID=<c:out value="${bookmark.examID}"/>"><c:out value="${bookmark.examName}"/></a></p>
+   </c:forEach>
+   </div>
+<p class = "miru_1"><a href = "#">もっとみる</a></p>
+</div>
+
+<div class = "repo col-6 mt-5">
+<h2 class = "r_mi">レポート一覧</h2>
+<div class = "r_box">
+   <c:set var="pattern" value="yyyy/MM/dd" />
+   <c:forEach var="report" items="${MypageData.reportList}" end="${maxCnt}">
+   <p class = "test"> <a href = "/ExamPlatform/Report?reportID=<c:out value="${report.reportID}"/>">《<fmt:formatDate value="${report.examDate}" pattern="${pattern}"/>》 《<c:out value="${report.reportID}"/>》 《<c:out value="${report.examName}"/>》</a></p>
+   </c:forEach>
+   </div>
+<p class = "miru_2"><a href = "#">もっとみる</a></p>
 </div>
 </div>
 </main>
