@@ -151,6 +151,29 @@ public class ReportDAO extends Database {
 		return cnt;
 	}
 	
+	public List<Report> getUseInfoReport(Exam exam) {
+		List<Report> reportList = new ArrayList<>();
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "SELECT " + REPORT_ID + " FROM " + TABLE + " WHERE " + EXAM_ID + " = ? AND " + USE_INFO + " = true AND " + EXAM_DATE + " >= ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, exam.getExamID());
+			pStmt.setDate(2, new java.sql.Date(exam.getUpdateDate().getTime()));
+			
+			ResultSet rs = pStmt.executeQuery();
+			
+			int reportID;
+			while(rs.next()) {
+				reportID = rs.getInt(REPORT_ID);
+				reportList.add(findReportInfo(exam.getUserID(), reportID));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return reportList;
+		}
+		return reportList;
+	}
+	
 	public int getExamCount(String userID) {
 		int cnt=0;
 		
