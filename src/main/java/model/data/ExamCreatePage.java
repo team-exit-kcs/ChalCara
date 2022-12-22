@@ -9,29 +9,25 @@ public class ExamCreatePage implements Serializable{
 	 * ジャンルリスト
 	 * タグリスト
 	 * 登録試験概要
-	 * 試験問題形式　大問０(初期値)　小問１
 	 * 選択大問番号　初期値　１
 	 * 登録試験問題
 	 */
 	final private List<Genre> genreList;
 	final private List<String> tagList;
 	final private EntryExam entryExam;
-	final private int questionFormat;
 	final private List<BigQuestion> bigQuestionList;
 	
 	public ExamCreatePage(List<Genre> genreList, List<String> tagList) {
 		this.genreList = genreList;
 		this.tagList = tagList;
 		this.entryExam = null;
-		this.questionFormat = 0;
 		this.bigQuestionList = new ArrayList<>();
 	}
 
-	public ExamCreatePage(ExamCreatePage examCreatePage, EntryExam entryExam, int questionFormat) {
+	public ExamCreatePage(ExamCreatePage examCreatePage, EntryExam entryExam) {
 		this.genreList = examCreatePage.getGenreList();
 		this.tagList = examCreatePage.getTagList();
 		this.entryExam = entryExam;
-		this.questionFormat = questionFormat;
 		this.bigQuestionList = new ArrayList<>();
 	}
 
@@ -39,16 +35,14 @@ public class ExamCreatePage implements Serializable{
 		this.genreList = examCreatePage.getGenreList();
 		this.tagList = examCreatePage.getTagList();
 		this.entryExam = examCreatePage.getEntryExam();
-		this.questionFormat = examCreatePage.getQuestionFormat();
 		this.bigQuestionList = bigQuestion;
 	}
 
-	public ExamCreatePage(List<Genre> genreList, List<String> tagList, EntryExam entryExam, int questionFormat,
+	public ExamCreatePage(List<Genre> genreList, List<String> tagList, EntryExam entryExam, 
 			List<BigQuestion> bigQuestionList) {
 		this.genreList = genreList;
 		this.tagList = tagList;
 		this.entryExam = entryExam;
-		this.questionFormat = questionFormat;
 		this.bigQuestionList = bigQuestionList;
 	}
 
@@ -65,10 +59,6 @@ public class ExamCreatePage implements Serializable{
 
 	public List<BigQuestion> getBigQuestionList() {
 		return bigQuestionList;
-	}
-
-	public int getQuestionFormat() {
-		return questionFormat;
 	}
 	
 }

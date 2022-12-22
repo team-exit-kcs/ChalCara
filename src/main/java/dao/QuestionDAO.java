@@ -54,6 +54,38 @@ public class QuestionDAO extends Database {
 		return questionList;
 	}
 	
+	public Question findQuestion(String examID, int bigQuestionID, int questionID){
+		Question question = null;
+		ChoicesDAO choicesDAO = new ChoicesDAO();
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "SELECT " + QUESTION_SENTENCE + "," + ANSWER + "," + QUESTION_EXPLANATION +
+					"," + ALLOCATION_OF_POINT + " FROM " + TABLE + 
+					" WHERE " + EXAM_ID + " = ? AND " + BIG_QUESTION_ID + " = ? AND " + QUESTION_ID + " = ?";
+			
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, examID);
+			pStmt.setInt(2, bigQuestionID);
+			
+			ResultSet rs = pStmt.executeQuery();
+			
+			if(rs.next()) {
+				String questionSentence = rs.getString(QUESTION_SENTENCE);
+				int answer = rs.getInt(ANSWER);
+				String questionExplanation = rs.getString(QUESTION_EXPLANATION);
+				double allocationOfPoint = rs.getDouble(ALLOCATION_OF_POINT);
+				
+				List<Choices> choicesList = choicesDAO.findChoices(examID, bigQuestionID, questionID);
+					
+				question = new Question(examID, bigQuestionID, questionID, questionSentence, answer, questionExplanation, allocationOfPoint, choicesList);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return question;
+	}
+	
 	public boolean setQuestion(List<Question> questionList) {
 		if(questionList == null || questionList.isEmpty()) {
 			return true;

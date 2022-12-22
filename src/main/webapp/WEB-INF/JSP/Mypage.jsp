@@ -79,7 +79,7 @@
 
 </div>
 
-<p class = "miru"><a href = "#">もっとみる</a></p>
+<p class = "miru"><a href = "/ExamPlatform/ExamListServlet?userID=<c:out value="${LoginUser.userID}"/>">もっとみる</a></p>
 
 <div class = "mi_root">
 
@@ -111,8 +111,8 @@
 
 <div class = "miru_br">
 
-<div class = "miru_b"><p class = "miru"><a href = "#">もっとみる</a></p></div>
-<div class = "miru_r"><p class = "miru"><a href = "#">もっとみる</a></p></div>
+<div class = "miru_b"><p class = "miru"><a href = "/ExamPlatform/Mypage/BookmarkListServlet">もっとみる</a></p></div>
+<div class = "miru_r"><p class = "miru"><a href = "/ExamPlatform/Mypage/ReportListServlet">もっとみる</a></p></div>
 
 </div>
 

@@ -18,7 +18,12 @@
 <br/>
 <form action="/ExamPlatform/UpdAccountServlet" method="post">
 <span>プロフィール<br/></span>
-<textarea name = "profile"><c:out value="${LoginUser.profile}"/></textarea><input type="submit" value="更新">
+<textarea name = "profile"><c:out value="${LoginUser.profile}"/></textarea><br>
+<label>
+    <input type="checkbox" id="useInfo" name="useInfo" value="true" <c:if test="${LoginUser.useInfoDefault}">checked="checked"</c:if>>
+   	受験情報を試験作成者に送信する(デフォルト)
+</label>
+<br><input type="submit" value="更新">
 </form>
 </div>
 </div>

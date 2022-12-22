@@ -1,6 +1,5 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import dao.BookmarkDAO;
@@ -17,12 +16,7 @@ public class MypageLogic {
 		ReportDAO rd = new ReportDAO();
 		List<Exam> examList = ed.findUserExam(userID);
 		List<Exam> bookmarkExamList = bd.findBookmark(userID).getExamList();
-		List<Integer> reportIDList = rd.findUserReport(userID);
-		
-		List<Report> reportList = new ArrayList<>();
-		for(int reportID:reportIDList) {
-			reportList.add(rd.findReportInfo(userID,reportID));
-		}
+		List<Report> reportList = rd.findUserReport(userID);
 		
 		return new Mypage(examList,bookmarkExamList,reportList);
 	}

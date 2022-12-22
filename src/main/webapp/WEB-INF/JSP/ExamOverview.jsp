@@ -56,16 +56,16 @@
           
           <div>
                <label for = "OpenRange" >公開範囲：
-               <input type = "radio" name = "OpenRange" value = "0" required onchange = "LimitedPassForm()" <c:if test="${ExamCreatePage.entryExam.disclosureRange==0}">checked="checked"</c:if>>公開
-               <input type = "radio" name = "OpenRange" value = "1" required onchange = "LimitedPassForm()" <c:if test="${ExamCreatePage.entryExam.disclosureRange==1}">checked="checked"</c:if> id = "radio-limited">限定公開
-               <input type = "radio" name = "OpenRange" value = "2" required onchange = "LimitedPassForm()" <c:if test="${ExamCreatePage.entryExam.disclosureRange==2}">checked="checked"</c:if>>非公開
+               <input type = "radio" name = "OpenRange" value = "0" required onchange = "change()" <c:if test="${ExamCreatePage.entryExam.disclosureRange==0}">checked="checked"</c:if> id = "radio-open">公開
+               <input type = "radio" name = "OpenRange" value = "1" required onchange = "change()" <c:if test="${ExamCreatePage.entryExam.disclosureRange==1}">checked="checked"</c:if> id = "radio-limited">限定公開
+               <input type = "radio" name = "OpenRange" value = "2" required onchange = "change()" <c:if test="${ExamCreatePage.entryExam.disclosureRange==2}">checked="checked"</c:if>>非公開
                </label>
           </div>
           
           <div id = "Ques_for">
                <label for="QuestionFormat">問題形式：</label>
-               <label><input type="radio" value = "0" required name="QuestionFormat" <c:if test="${ExamCreatePage.questionFormat==0}">checked="checked"</c:if>>大問</label>
-               <label><input type="radio" value = "1" name="QuestionFormat"  <c:if test="${ExamCreatePage.questionFormat==1}">checked="checked"</c:if>>小問</label>
+               <label><input type="radio" value = "0" onchange = "useGameCheckboxCtl();" required name="QuestionFormat" <c:if test="${ExamCreatePage.entryExam.questionFormat==0}">checked="checked"</c:if>>大問</label>
+               <label><input type="radio" value = "1" onchange = "useGameCheckboxCtl();" name="QuestionFormat" id = "radio-question" <c:if test="${ExamCreatePage.entryExam.questionFormat==1}">checked="checked"</c:if>>小問</label>
           </div>
           
           <div><label for = "e_Time">試験時間：<input type = "number" required name = "examTime" min = 1 <c:if test="${not empty ExamCreatePage.entryExam}">value = <c:out value="${ExamCreatePage.entryExam.examTime}" /></c:if>>分</label></div>
@@ -75,6 +75,14 @@
           <div>
                <label for = "Explanation">説明文：</label>
                <textarea name = "Explanation" placeholder = "試験概要を説明して下さい"><c:out value="${ExamCreatePage.entryExam.examExplanation}" /></textarea>
+          </div>
+          
+          <div>
+  			<label>
+    			<input type="checkbox" id="useGame" name="useGame" value="true" <c:if test="${ExamCreatePage.entryExam.useGame}">checked="checked"</c:if>>
+   				ゲームの問題としての使用を許可する
+   				(小問形式かつ公開設定の場合のみ選択できます)
+  			</label>
           </div>
           
           <div class = "footer">
@@ -87,9 +95,15 @@
           </div>
           
           <script src="./js/tag.js"></script>
+          <script src="./js/useGame.js"></script>
           <script src="./js/openRange.js"></script>
           <script type="text/javascript">
-            LimitedPassForm();
+          	change();
+          	
+          	function change(){
+           		LimitedPassForm();
+         		useGameCheckboxCtl();
+          	}
             
          	function back(){
           		result=window.confirm("入力した情報は保存されません");

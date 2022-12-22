@@ -17,6 +17,7 @@ public class ExaminationLogic {
 		BookmarkDAO bookmarkDAO = new BookmarkDAO();
 		
 		ExaminationPage pageData = null;
+		boolean useInfo = false;
 		boolean bookmark = false;
 		
 		if(examID != null) {
@@ -24,13 +25,12 @@ public class ExaminationLogic {
 			List<BigQuestion> bigQuestionList = bigQuestionDAO.findBigQuestion(examID);
 			
 			if(user != null) {
+				useInfo = user.isUseInfoDefault();
 				bookmark = bookmarkDAO.isBookmark(examID, user.getUserID());
 			}
 			
 			if(exam != null) {
-				/*大問０(初期値)　小問１  大問の問題文がnullの場合は小問のみのため問題文の値で判定*/
-				int questionFormat = (bigQuestionList.get(0).getBigQuestionSentence() == null ? 1 : 0);
-				pageData = new ExaminationPage(exam,questionFormat,bigQuestionList,bookmark);
+				pageData = new ExaminationPage(exam,bigQuestionList,bookmark,useInfo,true);
 			}
 		}
 		

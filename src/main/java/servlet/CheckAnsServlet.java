@@ -58,6 +58,7 @@ public class CheckAnsServlet extends HttpServlet {
 			List<BQCheckAns> BQCheckAnsList = new ArrayList<>();
 			List<BigQuestion> bigQuestionList = pageData.getBigQuestionList();
 			double score = 0;
+			int miss = 0;
 			
 			for(BigQuestion bq : bigQuestionList) {
 				List<CheckAns> checkAnsList = new ArrayList<>();
@@ -67,15 +68,20 @@ public class CheckAnsServlet extends HttpServlet {
 					CheckAns result = cal.exequte(q, strAns);
 					if(result.isTf()) {
 						score += result.getAllocationOfPoint();
+					}else {
+						miss++;
 					}
 					
 					checkAnsList.add(result);
 				}
 				BQCheckAnsList.add(new BQCheckAns(bq.getBigQuestionID(), bq.getBigQuestionSentence(), checkAnsList));
 			}
-			CheckAnsPage checkAnsPage = new CheckAnsPage(pageData.getExam().getExamID(), (int)score, BQCheckAnsList);
+			CheckAnsPage checkAnsPage = new CheckAnsPage(pageData.getExam().getExamID(), (int)score, BQCheckAnsList, miss);
 			
-			Report report = crl.execute(checkAnsPage, pageData.getExam() , user);
+			int useTime = Integer.parseInt(request.getParameter("time"));
+			
+			
+			Report report = crl.execute(checkAnsPage, pageData.getExam() , user, useTime, pageData.isUseInfo(), pageData.isNotRedoExam());
 			
 			session.removeAttribute("checkAnsPage");
 			session.setAttribute("checkAnsPage", checkAnsPage);

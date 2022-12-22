@@ -24,7 +24,8 @@
 <span>印刷</span>
 </button>--%>
 </div>
-<p id = Examname><c:out value="${report.examName}"/></p>
+<p id = Examname>試験名：<c:out value="${report.examName}"/></p><br>
+<p>経過時間：<c:out value="${report.useTime}"/>分</p>
 <div  class = gouhi_ten>
 <%-- int ten = report.getScore();
    int g_ten = report.getPassingScore();
@@ -37,11 +38,18 @@
    }--%>
    
 <c:choose>
- <c:when test="${report.score >= report.passingScore }">
- <h2 id = gouhi>合格</h2>
+ <c:when test="${report.notRedoExam}">
+ 	<c:choose>
+ 	<c:when test="${report.score >= report.passingScore }">
+ 	<h2 id = gouhi>合格</h2>
+ 	</c:when>
+	 <c:otherwise>
+ 	<h2 id = gouhi>不合格</h2>
+ 	</c:otherwise>
+	</c:choose>
  </c:when>
  <c:otherwise>
- <h2 id = gouhi>不合格</h2>
+ <h2 id = gouhi>合否なし</h2>
  </c:otherwise>
 </c:choose>
 
@@ -49,10 +57,10 @@
 </div>
 
 <div class = name_date>
-<p id = name><c:out value="${report.userID}"/></p>
+<c:if test ="${not empty LoginUser}"><p id = name>ユーザ名：<c:out value="${report.userID}"/></p></c:if>
 <c:set var="pattern" value="yyyy/MM/dd" />
 
-<p id="date"><fmt:formatDate value="${report.examDate}" pattern="${pattern}"/></p>
+<p id="date">試験日：<fmt:formatDate value="${report.examDate}" pattern="${pattern}"/></p>
 <%--<script>
 date = new Date();
 year = date.getFullYear();

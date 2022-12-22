@@ -26,6 +26,8 @@ public class ExamDAO extends Database {
 	final private String EXAM_EXPLANATION = "ExamExplanation";
 	final private String DISCLOSURE_RANGE = "DisclosureRange";
 	final private String LIMITED_PASS = "LimitedPassword";
+	final private String USE_GAME = "UseGame";
+	final private String FORMAT = "QuestionFormat";
 	
 	public Exam findExamInfo(String examID) {
 		GenreDAO genreDAO = new GenreDAO();
@@ -37,7 +39,7 @@ public class ExamDAO extends Database {
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
 
 			String sql = "SELECT "+ USER_ID + ", " + GENRE_ID + ", " + EXAM_NAME + ", " + CREATE_DATE + ", " + UPDATE_DATE + ", " + PASSING_SCORE + ", " + 
-					EXAM_TIME + ", " + EXAM_EXPLANATION + ", " + DISCLOSURE_RANGE + " FROM " + TABLE + " WHERE " + EXAM_ID + " = ?";
+					EXAM_TIME + ", " + EXAM_EXPLANATION + ", " + DISCLOSURE_RANGE + ", " + USE_GAME + ", " + FORMAT + " FROM " + TABLE + " WHERE " + EXAM_ID + " = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, examID);
 			
@@ -53,13 +55,15 @@ public class ExamDAO extends Database {
 				String examExplanation = rs.getString(EXAM_EXPLANATION);
 				int disclosureRange = rs.getInt(DISCLOSURE_RANGE);
 				int genreID = rs.getInt(GENRE_ID);
+				boolean useGame = rs.getBoolean(USE_GAME);
+				int questionFormat = rs.getInt(FORMAT);
 				String genreName = genreDAO.findGenreName(genreID);
 				List<String> tagList = tagDAO.findTag(examID);
 				int exeCount = reportDAO.getUserCount(examID);
 				int bookmarkCount = bookmarkDAO.getUserCount(examID);
 				
 				exam = new Exam(examID, userID, genreID, examName, createDate, updateDate, passingScore, examTime, examExplanation,
-						disclosureRange,  tagList, genreName, exeCount, bookmarkCount);
+						disclosureRange,  tagList, useGame, questionFormat, genreName, exeCount, bookmarkCount);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -135,7 +139,7 @@ public class ExamDAO extends Database {
 
 	public List<Exam> findSearchExam(String word) {
 		DisclosureRangeLogic DR = new DisclosureRangeLogic();
-		List<Exam> examIDList = new ArrayList<>();
+		List<Exam> examList = new ArrayList<>();
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
 			String sql = "SELECT " + EXAM_ID + " FROM " + TABLE + " WHERE " + DISCLOSURE_RANGE + " = "  + DR.getOPEN() + " AND ( " + EXAM_NAME + " LIKE ? OR " + EXAM_EXPLANATION + " LIKE ? )";
@@ -147,13 +151,35 @@ public class ExamDAO extends Database {
 			
 			while(rs.next()) {
 				String examID = rs.getString(EXAM_ID);
-				examIDList.add(this.findExamInfo(examID));
+				examList.add(this.findExamInfo(examID));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
-		return examIDList;
+		return examList;
+	}
+	
+	public List<Exam> findSearchGenreExam(int genreID) {
+		DisclosureRangeLogic DR = new DisclosureRangeLogic();
+		List<Exam> examList = new ArrayList<>();
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "SELECT " + EXAM_ID + " FROM " + TABLE + " WHERE " + DISCLOSURE_RANGE + " = "  + DR.getOPEN() + " AND " + GENRE_ID + " = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setInt(1, genreID);
+			
+			ResultSet rs = pStmt.executeQuery();
+			
+			while(rs.next()) {
+				String examID = rs.getString(EXAM_ID);
+				examList.add(this.findExamInfo(examID));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return examList;
 	}
 	
 	public List<Exam> findSearchUserExam(String userID) {
@@ -204,7 +230,7 @@ public class ExamDAO extends Database {
 		TagDAO tagDAO = new TagDAO();
 		
 		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
-			String sql = "INSERT INTO " + TABLE + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO " + TABLE + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, exam.getExamID());
 			pStmt.setString(2, exam.getUserID());
@@ -217,6 +243,8 @@ public class ExamDAO extends Database {
 			pStmt.setString(9, exam.getExamExplanation());
 			pStmt.setInt(10, exam.getDisclosureRange());
 			pStmt.setString(11, exam.getLimitedPassword());
+			pStmt.setBoolean(12, exam.isUseGame());
+			pStmt.setInt(13, exam.getQuestionFormat());
 			
 			int result = pStmt.executeUpdate();
 			

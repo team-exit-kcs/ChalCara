@@ -11,7 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.ReportDAO;
+import model.CheckAnsPageLogic;
+import model.ExaminationLogic;
+import model.RedoExamLogic;
 import model.data.Account;
+import model.data.CheckAnsPage;
+import model.data.ExaminationPage;
 import model.data.Report;
 
 /**
@@ -42,13 +47,32 @@ public class ReportServlet extends HttpServlet {
 		
 		if(user != null && reportID != null) {
 			ReportDAO reportDAO = new ReportDAO();
+			CheckAnsPageLogic capl = new CheckAnsPageLogic();
+			
+			report = reportDAO.findReportInfo(user.getUserID(), Integer.parseInt(reportID));
 			
 			session.removeAttribute("report");
-			session.setAttribute("report", reportDAO.findReportInfo(reportID, Integer.parseInt(reportID)));
+			session.setAttribute("report", report);
+			
+			session.removeAttribute("checkAnsPage");
+			if(report != null) {
+				CheckAnsPage checkAnsPage = capl.execute(user.getUserID(), report);
+				if(checkAnsPage != null) {
+					session.setAttribute("checkAnsPage", checkAnsPage);
+					
+					ExaminationLogic EL = new ExaminationLogic();
+					RedoExamLogic REL = new RedoExamLogic();
+					
+					ExaminationPage examinationPage = REL.exequte(EL.exequte(report.getExamID(), user), checkAnsPage);
+					session.removeAttribute("pageData");
+					session.setAttribute("pageData", examinationPage);
+					
+				}
+			}
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/ResultReport.jsp");
 			dispatcher.forward(request, response);
-		}if(report != null) {
+		}else if(report != null) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/ResultReport.jsp");
 			dispatcher.forward(request, response);
 			

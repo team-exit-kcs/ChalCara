@@ -12,6 +12,10 @@ public class DisclosureRangeLogic {
 	public boolean isNotClose(int disclosureRange) {
 		return this.CLOSE != disclosureRange;
 	}
+	
+	public boolean isOpen(int disclosureRange) {
+		return this.OPEN == disclosureRange;
+	}
 
 	public int getOPEN() {
 		return OPEN;

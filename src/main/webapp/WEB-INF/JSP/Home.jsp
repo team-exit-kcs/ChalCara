@@ -8,7 +8,6 @@
 <jsp:include page="./title.jsp"/>
 <link rel="stylesheet" href="/ExamPlatform/css/Home.css">
 <link rel="stylesheet" href="/ExamPlatform/css/BulletinBoard.css">
-<script src="/ExamPlatform/js/Category.js"></script>
 </head>
 <body>
 <jsp:include page="./header.jsp" />

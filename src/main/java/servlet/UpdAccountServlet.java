@@ -47,11 +47,18 @@ public class UpdAccountServlet extends HttpServlet {
 		
 		Account account = (Account) session.getAttribute("LoginUser");
 		String profile = request.getParameter("profile");
+		
+		String useInfoCheck = request.getParameter("useInfo");
+		boolean useInfo = false;
+		if(useInfoCheck != null && useInfoCheck.equals("true")) {
+			useInfo = true;
+		}
+		
 		String userID = account.getUserID();
-		accountDAO.updProfile(userID, profile);
+		accountDAO.updAccount(userID, profile, useInfo);
 		
 		session.removeAttribute("LoginUser");
-		session.setAttribute("LoginUser", new Account(userID,profile,account.getIcon()));
+		session.setAttribute("LoginUser", new Account(userID,profile,account.getIcon(),useInfo));
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/accountSettings.jsp");
 		dispatcher.forward(request, response);

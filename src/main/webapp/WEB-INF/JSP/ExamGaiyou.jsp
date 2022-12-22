@@ -33,6 +33,13 @@
 	</div>
 	<br>
 	
+	<div class = "createUser" style="text-align: right;">
+		<span>
+			<c:if test="${LoginUser.userID == pageData.exam.userID}"><a href="/ExamPlatform/ExamStatsServlet?examID=<c:out value="${pageData.exam.examID}"/>">統計</a></c:if>
+		</span>
+	</div>
+	<br>
+	
 	<div style="text-align: center">
 		試験作成日：
 		<span>
@@ -102,7 +109,15 @@
 		</div>
 		<br>
 		<div>
-			<button onclick="location.href='/ExamPlatform/ConductTheExamServlet'">試験開始</button>
+			<form action="/ExamPlatform/ConductTheExamServlet" method="post">
+			<c:if test="${not empty LoginUser}">
+				<label>
+    				<input type="checkbox" id="useInfo" name="useInfo" value="true" <c:if test="${LoginUser.useInfoDefault}">checked="checked"</c:if>>
+  					 	受験情報を試験作成者に送信する
+				</label><br>
+			</c:if>
+			<input type="submit" value="試験開始">
+			</form>
 		</div>
 	</div>
 </body>

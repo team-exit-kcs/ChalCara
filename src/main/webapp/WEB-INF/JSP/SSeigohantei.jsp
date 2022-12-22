@@ -13,6 +13,7 @@ td {
 </style>
 </head>
 <body>
+<input type="button" id = insatu value = "印刷" onclick = "window.print();" />
 	<h1>試験名：<span><c:out value="${report.examName}"/></span></h1>
 	
 	<div style="text-align: center">
@@ -46,8 +47,9 @@ td {
 				</tr>
 			</c:forEach>
 		</table>
-	
+		<p>注意：試験作成者が試験を更新した場合このページは表示できなくなります。必要な場合は印刷などを行ってください。</p>
 		<div style="margin-top: 20px">
+			<c:if test="${checkAnsPage.miss > 0}"><a href="/ExamPlatform/ConductTheExamServlet/redo">間違った問題をやり直す</a></c:if>
 			<a href="/ExamPlatform/Report">レポートに戻る</a>
 		</div>
 	</div>
