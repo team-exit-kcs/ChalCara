@@ -2,6 +2,7 @@ package test;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,8 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.data.Exam;
-import model.data.HomeData;
+import model.data.BigQuestion;
+import model.data.Choices;
+import model.data.EntryExam;
+import model.data.ExamCreatePage;
+import model.data.Genre;
+import model.data.Question;
 
 
 /**
@@ -60,7 +65,7 @@ public class TestForwardServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		
- // /*Home
+  /*Home
 		String[] name = {"新着","ブクマ","月間"};
 		List<Exam> newExamList = new ArrayList<>();
 		int i=0;
@@ -118,7 +123,7 @@ public class TestForwardServlet extends HttpServlet {
 		request.setAttribute("MypageData", new Mypage(examList,bmList,rpList));
 //	 */
 		
-	/*ExamOverview
+//	/*ExamOverview
 		List<Genre> genreList = new ArrayList<>();
 		for(int i=0;i<10;i++) {
 			genreList.add(new Genre(i,"ジャンル"+Integer.toString(i)));
