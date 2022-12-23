@@ -12,12 +12,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <link rel = "stylesheet" href= "/ExamPlatform/css/Confimation.css">
 <jsp:include page="./title.jsp" />
-<link rel="stylesheet" href="/ExamPlatform/css/Confimation.css">
 </head>
 <body>
 <main>
+<div class = "">
 <h1>確認フォーム</h1>
 <p>試験名：<c:out value="${ExamCreatePage.entryExam.examName}" /></p><br>
 <p>ジャンル：<c:out value="${ExamCreatePage.genreList[(ExamCreatePage.entryExam.genreID - 1)].genreName}" /></p><br>
@@ -77,6 +79,7 @@
 	<button type="button" id = "btn-back" class = "back" onclick="location.href='/ExamPlatform/ExamCreateServlet'">戻る</button>
 	<input type="submit" value = "確定" class = "ok"></input>
 </form>
+</div>
 </div>
 </main>
 </body>

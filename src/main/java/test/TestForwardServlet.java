@@ -2,6 +2,10 @@ package test;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +14,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import model.data.BigQuestion;
+import model.data.Choices;
+import model.data.EntryExam;
+import model.data.ExamCreatePage;
+import model.data.Genre;
+import model.data.Question;
 
 
 /**
@@ -91,7 +102,7 @@ public class TestForwardServlet extends HttpServlet {
 		request.setAttribute("MypageData", new Mypage(examList,bmList,rpList));
 //	 */
 		
-	/*ExamOverview
+//	/*ExamOverview
 		List<Genre> genreList = new ArrayList<>();
 		for(int i=0;i<10;i++) {
 			genreList.add(new Genre(i,"ジャンル"+Integer.toString(i)));
@@ -128,7 +139,7 @@ public class TestForwardServlet extends HttpServlet {
 			bigQuestionList.add(new BigQuestion("exam",a,"exam"+a,questionList));
 		}
 		
-		session.setAttribute("ExamCreatePage", new ExamCreatePage(genreList,tagList,entryExam,0,bigQuestionList));
+		session.setAttribute("ExamCreatePage", new ExamCreatePage(genreList,tagList,entryExam,bigQuestionList));
 //	*/
 		
 		/*試験実行 小問
