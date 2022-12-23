@@ -60,12 +60,12 @@ public class TestForwardServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		
-//  /*Home
+ // /*Home
 		String[] name = {"新着","ブクマ","月間"};
 		List<Exam> newExamList = new ArrayList<>();
 		int i=0;
 		newExamList.add(new Exam("", "sato", 1, name[i]+1, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
-		newExamList.add(new Exam("", "hoge", 1, name[i]+2, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
+		newExamList.add(new Exam("", "hogehogehogehoge", 1, name[i]+2, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
 		newExamList.add(new Exam("", "root", 1, name[i]+3, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
 		newExamList.add(new Exam("", "sudo", 1, name[i]+4, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
 		newExamList.add(new Exam("", "aaaa", 1, name[i]+5, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
@@ -136,7 +136,7 @@ public class TestForwardServlet extends HttpServlet {
 		
 		EntryExam entryExam=null;
 		try {
-			entryExam = new EntryExam("testUsr",3,"testExam",new Date(),new Date(),60,120,"試験概要です",1,examtagList,"pass");
+			entryExam = new EntryExam("testUsr",3,"testExam",new Date(),new Date(),60,120,"試験概要です",1,examtagList,false,1,"pass");
 		} catch (NoSuchAlgorithmException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
@@ -155,7 +155,7 @@ public class TestForwardServlet extends HttpServlet {
 			bigQuestionList.add(new BigQuestion("exam",a,"exam"+a,questionList));
 		}
 		
-		session.setAttribute("ExamCreatePage", new ExamCreatePage(genreList,tagList,entryExam,0,bigQuestionList));
+		session.setAttribute("ExamCreatePage", new ExamCreatePage(genreList,tagList,entryExam,bigQuestionList));
 //	*/
 		
 		/*試験実行 小問
