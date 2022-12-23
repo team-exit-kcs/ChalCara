@@ -127,7 +127,8 @@ public class UpdExamOverviewServlet extends HttpServlet {
 			
 			request.setAttribute("msg", new String("更新が完了しました"));
 			
-			response.sendRedirect("http://example.com:8080/ExamPlatform/UpdExam/Overview?examID=" + exam.getExamID());
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/ExamUpdateOverview.jsp");
+			dispatcher.forward(request, response);
 		}else {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/NotFound.jsp");
 			dispatcher.forward(request, response);

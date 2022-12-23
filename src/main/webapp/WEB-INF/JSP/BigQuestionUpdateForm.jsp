@@ -10,7 +10,7 @@
 <%@ page import = "java.util.List" %>
 
 <c:set var="bigQuestionNum" value="${param.bigQuestionNum}" />
-<c:set var="bigQuestion" value="${ExaminationPage.bigQuestionList[bigQuestionNum-1]}" />
+<c:set var="bigQuestion" value="${ExamUpdatePage.bigQuestionList[bigQuestionNum-1]}" />
 
 <%-- 大問 --%>
 <div class = "Bigquestion">

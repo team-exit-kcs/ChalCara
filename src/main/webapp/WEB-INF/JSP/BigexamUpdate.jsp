@@ -17,11 +17,12 @@
 <link rel="stylesheet" href="/ExamPlatform/css/QuestionRegister.css">
 </head>
 <body>
-<form action="/ExamPlatform/ExamCreateServlet/BigQuestion" method="post">
+<form action="/ExamPlatform/UpdExam/Question" method="post">
+<input type="hidden" id="examID" name="examID" value=<c:out value="${ExamUpdatePage.exam.examID}" />>
 <h1>問題更新フォーム</h1>
 <div>
 
-<c:forEach var="bq" items="${ExaminationPage.bigQuestionList}">
+<c:forEach var="bq" items="${ExamUpdatePage.bigQuestionList}">
      <jsp:include page="./BigQuestionUpdateForm.jsp">
           <jsp:param name="bigQuestionNum" value = "${bq.bigQuestionID}" />
           <jsp:param name="questionFormat" value = "0" />
@@ -31,11 +32,12 @@
 <span><br><button type="button" onclick="addBigQuestionForm(this)">＋大問を追加</button></span>
 </div>
 
-<input type="hidden" id="BQNum" name="bigQuestionNum" value="<c:choose><c:when test="${empty ExaminationPage.exam}">1</c:when><c:otherwise><c:out value="${Examination.bigQuestionList.size()}"/></c:otherwise></c:choose>">
+<input type="hidden" id="BQNum" name="bigQuestionNum" value="<c:choose><c:when test="${empty ExamUpdatePage.exam}">1</c:when><c:otherwise><c:out value="${ExamUpdatePage.bigQuestionList.size()}"/></c:otherwise></c:choose>">
 <div class = "footer">
           <div class = "botton_area">
           <input type="submit" value = "更新" class = "ok"></input>
-          </div>          
+          </div>
+<span><a href="/ExamPlatform/UpdExam/Overview?examID=<c:out value="${ExamUpdatePage.exam.examID}"/>">試験更新</a></span><br>
 </div>
 </form>
 
@@ -45,7 +47,8 @@
 			}
 
          	function back(){
-          		location.href='/ExamPlatform//ExamCreateServlet'<%--passを後々変更する --%>
+         		let examID = document.getElementById("examID").value;
+          		location.href='/ExamPlatform/ExaminationServlet?examID=' + examID;
             }
 </script>
 <script src="/ExamPlatform/js/choices.js"></script>

@@ -225,6 +225,26 @@ public class ExamDAO extends Database {
 		return examIDList;
 	}
 	
+	public boolean deleteExam(Exam exam) {
+		boolean resultSts=false;
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "DELETE FROM " + TABLE + " WHERE " + EXAM_ID + " = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, exam.getExamID());
+			
+			int result = pStmt.executeUpdate();
+			
+			if(result>0) {
+				resultSts=true;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return resultSts;
+	}
+	
 	public boolean updExam(EntryExam exam) {
 		boolean resultSts=false;
 		TagDAO tagDAO = new TagDAO();

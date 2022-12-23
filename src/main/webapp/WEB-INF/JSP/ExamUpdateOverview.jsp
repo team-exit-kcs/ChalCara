@@ -92,7 +92,9 @@
           <button type="button" id = "btn-back" class = "back" onclick="back()">戻る</button>
           <input type="submit" value = "更新" class = "ok"></input>
           </div>
-          
+          <br>
+          <span><a href="/ExamPlatform/UpdExam/Question?examID=<c:out value="${ExamUpdatePage.exam.examID}"/>">試験問題更新</a></span><br>
+          <span><a href="/ExamPlatform/UpdExam/Delete?examID=<c:out value="${ExamUpdatePage.exam.examID}"/>">試験を削除</a></span>
           </div>
           
           <script src="/ExamPlatform/js/tag.js"></script>

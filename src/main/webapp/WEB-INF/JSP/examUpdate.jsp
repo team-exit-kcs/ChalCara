@@ -12,7 +12,7 @@
    
 <!DOCTYPE html>
 
-<c:set var="questionList" value="${ExaminationPage.bigQuestionList[0].questionList}" />
+<c:set var="questionList" value="${ExamUpdatePage.bigQuestionList[0].questionList}" />
 
 <html>
 <head>
@@ -21,7 +21,8 @@
 <link rel="stylesheet" href="/ExamPlatform/css/QuestionRegister.css">
 </head>
 <body>
-<form action="/ExamPlatform/ExamCreateServlet/Question" method="post">
+<form action="/ExamPlatform/UpdExam/Question" method="post">
+<input type="hidden" id="examID" name="examID" value=<c:out value="${ExamUpdatePage.exam.examID}" />>
 <h1>問題更新フォーム</h1>
 
 <div class = "Bigquestion">
@@ -56,16 +57,15 @@
           <div class = "botton_area">
           <button type="button" id = "btn-back" class = "back" onclick="back()">戻る</button>
           <input type="submit" value = "更新確認画面へ" class = "ok"></input>
-          </div>          
+          </div>
+<span><a href="/ExamPlatform/UpdExam/Overview?examID=<c:out value="${ExamUpdatePage.exam.examID}"/>">試験更新</a></span><br>  
 </div>
 </div>
 </form>
 <script type="text/javascript">
          	function back(){
-          		result=window.confirm("保存されていないデータは破棄されます");
-          		if(result){
-          			location.href='/ExamPlatform/ExamCreateServlet'
-                }
+          		let examID = document.getElementById("examID").value;
+          		location.href='/ExamPlatform/ExaminationServlet?examID=' + examID;
             }
 </script>
 <script src="/ExamPlatform/js/choices.js"></script>
