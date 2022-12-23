@@ -6,7 +6,8 @@
 <div  id = "main_box" class = "d-flex justify-content-center row">
 <form action="/ExamPlatform/SearchServlet" method="post">
 <br>
-<div class="form-group">
+<div class= "row">
+<div class=" col-auto">
 <select required id="searchFormat" class="form-control" name="searchFormat" onchange="formChange()">
 <option value="1" <c:if test="${searchResult.searchFormat == 1}">selected</c:if>>試験検索</option>
 <option value="2" <c:if test="${searchResult.searchFormat == 2}">selected</c:if>>試験ID検索</option>
@@ -15,7 +16,7 @@
 <option value="5" <c:if test="${searchResult.searchFormat == 5}">selected</c:if>>ジャンル検索</option>
 </select>
 </div>
-<div class="form-group">
+<div class="col-auto">
 <span id="search1"><input type = "search" class="form-control" name = "searchWord" placeholder = "検索" <c:if test="${searchResult.searchFormat <= 3 && not empty searchResult.searchWord}">value="<c:out value="${searchResult.searchWord}"/>"</c:if> /></span>
 </div>
 
@@ -24,23 +25,25 @@
             <option><c:out value="${tag}" /></option>
       </c:forEach>
 </datalist>
-<span id="search2"><input type = "search" name = "searchTag" placeholder = "検索" list = "TagList" <c:if test="${searchResult.searchFormat == 4 && not empty searchResult.searchWord}">value="<c:out value="${searchResult.searchWord}"/>"</c:if> /></span>
+<span id="search2"><input type = "search" class="form-control" name = "searchTag" placeholder = "検索" list = "TagList" <c:if test="${searchResult.searchFormat == 4 && not empty searchResult.searchWord}">value="<c:out value="${searchResult.searchWord}"/>"</c:if> /></span>
 
 
 <span id="search3">
-<select name="searchGenre">
+<select name="searchGenre" class="form-control">
 <c:forEach var="genre" items="${searchForm.genreList}">
 	<option value="${genre.genreID}" <c:if test="${searchResult.searchFormat == 5 && searchResult.searchWord == genre.genreID}">selected</c:if>><c:out value="${genre.genreName}" /></option>
 </c:forEach>
 </select>
 </span>
-
-<input type="submit" class="btn btn-outline-primary btn-block" value = "検索" class = "ok" />
+<div class = "col-auto">
+<input type="submit" class="btn btn-outline-primary btn-block col-auto" value = "検索" class = "ok" />
+</div>
+</div>
 <hr>
-<details open>
-<summary>その他条件を指定する</summary>
-
-
+<details>
+<summary id = "open">その他条件を指定する</summary>
+<br>
+<div class="details-content">
 <div class="form-group">
 <label>ジャンル</label>
 <input type="checkbox" id="genreAllSelect" <c:if test="${empty searchFilter.genreIDFilterList}">checked</c:if>><label>すべて選択</label><br>
@@ -57,13 +60,13 @@
 <c:forEach var="eTag" items="${searchFilter.tagFilterList}" varStatus="sts">
 <c:choose>
 <c:when test="${sts.first}"><span><input type = "search" class="form-control" name = "tagFilter" list = "TagList" value = <c:out value="${eTag}" />></span></c:when>
-<c:otherwise><span><br><input type = "search" class="form-control" name = "tagFilter" list = "TagList" value = <c:out value="${eTag}" />><button type="button" onclick="rmForm(this)">-削除</button></span></c:otherwise>
+<c:otherwise><span><br><input type = "search" id = "add_drop" class="form-control" name = "tagFilter" list = "TagList" value = <c:out value="${eTag}" />><button type="button" onclick="rmForm(this)">-削除</button></span></c:otherwise>
 </c:choose>
 </c:forEach>
 </c:otherwise>
 </c:choose>
 
-<button type="button" class = "border-0 btn-outline-primary" onclick="addForm(this,'tag')">＋追加</button>
+<button type="button" id = "add_drop" class = "border-0 btn-outline-primary" onclick="addForm(this,'tag')">＋追加</button>
 </div>
 
 <div class="form-group">
@@ -74,13 +77,12 @@
 <c:forEach var="userID" items="${searchFilter.userIDFilterList}" varStatus="sts">
 <c:choose>
 <c:when test="${sts.first}"><span><input type = "search" class="form-control" name = "userIDFilter" value = <c:out value="${userID}" />></span></c:when>
-<c:otherwise><span><br><input type = "search" class="form-control" name = "userIDFilter" value = <c:out value="${userID}" />><button type="button" onclick="rmForm(this)">-削除</button></span></c:otherwise>
+<c:otherwise><span><br><input type = "search" class="" name = "userIDFilter" value = <c:out value="${userID}" />><button type="button" onclick="rmForm(this)">-削除</button></span></c:otherwise>
 </c:choose>
 </c:forEach>
 </c:otherwise>
 </c:choose>
-
-<button type="button" class = "border-0 btn-outline-primary" onclick="addForm(this,'userID')">＋追加</button>
+<button type="button" id = "add_drop" class = "border-0 btn-outline-primary" onclick="addForm(this,'userID')">＋追加</button>
 </div>
 
 <div class="form-group">
@@ -91,7 +93,8 @@
 </div>
 
 <input type="submit" class = "btn btn-outline-primary btn-block" value = "絞り込む" class = "ok" />
-
+<br>
+</div>
 </details>
 
 
@@ -123,9 +126,9 @@ window.onload = formChange;
 function addForm(btm,sw){
 	let Html;
 	if(sw == "tag"){
-		Html = '<span><br><input type = "search" class="form-control" name = "tagFilter" list = "TagList"><button type="button" class = "border-0 btn-outline-primary " onclick="rmForm(this)">-削除</button></span>';
+		Html = '<span><br><input type = "search" id = "add_drop" class="form-control" name = "tagFilter" list = "TagList"><button type="button" class = "border-0 btn-outline-primary" onclick="rmForm(this)">-削除</button></span>';
 	}else{
-		Html = '<span><br><input type = "search" class="form-control" name = "userIDFilter"><button type="button" class = "border-0 btn-outline-primary" onclick="rmForm(this)">-削除</button></span>';
+		Html = '<span><br><input type = "search" id = "add_drop" class="form-control" name = "userIDFilter"><button type="button" class = "border-0 btn-outline-primary" onclick="rmForm(this)">-削除</button></span>';
 	}
 	let tagForm = document.getElementById("tagForm");
 	

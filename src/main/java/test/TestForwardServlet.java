@@ -213,8 +213,7 @@ public class TestForwardServlet extends HttpServlet {
 		}
 		
 		session.setAttribute("pageData", new ExaminationPage(exam,0,bigQuestionList,false));
-//	*/		
-		
+//	*/	
 		String URL = request.getParameter("url");
 		RequestDispatcher dispatcher = request.getRequestDispatcher(URL);
 		dispatcher.forward(request,response);
