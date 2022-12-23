@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.data.Account;
 
 
 /**
@@ -110,7 +109,7 @@ public class TestForwardServlet extends HttpServlet {
 		
 		EntryExam entryExam=null;
 		try {
-			entryExam = new EntryExam("testUsr",3,"testExam",new Date(),new Date(),60,120,"試験概要です",1,examtagList,"pass");
+			entryExam = new EntryExam("testUsr",3,"testExam",new Date(),new Date(),60,120,"試験概要です",1,examtagList,false,0,"pass");
 		} catch (NoSuchAlgorithmException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
