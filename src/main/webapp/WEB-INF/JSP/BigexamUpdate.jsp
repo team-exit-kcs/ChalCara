@@ -20,6 +20,7 @@
 <form action="/ExamPlatform/UpdExam/Question" method="post">
 <input type="hidden" id="examID" name="examID" value=<c:out value="${ExamUpdatePage.exam.examID}" />>
 <h1>問題更新フォーム</h1>
+<c:if test="${not empty msg}"><p class="errorMsg"><c:out value="${msg}"/></p></c:if>
 <div>
 
 <c:forEach var="bq" items="${ExamUpdatePage.bigQuestionList}">
@@ -35,6 +36,7 @@
 <input type="hidden" id="BQNum" name="bigQuestionNum" value="<c:choose><c:when test="${empty ExamUpdatePage.exam}">1</c:when><c:otherwise><c:out value="${ExamUpdatePage.bigQuestionList.size()}"/></c:otherwise></c:choose>">
 <div class = "footer">
           <div class = "botton_area">
+          <button type="button" id = "btn-back" class = "back" onclick="back()">戻る</button>
           <input type="submit" value = "更新" class = "ok"></input>
           </div>
 <span><a href="/ExamPlatform/UpdExam/Overview?examID=<c:out value="${ExamUpdatePage.exam.examID}"/>">試験更新</a></span><br>

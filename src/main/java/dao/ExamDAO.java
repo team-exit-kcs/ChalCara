@@ -245,6 +245,28 @@ public class ExamDAO extends Database {
 		return resultSts;
 	}
 	
+	public boolean updDate(String examID) {
+		boolean resultSts=false;
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "UPDATE " + TABLE + " SET " + UPDATE_DATE + " = ? WHERE " + EXAM_ID + " = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			pStmt.setDate(1, new java.sql.Date(new Date().getTime()));
+			pStmt.setString(2, examID);
+			
+			int result = pStmt.executeUpdate();
+			
+			if(result>0) {
+				resultSts=true;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return resultSts;
+	}
+	
 	public boolean updExam(EntryExam exam) {
 		boolean resultSts=false;
 		TagDAO tagDAO = new TagDAO();

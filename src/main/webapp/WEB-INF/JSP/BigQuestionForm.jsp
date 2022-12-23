@@ -26,14 +26,14 @@
 <div>
 <c:choose>
 	<c:when test="${empty bigQuestion.questionList}">
-		<jsp:include page="./QuestionUpdateForm.jsp">
+		<jsp:include page="./QuestionForm.jsp">
 			<jsp:param name="bigQuestionNum" value = "${bigQuestionNum}" />
 			<jsp:param name="questionNum" value = "1" />
 		</jsp:include>
 	</c:when>
 	<c:otherwise>
 		<c:forEach var="q" items="${bigQuestion.questionList}">
-			<jsp:include page="./QuestionUpdateForm.jsp">
+			<jsp:include page="./QuestionForm.jsp">
  				<jsp:param name="bigQuestionNum" value = "${bigQuestionNum}" />	
 				<jsp:param name="questionNum" value = "${q.questionID}" />
 			</jsp:include>

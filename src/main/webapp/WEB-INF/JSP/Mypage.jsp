@@ -58,22 +58,21 @@
 <c:forEach var="exam" items="${MypageData.examList}" end="${maxCnt}">
  <div class = "exam">
   <img src="./img/exam.png" height="70" width="70" alt="Create exam file">
-<%--ポップアップ表示ＨＴＭＬ --%>
+  <p><a href = "/ExamPlatform/ExaminationServlet?examID=<c:out value="${exam.examID}"/>"><c:out value="${exam.examName}"/></a></p>
+
+<%--ポップアップ表示ＨＴＭＬ
   <label class = "open" for = "pop-up">
   <a href = "/ExamPlatform/ExaminationServlet?examID=<c:out value="${exam.examID}"/>"><c:out value="${exam.examName}"/></a>
   </label>
   <input type="checkbox" id="pop-up">
   <div class="overlay">
 	<div class="window">
-	    <form action = "#" method = "GET">
 		<label class="close" for="pop-up">×</label>
-		<input type = "radio" name = "select" value = "#">試験問題<br>
-		<input type = "radio" name = "select" value = "#">試験概要<br>
-		<input type = "submit" id = "button_1"value = "編集する">
-		</form>
+		<div><a href="/ExamPlatform/UpdExam/Overview?examID=<c:out value="${exam.examID}"/>">試験更新</a></div><br>
+		<div><a href="/ExamPlatform/UpdExam/Question?examID=<c:out value="${exam.examID}"/>">試験問題更新</a></div>
 	</div>
-<%--ポップアップ表示ＨＴＭＬ〆--%>
- </div>
+</div>
+ポップアップ表示ＨＴＭＬ〆--%>
  </div>
 </c:forEach>
 

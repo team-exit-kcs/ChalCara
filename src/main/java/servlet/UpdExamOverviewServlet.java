@@ -127,7 +127,7 @@ public class UpdExamOverviewServlet extends HttpServlet {
 			
 			request.setAttribute("msg", new String("更新が完了しました"));
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/ExamUpdateOverview.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/updExamSuccess.jsp");
 			dispatcher.forward(request, response);
 		}else {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/NotFound.jsp");

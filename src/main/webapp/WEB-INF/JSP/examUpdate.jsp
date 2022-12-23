@@ -24,7 +24,7 @@
 <form action="/ExamPlatform/UpdExam/Question" method="post">
 <input type="hidden" id="examID" name="examID" value=<c:out value="${ExamUpdatePage.exam.examID}" />>
 <h1>問題更新フォーム</h1>
-
+<c:if test="${not empty msg}"><p class="errorMsg"><c:out value="${msg}"/></p></c:if>
 <div class = "Bigquestion">
  <ul class = "B_question">
   <li><h2>小問</h2></li>
@@ -40,7 +40,7 @@
     </c:when>
     <c:otherwise>
         <c:forEach var="q" items="${questionList}">
-         	<jsp:include page="./BigQuestionUpdateForm.jsp">
+         	<jsp:include page="./QuestionUpdateForm.jsp">
 		        <jsp:param name="bigQuestionNum" value = "1" />
 		        <jsp:param name="questionNum" value = "${q.questionID}" />
 	        </jsp:include>
@@ -56,7 +56,7 @@
 <div class = "footer">
           <div class = "botton_area">
           <button type="button" id = "btn-back" class = "back" onclick="back()">戻る</button>
-          <input type="submit" value = "更新確認画面へ" class = "ok"></input>
+          <input type="submit" value = "更新" class = "ok"></input>
           </div>
 <span><a href="/ExamPlatform/UpdExam/Overview?examID=<c:out value="${ExamUpdatePage.exam.examID}"/>">試験更新</a></span><br>  
 </div>
