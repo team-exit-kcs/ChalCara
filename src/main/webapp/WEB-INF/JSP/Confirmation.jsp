@@ -53,7 +53,11 @@
 </p><br>
 <p><c:out value="${ExamCreatePage.entryExam.examTime}" /></p><br>
 <p><c:out value="${ExamCreatePage.entryExam.passingScore}" /></p><br>
+<%-- <textarea id = "area" placeholder = "<c:out value="${ExamCreatePage.entryExam.examExplanation}" />"></textarea><br>--%>
 <p><c:out value="${ExamCreatePage.entryExam.examExplanation}" /></p><br>
+<c:if test = "${ExamCreatePage.entryExam.examExplanation == null}">
+<br>
+</c:if>
 <p><c:choose>
 		<c:when test="${ExamCreatePage.entryExam.useGame}">許可する</c:when>
 		<c:otherwise>許可しない</c:otherwise>
@@ -77,7 +81,7 @@
 			<c:when test="${ExamCreatePage.entryExam.questionFormat == 0}"><p class = "setu">＜設問${Q.questionID}＞</p><br></c:when>
 			<c:otherwise><span>問${Q.questionID}</span><br></c:otherwise>
 		</c:choose>
-		<span>${Q.questionSentence}</span><br>
+		<span class = "s_toi">${Q.questionSentence}</span><br>
 		<span>解説：${Q.questionExplanation}</span><br>
 		<span>配点：${Q.allocationOfPoint}</span><br>
 		<c:forEach var="choices" items="${Q.choicesList}">
