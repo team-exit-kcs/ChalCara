@@ -20,7 +20,7 @@
    <ul class = "nav_list">
       <li><a href = "/ExamPlatform/HomeServlet">ホーム</a>
       <li><a href = "/ExamPlatform/SearchServlet">試験検索</a>
-      <li><a href = "#">ゲーム</a>
+      <li><a href = "/ExamPlatform/Game/Start">ゲーム</a>
       <li><a href = "/ExamPlatform/MypageServlet">マイページ</a>
    </ul> 
 </nav>
