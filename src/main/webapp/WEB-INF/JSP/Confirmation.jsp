@@ -38,7 +38,10 @@
 <p><c:out value="${ExamCreatePage.genreList[(ExamCreatePage.entryExam.genreID - 1)].genreName}" /></p><br>
 <p><c:forEach var="tag" items="${ExamCreatePage.entryExam.tagList}">
 		<span>${tag} </span>
-	</c:forEach>
+   </c:forEach>
+   <c:if test = "${tag == null}">
+   <br>
+   </c:if>
 </p><br>
 <p><c:choose>
 		<c:when test="${ExamCreatePage.entryExam.disclosureRange == 0}">公開</c:when>
@@ -74,7 +77,7 @@
 		<span id = "examcord">${BQ.bigQuestionSentence}</span><br>
 	</c:if>
 	<br>
-	<div class = "d-flex">
+	<div class = "d-flex col-12">
 	<c:forEach var="Q" items="${BQ.questionList}">
 	<div class = "col-4">
 		<c:choose>

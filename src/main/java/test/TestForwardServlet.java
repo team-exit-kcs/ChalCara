@@ -120,7 +120,7 @@ public class TestForwardServlet extends HttpServlet {
 		
 		EntryExam entryExam=null;
 		try {
-			entryExam = new EntryExam("testUsr",3,"testExam",new Date(),new Date(),60,120,"試験概要説明",1,examtagList,false,0,"pass");
+			entryExam = new EntryExam("testUsr",3,"testExam",new Date(),new Date(),60,120,null,1,null,false,0,"pass");
 		} catch (NoSuchAlgorithmException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
