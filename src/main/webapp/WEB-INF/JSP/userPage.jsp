@@ -45,6 +45,7 @@
   <p><a href = "/ExamPlatform/ExaminationServlet?examID=<c:out value="${exam.examID}"/>"><c:out value="${exam.examName}"/></a></p>
  </div>
 </c:forEach>
+<p class = "miru"><a href = "/ExamPlatform/ExamListServlet?userID=<c:out value="${LoginUser.userID}"/>">もっとみる</a></p>
 
 </div>
 </body>

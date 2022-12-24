@@ -10,6 +10,8 @@ import java.util.List;
 
 import model.data.BQCheckAns;
 import model.data.CheckAns;
+import model.data.Choices;
+import model.data.Exam;
 import model.data.UserAns;
 
 public class UserAnsDAO extends Database {
@@ -20,6 +22,11 @@ public class UserAnsDAO extends Database {
 	final private String QUESTION_ID = "QuestionID";
 	final private String USER_ANS = "UserAns";
 	final private String TF = "tf";
+	
+	final private String REPORT_TABLE = "Report";
+	final private String EXAM_ID = "ExamID";
+	final private String USE_INFO = "UseInfo";
+	final private String EXAM_DATE = "ExamDate";
 	
 	public List<UserAns> findUserAns(String userID, int reportID){
 		List<UserAns> userAnsList = new ArrayList<>();
@@ -46,6 +53,33 @@ public class UserAnsDAO extends Database {
 			return null;
 		}
 		return userAnsList;
+	}
+	
+	public int getAnsCount(Exam exam, Choices choices) {
+		int cnt=0;
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "SELECT COUNT(*) AS cnt FROM " + TABLE + " AS UA JOIN " + REPORT_TABLE + " AS R ON UA." + REPORT_ID + " = R." + REPORT_ID +
+					" AND UA." + USER_ID + " = R." + USER_ID + " WHERE R." + EXAM_ID + " = ? AND R." + USE_INFO + " = true AND R." + EXAM_DATE + " >= ? AND UA."
+					+ BIG_QUESTION_ID + " = ? AND UA."+ QUESTION_ID + " = ? AND UA." + USER_ANS + " = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, choices.getExamID());
+			pStmt.setDate(2, new java.sql.Date(exam.getUpdateDate().getTime()));
+			pStmt.setInt(3, choices.getBigQuestionID());
+			pStmt.setInt(4, choices.getQuestionID());
+			pStmt.setInt(5, choices.getChoicesID());
+			
+			ResultSet rs = pStmt.executeQuery();
+			
+			if(rs.next()) {
+				cnt = rs.getInt("cnt");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return cnt;
+		}
+		
+		return cnt;
 	}
 	
 	public boolean setUserAns(String userID, int reportID, List<BQCheckAns> BQCheckAnsList) {

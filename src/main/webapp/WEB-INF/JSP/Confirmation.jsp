@@ -44,12 +44,6 @@
 <p>試験時間：<c:out value="${ExamCreatePage.entryExam.examTime}" /></p><br>
 <p>合格点：<c:out value="${ExamCreatePage.entryExam.passingScore}" /></p><br>
 <p>説明文:<c:out value="${ExamCreatePage.entryExam.examExplanation}" /></p><br>
-<p>受験データの収集:
-	<c:choose>
-		<c:when test="${ExamCreatePage.entryExam.getInfo}">する</c:when>
-		<c:otherwise>しない</c:otherwise>
-	</c:choose>
-</p><br>
 <p>ゲームでの使用:
 	<c:choose>
 		<c:when test="${ExamCreatePage.entryExam.useGame}">許可する</c:when>

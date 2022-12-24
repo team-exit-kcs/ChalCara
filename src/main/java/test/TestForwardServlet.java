@@ -2,10 +2,6 @@ package test;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,15 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import model.data.BigQuestion;
-import model.data.Choices;
-import model.data.EntryExam;
-import model.data.ExamCreatePage;
-import model.data.Genre;
-import model.data.Question;
-
-
 /**
  * Servlet implementation class TestForwardServlet
  */
@@ -66,38 +53,17 @@ public class TestForwardServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
   /*Home
-		String[] name = {"新着","ブクマ","月間"};
 		List<Exam> newExamList = new ArrayList<>();
-		int i=0;
-		newExamList.add(new Exam("", "sato", 1, name[i]+1, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
-		newExamList.add(new Exam("", "hogehogehogehoge", 1, name[i]+2, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
-		newExamList.add(new Exam("", "root", 1, name[i]+3, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
-		newExamList.add(new Exam("", "sudo", 1, name[i]+4, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
-		newExamList.add(new Exam("", "aaaa", 1, name[i]+5, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
-		newExamList.add(new Exam("", "test", 1, name[i]+6, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
-		newExamList.add(new Exam("", "cafe", 1, name[i]+7, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
 		
-		List<Exam> mExamList = new ArrayList<>();
-		i=1;
-		mExamList.add(new Exam("", "sato", 1, name[i]+1, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
-		mExamList.add(new Exam("", "hoge", 1, name[i]+2, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
-		mExamList.add(new Exam("", "root", 1, name[i]+3, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
-		mExamList.add(new Exam("", "sudo", 1, name[i]+4, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
-		mExamList.add(new Exam("", "aaaa", 1, name[i]+5, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
-		mExamList.add(new Exam("", "test", 1, name[i]+6, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
-		mExamList.add(new Exam("", "cafe", 1, name[i]+7, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
+		newExamList.add(new Exam("", "sato", 1, "ITパスポート", new Date(), new Date(),60, 60, "", 1, null,"", 1000, 50));
+		newExamList.add(new Exam("", "hoge", 1, "基本情報技術者試験", new Date(), new Date(),60, 60, "", 1, null,"", 1000, 50));
+		newExamList.add(new Exam("", "root", 1, "’ or 'A' = 'A", new Date(), new Date(),60, 60, "", 1, null,"", 1000, 50));
+		newExamList.add(new Exam("", "sudo", 1, "定番クイズ10選", new Date(), new Date(),60, 60, "", 1, null,"", 1000, 50));
+		newExamList.add(new Exam("", "aaaa", 1, "１", new Date(), new Date(),60, 60, "", 1, null,"", 1000, 50));
+		newExamList.add(new Exam("", "test", 1, "簿記　勘定科目", new Date(), new Date(),60, 60, "", 1, null,"", 1000, 50));
+		newExamList.add(new Exam("", "cafe", 1, "英単語", new Date(), new Date(),60, 60, "", 1, null,"", 1000, 50));
 		
-		List<Exam> bExamList = new ArrayList<>();
-		i=2;
-		bExamList.add(new Exam("", "sato", 1, name[i]+1, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
-		bExamList.add(new Exam("", "hoge", 1, name[i]+2, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
-		bExamList.add(new Exam("", "root", 1, name[i]+3, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
-		bExamList.add(new Exam("", "sudo", 1, name[i]+4, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
-		bExamList.add(new Exam("", "aaaa", 1, name[i]+5, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
-		bExamList.add(new Exam("", "test", 1, name[i]+6, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
-		bExamList.add(new Exam("", "cafe", 1, name[i]+7, new Date(), new Date(),60, 60, "", 1, null,false,1,"", 1000, 50));
-		
-		session.setAttribute("HomeData",new HomeData(newExamList,mExamList,bExamList));
+		session.setAttribute("homeData",newExamList);
 //	*/
 		
 	/*Account
@@ -123,7 +89,7 @@ public class TestForwardServlet extends HttpServlet {
 		request.setAttribute("MypageData", new Mypage(examList,bmList,rpList));
 //	 */
 		
-//	/*ExamOverview
+	/*ExamOverview
 		List<Genre> genreList = new ArrayList<>();
 		for(int i=0;i<10;i++) {
 			genreList.add(new Genre(i,"ジャンル"+Integer.toString(i)));
@@ -139,13 +105,8 @@ public class TestForwardServlet extends HttpServlet {
 			examtagList.add("Tag"+Integer.toString(i));
 		}
 		
-		EntryExam entryExam=null;
-		try {
-			entryExam = new EntryExam("testUsr",3,"testExam",new Date(),new Date(),60,120,"試験概要です",1,examtagList,false,1,"pass");
-		} catch (NoSuchAlgorithmException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
+	    Exam exam = null;
+	    exam = new Exam("exam","testUsr",3,"testExam",new Date(),new Date(),60,120,"試験概要です",1,examtagList, null, 0, 0);
 		
 		List<BigQuestion> bigQuestionList = new ArrayList<>();
 		for(int a=1;a<3;a++) {
@@ -160,10 +121,10 @@ public class TestForwardServlet extends HttpServlet {
 			bigQuestionList.add(new BigQuestion("exam",a,"exam"+a,questionList));
 		}
 		
-		session.setAttribute("ExamCreatePage", new ExamCreatePage(genreList,tagList,entryExam,bigQuestionList));
+		session.setAttribute("ExamUpdatePage",new ExamUpdatePage(genreList,tagList,exam,0,null));
 //	*/
 		
-		/*試験実行 小問
+	/*試験実行 小問
 		List<String> tagList = new ArrayList<>();
 		tagList.add("IT");
 		tagList.add("情報処理技術者試験");
@@ -217,8 +178,9 @@ public class TestForwardServlet extends HttpServlet {
 			bigQuestionList.add(new BigQuestion("37268335dd6931045bdcdf92623ff819a64244b53d0e746d438797349d4da578",a,"exam"+a,questionList));
 		}
 		
-		session.setAttribute("pageData", new ExaminationPage(exam,0,bigQuestionList,false));
-//	*/	
+		session.setAttribute("ExaminationPage", new ExaminationPage(exam,0,bigQuestionList,false));
+//	*/		
+		
 		String URL = request.getParameter("url");
 		RequestDispatcher dispatcher = request.getRequestDispatcher(URL);
 		dispatcher.forward(request,response);

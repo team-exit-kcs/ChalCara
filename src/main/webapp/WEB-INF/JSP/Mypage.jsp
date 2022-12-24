@@ -58,12 +58,26 @@
  <div class = "exam">
   <img src="./img/exam.png" height="70" width="70" alt="Create exam file">
   <p><a href = "/ExamPlatform/ExaminationServlet?examID=<c:out value="${exam.examID}"/>"><c:out value="${exam.examName}"/></a></p>
+
+<%--ポップアップ表示ＨＴＭＬ
+  <label class = "open" for = "pop-up">
+  <a href = "/ExamPlatform/ExaminationServlet?examID=<c:out value="${exam.examID}"/>"><c:out value="${exam.examName}"/></a>
+  </label>
+  <input type="checkbox" id="pop-up">
+  <div class="overlay">
+	<div class="window">
+		<label class="close" for="pop-up">×</label>
+		<div><a href="/ExamPlatform/UpdExam/Overview?examID=<c:out value="${exam.examID}"/>">試験更新</a></div><br>
+		<div><a href="/ExamPlatform/UpdExam/Question?examID=<c:out value="${exam.examID}"/>">試験問題更新</a></div>
+	</div>
+</div>
+ポップアップ表示ＨＴＭＬ〆--%>
  </div>
 </c:forEach>
 
 </div>
 
-<p class = "miru"><a href = "#">もっとみる</a></p>
+<p class = "miru"><a href = "/ExamPlatform/ExamListServlet?userID=<c:out value="${LoginUser.userID}"/>">もっとみる</a></p>
 
 <div class = "mi_root row">
 
@@ -74,7 +88,7 @@
    <p class = "b_exam"><a href = "/ExamPlatform/ExaminationServlet?examID=<c:out value="${bookmark.examID}"/>"><c:out value="${bookmark.examName}"/></a></p>
    </c:forEach>
    </div>
-<p class = "miru_1"><a href = "#">もっとみる</a></p>
+<p class = "miru_1"><a href = "/ExamPlatform/Mypage/BookmarkListServlet">もっとみる</a></p>
 </div>
 
 <div class = "repo col-6 mt-5">
@@ -85,7 +99,7 @@
    <p class = "test"> <a href = "/ExamPlatform/Report?reportID=<c:out value="${report.reportID}"/>">《<fmt:formatDate value="${report.examDate}" pattern="${pattern}"/>》 《<c:out value="${report.reportID}"/>》 《<c:out value="${report.examName}"/>》</a></p>
    </c:forEach>
    </div>
-<p class = "miru_2"><a href = "#">もっとみる</a></p>
+<p class = "miru_2"><a href = "/ExamPlatform/Mypage/ReportListServlet">もっとみる</a></p>
 </div>
 </div>
 </div>

@@ -23,7 +23,7 @@ public class SearchResult implements Serializable {
 	
 	public SearchResult(int page, List<Search> resultList, int searchFormat, String searchWord) {
 		this.page = page;
-		this.maxPage = (resultList.size() / (this.STEP + 1)) + 1;
+		this.maxPage = (int) Math.ceil(resultList.size() / (double)this.STEP);
 		this.resultList = resultList;
 		this.searchFormat = searchFormat;
 		this.searchWord = searchWord;

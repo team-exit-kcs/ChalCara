@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.data.BigQuestion;
+import model.data.Exam;
 import model.data.Question;
 
 public class BigQuestionDAO extends Database {
@@ -43,6 +44,26 @@ public class BigQuestionDAO extends Database {
 			return null;
 		}
 		return bigQuestionList;
+	}
+	
+	public boolean deleteQuestions(Exam exam) {
+		boolean resultSts=false;
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "DELETE FROM " + TABLE + " WHERE " + EXAM_ID + " = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, exam.getExamID());
+			
+			int result = pStmt.executeUpdate();
+			
+			if(result>0) {
+				resultSts=true;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return resultSts;
 	}
 	
 	public boolean setBigQuestion(List<BigQuestion> bigQuestionList) {

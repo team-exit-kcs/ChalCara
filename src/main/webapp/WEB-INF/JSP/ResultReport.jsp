@@ -59,7 +59,7 @@
 </div>
 
 <div class = name_date>
-<p id = name>ユーザ名：<c:out value="${report.userID}"/></p>
+<c:if test ="${not empty LoginUser}"><p id = name>ユーザ名：<c:out value="${report.userID}"/></p></c:if>
 <c:set var="pattern" value="yyyy/MM/dd" />
 
 <p id="date">試験日：<fmt:formatDate value="${report.examDate}" pattern="${pattern}"/></p>
