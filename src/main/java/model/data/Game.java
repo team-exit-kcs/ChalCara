@@ -44,6 +44,10 @@ public class Game implements Serializable {
 	public void enemyAttack(int lebel) {
 		hp -= enemyAttack[lebel];
 	}
+	
+	public void qCntUp() {
+		qCnt++;
+	}
 
 	public int getMaxUserHP() {
 		return maxUserHP;
