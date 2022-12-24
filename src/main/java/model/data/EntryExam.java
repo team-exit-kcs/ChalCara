@@ -43,6 +43,21 @@ public class EntryExam extends BaseExam implements Serializable {
 			this.limitedPassword = null;
 		}
 	}
+	
+	public EntryExam(String examID, String userID, int genreID, String examName, Date createDate, Date updateDate,
+			int passingScore, int examTime, String examExplanation, int disclosureRange, List<String> tagList,
+			boolean useGame, int questionFormat, String limitedPassword) throws NoSuchAlgorithmException {
+		super(examID, userID, genreID, examName, createDate, updateDate, passingScore, examTime, examExplanation,
+				disclosureRange, tagList, useGame, questionFormat);
+		
+		Hash hash = new Hash();
+		DisclosureRangeLogic DR = new DisclosureRangeLogic();
+		if(DR.isLimited(disclosureRange)) {
+			this.limitedPassword = hash.createHash(limitedPassword);
+		}else {
+			this.limitedPassword = null;
+		}
+	}
 
 	public EntryExam(String userID, int genreID, String examName, Date createDate, Date updateDate,
 			int passingScore, int examTime, String examExplanation, int disclosureRange, List<String> tagList,

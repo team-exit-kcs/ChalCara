@@ -225,6 +225,85 @@ public class ExamDAO extends Database {
 		return examIDList;
 	}
 	
+	public boolean deleteExam(Exam exam) {
+		boolean resultSts=false;
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "DELETE FROM " + TABLE + " WHERE " + EXAM_ID + " = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, exam.getExamID());
+			
+			int result = pStmt.executeUpdate();
+			
+			if(result>0) {
+				resultSts=true;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return resultSts;
+	}
+	
+	public boolean updDate(String examID) {
+		boolean resultSts=false;
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "UPDATE " + TABLE + " SET " + UPDATE_DATE + " = ? WHERE " + EXAM_ID + " = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			pStmt.setDate(1, new java.sql.Date(new Date().getTime()));
+			pStmt.setString(2, examID);
+			
+			int result = pStmt.executeUpdate();
+			
+			if(result>0) {
+				resultSts=true;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return resultSts;
+	}
+	
+	public boolean updExam(EntryExam exam) {
+		boolean resultSts=false;
+		TagDAO tagDAO = new TagDAO();
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "UPDATE " + TABLE + " SET " + GENRE_ID + " = ?, " + EXAM_NAME + " = ?, " + UPDATE_DATE + " = ?, "
+					+ PASSING_SCORE + " = ?, " + EXAM_TIME + " = ?, " + EXAM_EXPLANATION + " = ?, " + DISCLOSURE_RANGE + " = ?, "
+					+ LIMITED_PASS + " = ?, " + USE_GAME + " = ?, " + FORMAT + " = ? WHERE " + EXAM_ID + " = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			pStmt.setInt(1, exam.getGenreID());
+			pStmt.setString(2, exam.getExamName());
+			pStmt.setDate(3, new java.sql.Date(exam.getUpdateDate().getTime()));
+			pStmt.setInt(4, exam.getPassingScore());
+			pStmt.setInt(5, exam.getExamTime());
+			pStmt.setString(6, exam.getExamExplanation());
+			pStmt.setInt(7, exam.getDisclosureRange());
+			pStmt.setString(8, exam.getLimitedPassword());
+			pStmt.setBoolean(9, exam.isUseGame());
+			pStmt.setInt(10, exam.getQuestionFormat());
+			pStmt.setString(11, exam.getExamID());
+			
+			int result = pStmt.executeUpdate();
+			
+			tagDAO.deleteTags(exam.getExamID());
+			boolean tagResult = tagDAO.setTag(exam.getExamID(),exam.getTagList());
+			
+			if(result>0 && tagResult) {
+				resultSts=true;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return resultSts;
+	}
+	
 	public boolean setExam(EntryExam exam) {
 		boolean resultSts=false;
 		TagDAO tagDAO = new TagDAO();

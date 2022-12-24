@@ -32,12 +32,13 @@
 		</span>
 	</div>
 	<br>
-	
+	<c:if test="${LoginUser.userID == pageData.exam.userID}">
 	<div class = "createUser" style="text-align: right;">
-		<span>
-			<c:if test="${LoginUser.userID == pageData.exam.userID}"><a href="/ExamPlatform/ExamStatsServlet?examID=<c:out value="${pageData.exam.examID}"/>">統計</a></c:if>
-		</span>
+		<span><a href="/ExamPlatform/ExamStatsServlet?examID=<c:out value="${pageData.exam.examID}"/>">統計</a></span><br>
+		<span><a href="/ExamPlatform/UpdExam/Overview?examID=<c:out value="${pageData.exam.examID}"/>">試験更新</a></span><br>
+		<span><a href="/ExamPlatform/UpdExam/Question?examID=<c:out value="${pageData.exam.examID}"/>">試験問題更新</a></span>
 	</div>
+	</c:if>
 	<br>
 	
 	<div style="text-align: center">

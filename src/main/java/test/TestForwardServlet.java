@@ -2,6 +2,9 @@ package test;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,9 +13,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.data.Account;
 
-
+import model.data.BigQuestion;
+import model.data.Choices;
+import model.data.Exam;
+import model.data.ExamUpdatePage;
+import model.data.Genre;
+import model.data.Question;
 /**
  * Servlet implementation class TestForwardServlet
  */
@@ -92,7 +99,7 @@ public class TestForwardServlet extends HttpServlet {
 		request.setAttribute("MypageData", new Mypage(examList,bmList,rpList));
 //	 */
 		
-	/*ExamOverview
+//	/*ExamOverview
 		List<Genre> genreList = new ArrayList<>();
 		for(int i=0;i<10;i++) {
 			genreList.add(new Genre(i,"ジャンル"+Integer.toString(i)));
@@ -108,13 +115,16 @@ public class TestForwardServlet extends HttpServlet {
 			examtagList.add("Tag"+Integer.toString(i));
 		}
 		
-		EntryExam entryExam=null;
+		/*EntryExam entryExam=null;
 		try {
 			entryExam = new EntryExam("testUsr",3,"testExam",new Date(),new Date(),60,120,"試験概要です",1,examtagList,"pass");
 		} catch (NoSuchAlgorithmException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
+		*/
+	    Exam exam = null;
+	    exam = new Exam("exam","testUsr",3,"testExam",new Date(),new Date(),60,120,"試験概要です",1,examtagList, null, 0, 0);
 		
 		List<BigQuestion> bigQuestionList = new ArrayList<>();
 		for(int a=1;a<3;a++) {
@@ -129,10 +139,10 @@ public class TestForwardServlet extends HttpServlet {
 			bigQuestionList.add(new BigQuestion("exam",a,"exam"+a,questionList));
 		}
 		
-		session.setAttribute("ExamCreatePage", new ExamCreatePage(genreList,tagList,entryExam,0,bigQuestionList));
+		session.setAttribute("ExamUpdatePage",new ExamUpdatePage(genreList,tagList,exam,0,null));
 //	*/
 		
-		/*試験実行 小問
+	/*試験実行 小問
 		List<String> tagList = new ArrayList<>();
 		tagList.add("IT");
 		tagList.add("情報処理技術者試験");
@@ -186,7 +196,7 @@ public class TestForwardServlet extends HttpServlet {
 			bigQuestionList.add(new BigQuestion("37268335dd6931045bdcdf92623ff819a64244b53d0e746d438797349d4da578",a,"exam"+a,questionList));
 		}
 		
-		session.setAttribute("pageData", new ExaminationPage(exam,0,bigQuestionList,false));
+		session.setAttribute("ExaminationPage", new ExaminationPage(exam,0,bigQuestionList,false));
 //	*/		
 		
 		String URL = request.getParameter("url");
