@@ -13,7 +13,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <link rel = "stylesheet" href= "/ExamPlatform/css/Confimation.css">
 <jsp:include page="./title.jsp" />
 </head>
@@ -74,7 +74,7 @@
 		<span id = "examcord">${BQ.bigQuestionSentence}</span><br>
 	</c:if>
 	<br>
-	<div class = "d-flex justify-content-start">
+	<div class = "d-flex">
 	<c:forEach var="Q" items="${BQ.questionList}">
 	<div class = "col-4">
 		<c:choose>
@@ -82,6 +82,7 @@
 			<c:otherwise><span>問${Q.questionID}</span><br></c:otherwise>
 		</c:choose>
 		<span class = "s_toi">${Q.questionSentence}</span><br>
+		<div class = "lh-lg">
 		<span>解説：${Q.questionExplanation}</span><br>
 		<span>配点：${Q.allocationOfPoint}</span><br>
 		<c:forEach var="choices" items="${Q.choicesList}">
@@ -91,6 +92,7 @@
 			<span>${choices.choicesID}：${choices.choices}</span><br>
 		</c:forEach>
 		<br>
+		</div>
 	</div>
 	</c:forEach>
 	</div>
@@ -99,7 +101,7 @@
 <div class = "botton_area d-flex justify-content-center row">
 
 <form action="/ExamPlatform/ExamCreateServlet/Confirmation" method="post">
-<div class = "row">
+<div class = "row justify-content-center">
 <div class = "col-auto">
 	<button type="button" class = "btn btn-outline-primary btn-block" id = "btn-back" class = "back" onclick="location.href='/ExamPlatform/ExamCreateServlet'">戻る</button>
 </div>
