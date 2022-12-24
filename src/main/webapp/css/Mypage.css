@@ -1,10 +1,6 @@
 @charset "UTF-8";
 
-main {
-	grid-template-columns: 1fr 1fr 1fr;
-}
-
-.mi_1 {
+#mi {
     text-align: center;
     font-family: serif;
     margin:1.5em 25.5em;
@@ -21,7 +17,6 @@ main {
 .root_1 {
     display: flex;
     margin-left: 60px;
-    width: 100%;
     margin:4em 0;
 }
 
@@ -29,12 +24,9 @@ main {
     font-family: serif;
     font-size: 20px;
     font-weight: bold;
-    margin-left: 9.5em;
-    margin-right: 5em;
 }
 
 .r1_item_2 {
-    vertical-align: middle;
     font-family: serif;
     font-size: 20px;
     font-weight: bold;
@@ -45,16 +37,9 @@ main {
     font-family: serif;
     font-size: 20px;
     font-weight: bold;
-    margin-left: 5em;
     border:3px solid #000000;
     border-radius:10px;
-    padding: 40px 10em;
-}
-
-.Create_box{
-	position: relative;
-	font-family: serif;
-	width: 1500px;
+    padding: 40px 5em;
 }
 
 .mi_2 {
@@ -71,10 +56,51 @@ main {
 	text-overflow: ellipsis;
 }
 
-.Create_box , .Create_exam{
+.Create_box{
 	text-align: right;
 	font-size: 24px;
+	font-family: serif;
+}
+
+.Create_exam{
+	text-align: right;
 	margin-right: 200px;
+	--color: #60c2e5;
+    cursor: pointer;
+    padding: 1rem 2rem;
+    border: 1px solid var(--color);
+    border-radius: 10px;
+    background-image: linear-gradient(135deg, var(--color) 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 300%;
+    color: var(--color);
+    text-decoration: none;
+    transition: all 1s;
+}
+
+.Create_exam:hover {
+    background-position: 0;
+    color: #fff;
+}
+
+.UpdAccount{
+	--color: #60c2e5;
+    cursor: pointer;
+    margin: 0.5rem;
+    padding: 1rem 2rem;
+    border: 1px solid var(--color);
+    border-radius: 10px;
+    background-image: linear-gradient(135deg, var(--color) 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 300%;
+    color: var(--color);
+    text-decoration: none;
+    transition: all 1s;
+}
+
+.UpdAccount:hover {
+    background-position: 0;
+    color: #fff;
 }
 
 .box_1 {
@@ -100,15 +126,38 @@ main {
 	margin-top: 1.5em;
 	margin-right: 12em;
 	margin-bottom: 3em;
+	/*margin-left:75%;
+	--color: #60c2e5;
+    cursor: pointer;
+    padding: 1rem 2rem;
+    border: 1px solid var(--color);
+    border-radius: 10px;
+    background-image: linear-gradient(135deg, var(--color) 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 300%;
+    color: var(--color);
+    text-decoration: none;
+    transition: all 1s;*/
 	
 }
 
-.mi_root{
-	display: flex;
-	justify-content: space-between;
-	margin-bottom: 50px;
+.miru:hover {
+    background-position: 0;
+    color: #fff;
 }
 
+.miru_1 {
+	text-align: right;
+	font-size: 18px;
+	margin: 15px 15%;
+}
+
+.miru_2 {
+	text-align: right;
+	font-size: 18px;
+	margin: 15px 15%;
+}
+/*
 .book{
 	text-align:center;
 	width: 50%;
@@ -177,14 +226,47 @@ main {
 	width: 50%;
 	margin-left: 16em;
 	text-align: right;
+	font-size: 26px;
 }
 
 .miru_r {
-	width: 50%;
+	width: 200%;
 	margin-left: 16em;
 	text-align: right;
+	font-size: 26px;
+}
+*/
+
+.b_box{
+	border:3px solid #000000;
+	border-radius:10px;
+    padding: 5em 10px;
+    margin: 0 15%
 }
 
+.b_mi{
+	text-align:center;
+	font-family: serif;
+	border-bottom:2px solid #000000;
+	margin-right: 45%;
+	margin-left: 15%;
+	margin-bottom: 50px;
+}
+
+.r_mi{
+	text-align:center;
+	font-family: serif;
+	border-bottom:2px solid #000000;
+	margin-right: 50%;
+	margin-left: 15%;
+	margin-bottom: 50px;
+}
+.r_box{
+	border:3px solid #000000;
+	border-radius:10px;
+    padding: 5em 15px;
+    margin: 0 15%
+}
 .test::after {
 	content:"/";
 	padding-left:20px;

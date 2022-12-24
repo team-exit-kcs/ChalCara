@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+#main_box{
+	margin-top: 2%;
+	margin-bottom: 2%;
+	border:4px solid #e8e8e8;
+	border-radius:10px;
+}
+
+#add_drop:focus{
+	outline: none;
+}
+
+#open {
+  /* display: list-item;以外を指定してデフォルトの三角形アイコンを消します */
+  display: block;
+  position: relative;
+  display: block; /* 矢印を消す */
+  padding: 10px 10px 10px 30px; /* アイコンの余白を開ける */
+  cursor: pointer; /* カーソルをポインターに */
+  font-weight: bold;
+  background-color: #e2f0f7;
+  transition: 0.2s;
+}
+
+#open::-webkit-details-marker {
+  /* Safariで表示されるデフォルトの三角形アイコンを消します */
+  display: none;
+}
+
+"open":hover {
+  cursor: pointer; /* カーソルを指マークに */
+  background-color: #ccebfb;
+}
+
+#open:before,
+#open:after {
+  content: "";
+  margin: auto 0 auto 10px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+#open:before {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  background-color: #1da1ff;
+}
+#open:after {
+  left: 6px;
+  width: 5px;
+  height: 5px;
+  border: 4px solid transparent;
+  border-left: 5px solid #fff;
+  box-sizing: border-box;
+  transition: .1s;
+}
+
+details[open] .details-content {
+  animation: fadeIn 0.5s ease;
+}
+
+details[open] #open:after {
+  transform: rotate(90deg); /* アイコンを回転 */
+  left: 4px; /* 位置を調整 */
+  top: 5px; /* 位置を調整 */
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0; /* 透明 */
+    transform: translateY(-10px); /* 上から表示 */
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}

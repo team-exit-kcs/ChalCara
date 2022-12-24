@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <title>試験概要</title>
 </head>
 <body>
@@ -32,12 +34,13 @@
 		</span>
 	</div>
 	<br>
-	
+	<c:if test="${LoginUser.userID == pageData.exam.userID}">
 	<div class = "createUser" style="text-align: right;">
-		<span>
-			<c:if test="${LoginUser.userID == pageData.exam.userID}"><a href="/ExamPlatform/ExamStatsServlet?examID=<c:out value="${pageData.exam.examID}"/>">統計</a></c:if>
-		</span>
+		<span><a href="/ExamPlatform/ExamStatsServlet?examID=<c:out value="${pageData.exam.examID}"/>">統計</a></span><br>
+		<span><a href="/ExamPlatform/UpdExam/Overview?examID=<c:out value="${pageData.exam.examID}"/>">試験更新</a></span><br>
+		<span><a href="/ExamPlatform/UpdExam/Question?examID=<c:out value="${pageData.exam.examID}"/>">試験問題更新</a></span>
 	</div>
+	</c:if>
 	<br>
 	
 	<div style="text-align: center">
