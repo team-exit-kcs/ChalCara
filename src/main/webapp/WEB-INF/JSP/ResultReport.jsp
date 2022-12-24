@@ -47,7 +47,7 @@
  </c:otherwise>
 </c:choose>
 
-<p id = ten><c:out value="${report.score}"/></p>
+<p id = ten class = "cord"><c:out value="${report.score}"/>点</p>
 </div>
 
 <div class = name_date>
