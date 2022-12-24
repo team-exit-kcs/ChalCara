@@ -1,177 +1,36 @@
 @charset "UTF-8";
 
-main {
-  position:relative;
-  margin: 0 auto;
-  width: 800px;
-  /* フォームの輪郭 */
-  padding: 1em;
-  border: 2px solid #000;
-  margin: 40px 21em;
-  
+#main_box{
+	margin-top: 2%;
+	margin-bottom: 2%;
+	border:4px solid #e8e8e8;
+	border-radius:10px;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-main li + li {
-  margin-top: 1em;
-}
-
-h1{
+#mi {
 	font-family: serif;
-	font-size: 36px;
 	border-bottom: 2px solid #000000;
-	margin: 1em 6em 0 6em;;
-}
-
-div#header{
-	display:inline-block;
-	text-align:center;
-	position:relative;
-	left: 110px;
+	margin: 10% 15%;
 }
 
 #insatu{
-	position:relative;
-	left: 220px;
-	bottom: 45px;
-	font-family: serif;
-	font-weight: bold;
-	font-size: 26px;
+	margin-top:10%;
 }
 
-#Examname{
-	text-align: center;
-	font-family: serif;
-	font-size: 36px;
-	font-weight: bold;
-}
-
-div.gouhi_ten{
-	display:inline-block;
-	text-align:center;
-	position:relative;
-	left: 160px;
-	bottom: 50px;
+.cord{
+	font-size:22px;
 }
 
 #gouhi{
+	font-size:50px;
 	font-family: serif;
-	font-size: 50px;
-	color: #ff0000;
-	border-bottom: 7px solid #ff0000;
-}
-
-#ten{
-	position:relative;
-	left: 400px;
-	bottom: 110px;
-	font-family: serif;
-	font-weight: bold;
-	font-size: 40px;
-}
-
-div.name_date{
-	display:inline-block;
-	text-align:center;
-	position:relative;
-	left: 20px;
-}
-
-#name{
-	font-family: serif;
-	font-size: 30px;
-	font-weight: bold;
-	position:relative;
-	top: 20px;
-}
-
-#date{
-	position:relative;
-	left: 400px;
-	bottom: 60px;
-	font-family: serif;
-	font-size: 30px;
-	font-weight: bold;
+	color:red;
 }
 
 #syousai{
-	position:relative;
-	top: 20px;
-	left: 365px;
-	font-family: serif;
-	font-size: 26px;
-	font-weight: bold;
+	margin:3% 0;
 }
 
-div.replay_back{
-	display:inline-block;
-	text-align:center;
-	position:relative;
-	left: 80px;
-	margin: 1.5em 0;
+.button_area{
+	margin: 2% 0;
 }
-
-#replay{
-	font-family: serif;
-	font-weight: bold;
-	font-size: 26px;
-}
-
-#back{
-	position:relative;
-	left: 360px;
-	font-family: serif;
-	font-weight: bold;
-	font-size: 26px;
-}
-
-label {
-  /* 大きさと配置を統一 */
-  display: inline-block;
-  width:  100px;
-  text-align: right;
-}
-
-input[type=text],
-textarea {
-  /* すべてのテキストフィールドのフォント設定を一致させる
-     既定で、 textarea には等幅フォントが設定されている */
-  font: 1em sans-serif;
-  width: 200px;
-
-  /* テキストフィールドの大きさを統一 */
-  width: 300px;
-  box-sizing: border-box;
-
-  /* フォームフィールド境界に合わせる */
-  border: 1px solid #999;
-}
-
-input:focus,
-textarea:focus {
-  /* フォーカスのある要素を強調する */
-  border-color: #000;
-}
-
-textarea {
-  /* 複数行のテキストフィールドをラベルに揃える */
-  vertical-align: top;
-
-  /* テキスト入力に十分な空間を与える */
-  height: 5em;
-}
-
-.button {
-  /* ボタンを他のテキストフィールドと同じ場所に置く */
-  padding-left: 90px; /* label 要素と同じサイズ */
-}
-
-button {
-  /* このマージンは、ラベルとテキストフィールドの間のスペースと
-     おおよそ同じスペースを表す */
-  margin-left: .5em;

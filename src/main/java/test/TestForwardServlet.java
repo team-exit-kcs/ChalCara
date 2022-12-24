@@ -2,10 +2,6 @@ package test;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,13 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import model.data.BigQuestion;
-import model.data.Choices;
-import model.data.EntryExam;
-import model.data.ExamCreatePage;
-import model.data.Genre;
-import model.data.Question;
 
 
 /**
@@ -84,25 +73,25 @@ public class TestForwardServlet extends HttpServlet {
 //	*/		
 		
 
-	/*Mypage		
- 		List<String> examList = new ArrayList<>();
+    /*Mypage		
+ 		List<Exam> examList = new ArrayList<>();
 		for(int i=0;i<3;i++) {
 			examList.add("testExam"+Integer.toString(i));
 		}
 		
-		List<String> bmList = new ArrayList<>();
+		List<Exam> bmList = new ArrayList<>();
 		for(int i=0;i<10;i++) {
 			bmList.add("testExam"+Integer.toString(i));
 		}
 		
 		List<Report> rpList = new ArrayList<>();
-		rpList.add(new Report(1,"testUsr","testExam",new Date(),new Date(), 95,0.95,"ExamTest",60));
-		rpList.add(new Report(2000,"testUsr","testExam2000",new Date(),new Date(), 95,0.95,"ExamTest",60));
+		rpList.add(new Report(1,"testUsr","testExam",new Date(),95,1,"ExamTest",60,10,false,false));
+		rpList.add(new Report(2000,"testUsr","testExam2000",new Date(),95,0.95,"ExamTest",60,10,false,false));
 		
 		request.setAttribute("MypageData", new Mypage(examList,bmList,rpList));
 //	 */
 		
-//	/*ExamOverview
+	/*ExamOverview
 		List<Genre> genreList = new ArrayList<>();
 		for(int i=0;i<10;i++) {
 			genreList.add(new Genre(i,"ジャンル"+Integer.toString(i)));
