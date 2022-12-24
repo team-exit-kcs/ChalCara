@@ -1,0 +1,27 @@
+@charset "UTF-8";
+#main{
+	padding: 0 2%;
+}
+#main_box2{
+	margin-top: 2%;
+	margin-bottom: 2%;
+	padding: 1% 5%;
+	border:4px solid #e8e8e8;
+	border-radius:10px;
+}
+
+#pagenation li {
+display: inline;
+padding:10px 15px;
+border:1px #ccc solid;color:#000053;
+border-radius: 5px / 5px;
+}
+
+#pagenation li:hover {
+	cursor: pointer;
+	background-color: #e2f0f7;
+}
+
+#cord {
+	font-size: 26px;
+}
