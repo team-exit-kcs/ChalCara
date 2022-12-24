@@ -1,18 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
-<%@ page import = "model.data.ExamCreatePage" %>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import = "model.data.ExaminationPage" %>
+<%@ page import = "model.data.ExamCreatePage" %>
 <%@ page import = "model.data.BigQuestion" %>
 <%@ page import = "model.data.Question" %>
 <%@ page import = "java.util.ArrayList" %>
 <%@ page import = "java.util.List" %>
 
-<!DOCTYPE html>
-
 <c:set var="bigQuestionNum" value="${param.bigQuestionNum}" />
-<c:set var="bigQuestion" value="${ExamCreatePage.bigQuestionList[bigQuestionNum-1]}" />
+<c:set var="bigQuestion" value="${ExamUpdatePage.bigQuestionList[bigQuestionNum-1]}" />
 
 <%-- 大問 --%>
 <div class = "Bigquestion">
@@ -26,21 +24,21 @@
 <div>
 <c:choose>
 	<c:when test="${empty bigQuestion.questionList}">
-		<jsp:include page="./QuestionForm.jsp">
+		<jsp:include page="./QuestionUpdateForm.jsp">
 			<jsp:param name="bigQuestionNum" value = "${bigQuestionNum}" />
 			<jsp:param name="questionNum" value = "1" />
 		</jsp:include>
 	</c:when>
 	<c:otherwise>
 		<c:forEach var="q" items="${bigQuestion.questionList}">
-			<jsp:include page="./QuestionForm.jsp">
+			<jsp:include page="./QuestionUpdateForm.jsp">
  				<jsp:param name="bigQuestionNum" value = "${bigQuestionNum}" />	
 				<jsp:param name="questionNum" value = "${q.questionID}" />
 			</jsp:include>
 		</c:forEach>
 	</c:otherwise>
 </c:choose>
- 
+
  <span><br><button type="button" onclick="addQuestionForm(this)">＋設問を追加</button></span>
 </div>
 

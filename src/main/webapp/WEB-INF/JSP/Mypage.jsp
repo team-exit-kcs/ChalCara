@@ -21,6 +21,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" href="./css/Mypage.css">
+<link rel="stylesheet" href="./css/examEdit.css">
 <link rel="stylesheet" href="./css/ress.css">
 <jsp:include page="./title.jsp" />
 </head>
@@ -58,6 +59,20 @@
  <div class = "exam">
   <img src="./img/exam.png" height="70" width="70" alt="Create exam file">
   <p><a href = "/ExamPlatform/ExaminationServlet?examID=<c:out value="${exam.examID}"/>"><c:out value="${exam.examName}"/></a></p>
+
+<%--ポップアップ表示ＨＴＭＬ
+  <label class = "open" for = "pop-up">
+  <a href = "/ExamPlatform/ExaminationServlet?examID=<c:out value="${exam.examID}"/>"><c:out value="${exam.examName}"/></a>
+  </label>
+  <input type="checkbox" id="pop-up">
+  <div class="overlay">
+	<div class="window">
+		<label class="close" for="pop-up">×</label>
+		<div><a href="/ExamPlatform/UpdExam/Overview?examID=<c:out value="${exam.examID}"/>">試験更新</a></div><br>
+		<div><a href="/ExamPlatform/UpdExam/Question?examID=<c:out value="${exam.examID}"/>">試験問題更新</a></div>
+	</div>
+</div>
+ポップアップ表示ＨＴＭＬ〆--%>
  </div>
 </c:forEach>
 

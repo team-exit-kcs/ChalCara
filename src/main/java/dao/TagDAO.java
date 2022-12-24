@@ -84,6 +84,18 @@ public class TagDAO extends Database {
 		return examList;
 	}
 	
+	public void deleteTags(String examID) {
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "DELETE FROM " + TABLE + " WHERE " + EXAM_ID + " = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, examID);
+			
+			pStmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public boolean setTag(String examID,List<String> tagList) {
 		if(tagList == null || tagList.isEmpty()) {
 			return true;
