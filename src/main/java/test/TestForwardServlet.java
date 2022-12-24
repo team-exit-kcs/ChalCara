@@ -2,9 +2,6 @@ package test;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,13 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import model.data.BigQuestion;
-import model.data.Choices;
-import model.data.Exam;
-import model.data.ExamUpdatePage;
-import model.data.Genre;
-import model.data.Question;
 /**
  * Servlet implementation class TestForwardServlet
  */
@@ -99,7 +89,7 @@ public class TestForwardServlet extends HttpServlet {
 		request.setAttribute("MypageData", new Mypage(examList,bmList,rpList));
 //	 */
 		
-//	/*ExamOverview
+	/*ExamOverview
 		List<Genre> genreList = new ArrayList<>();
 		for(int i=0;i<10;i++) {
 			genreList.add(new Genre(i,"ジャンル"+Integer.toString(i)));
@@ -115,14 +105,6 @@ public class TestForwardServlet extends HttpServlet {
 			examtagList.add("Tag"+Integer.toString(i));
 		}
 		
-		/*EntryExam entryExam=null;
-		try {
-			entryExam = new EntryExam("testUsr",3,"testExam",new Date(),new Date(),60,120,"試験概要です",1,examtagList,"pass");
-		} catch (NoSuchAlgorithmException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
-		*/
 	    Exam exam = null;
 	    exam = new Exam("exam","testUsr",3,"testExam",new Date(),new Date(),60,120,"試験概要です",1,examtagList, null, 0, 0);
 		

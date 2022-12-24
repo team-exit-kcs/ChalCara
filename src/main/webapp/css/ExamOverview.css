@@ -1,73 +1,196 @@
 @charset "UTF-8";
 
-body {
-    text-align: center;
-    position: relative;
-    font-family: serif;
-}
-
-div.main {
-	position: absolute;
-	top:100%;
-	left:48%;
-	transform: translateY(10%) translateX(-48%);
-	border:3px solid #000000;
+main {
+	grid-template-columns: 1fr 1fr 1fr;
 }
 
 .mi_1 {
-	text-align: center;
-	color: #000;
-	font-size: 30px;
+    text-align: center;
+    font-family: serif;
+    margin:1.5em 25.5em;
+    border-bottom: 2px solid #000000;
+    font-weight: bold;
+    font-size: 26px;
+    white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/*プロフィ－ル設定*/
+
+.root_1 {
+    display: flex;
+    margin-left: 60px;
+    width: 100%;
+    margin:4em 0;
+}
+
+.r1_item_1 {
+    font-family: serif;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 9.5em;
+    margin-right: 5em;
+}
+
+.r1_item_2 {
+    vertical-align: middle;
+    font-family: serif;
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 5em;
+}
+
+.r1_item_3 {
+    font-family: serif;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 5em;
+    border:3px solid #000000;
+    border-radius:10px;
+    padding: 40px 10em;
+}
+
+.Create_box{
+	position: relative;
+	font-family: serif;
+	width: 1500px;
+}
+
+.mi_2 {
+	text-align:center;
+    font-weight: bold;
+    font-size: 26px;
+    border-bottom: 2px solid #000000;
+    margin-left: 7.0em;
+    margin-right: 43.0em;
+    margin-top: 2.5em;
+    margin-bottom: 40px;
+    white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.Create_box , .Create_exam{
+	text-align: right;
+	font-size: 24px;
+	margin-right: 200px;
+}
+
+.box_1 {
+	display: flex;
+	border:3px solid #000000;
+    padding: 25px 50px;
+    margin: 1em 12.5em;
+    background-color:#ffffff;
+    border-radius:10px;
+}
+
+.exam img {
+	margin: 0 10px;
+}
+.exam p a{
+	margin-left: 20px;
+	font-size: 16px;
+}
+
+.miru {
+	text-align: right;
+	font-size: 18px;
+	margin-top: 1.5em;
+	margin-right: 12em;
+	margin-bottom: 3em;
+	
+}
+
+.mi_root{
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 50px;
+}
+
+.book{
+	text-align:center;
+	width: 50%;
 	border-bottom: 2px solid #000000;
-	margin: 1.5em 9em;
+	font-family: serif;
+	font-size: 20px;
+	margin: 0 12em;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
 
-#pass_reset{
-	position:relative;
-	bottom:10px;
-}
-
-label {
-	font-size:20px;
-}
-
-input{
+.repo{
+	text-align:center;
+	width: 50%;
+	border-bottom: 2px solid #000000;
 	font-family: serif;
-	border: 2px solid darkgray;
-	margin-bottom: 16px;
+	font-size: 20px;
+	margin: 0 12em;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
-textarea {
-	font-family: serif;
-    width:40%;
-    height:100px;
-    vertical-align: text-top;
+.box_root{
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 12.5px;
 }
 
-.btn-remove {
-    display: none;
+.b_box{
+	width: 50%;
+	border:3px solid #000000;
+    padding: 5em 15px;
+    margin-left: 12em;
+    margin-right: 12em;
+    background-color:#ffffff;
+    border-radius:10px;
 }
 
-div.tag {
+.b_exam{
+	vertical-align: top;
+	font-size: 16px;
 }
 
-.footer{
-	margin-top: 40px;
+.r_box {
+	width: 50%;
+	border: 3px solid #000000;
+    padding: 5em 15px;
+    margin-left: 12em;
+    margin-right: 12em;
+    background-color:#ffffff;
+    border-radius:10px;
+    white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
-.back{
-	position:relative; 
-	font-family: serif;
-	font-size:22px;
-	margin-right: 100px;
+.miru_br {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 50px;
 }
 
-.ok {
-	position:relative;
-	font-family: serif;
-	font-size:22px;
-	margin-left: 100px;
+.miru_b {
+	width: 50%;
+	margin-left: 16em;
+	text-align: right;
+}
+
+.miru_r {
+	width: 50%;
+	margin-left: 16em;
+	text-align: right;
+}
+
+.test::after {
+	content:"/";
+	padding-left:20px;
+	color:#000;
+}
+
+.test::last-child::after{
+	content:"";
 }
