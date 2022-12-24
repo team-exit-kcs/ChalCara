@@ -225,6 +225,26 @@ public class ExamDAO extends Database {
 		return examIDList;
 	}
 	
+	public List<Exam> findGameExam() {
+		List<Exam> examList = new ArrayList<>();
+		
+		try(Connection conn = DriverManager.getConnection(super.JDBC_URL, super.DB_USER, super.DB_PASS)){
+			String sql = "SELECT "+ EXAM_ID + " FROM " + TABLE + " WHERE " + USE_GAME + " = true";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			ResultSet rs = pStmt.executeQuery();
+			
+			while(rs.next()) {
+				String examID = rs.getString(EXAM_ID);
+				examList.add(this.findExamInfo(examID));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return examList;
+	}
+	
 	public boolean deleteExam(Exam exam) {
 		boolean resultSts=false;
 		

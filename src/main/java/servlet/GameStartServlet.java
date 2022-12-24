@@ -1,6 +1,10 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,7 +12,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import model.StartGameLogic;
+import model.data.Game;
 import model.data.SearchPage;
 
 /**
@@ -40,7 +47,35 @@ public class GameStartServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 問題選択処理
+		StartGameLogic gsl = new StartGameLogic();
+		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+		
+		List<Integer> genreIDFilterList = new ArrayList<>();
+		List<String> tagFilterList = new ArrayList<>();
+		
+		if(request.getParameterValues("GenreFilter") != null) {
+			List<String> tmpGenreIDFilterList = new ArrayList<>(Arrays.asList(request.getParameterValues("GenreFilter")));
+			genreIDFilterList = tmpGenreIDFilterList.stream().map(s -> Integer.parseInt(s)).collect(Collectors.toList());
+		}
+		if(!(request.getParameterValues("tagFilter").length == 1 && request.getParameterValues("tagFilter")[0].isEmpty())) {
+			tagFilterList = new ArrayList<>(Arrays.asList(request.getParameterValues("tagFilter")));
+			tagFilterList.removeAll(Arrays.asList("",null));
+		}
+		
+		Game game = gsl.execute(genreIDFilterList, tagFilterList);
+		if(game.getQuestionList().isEmpty()) {
+			String msg = "一致する問題がありません。問題を選択し直してください。";
+			request.setAttribute("msg", msg);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/gameStart.jsp");
+			dispatcher.forward(request, response);
+		}else {
+			session.removeAttribute("game");
+			session.setAttribute("game", game);
+			
+			response.sendRedirect("/ExamPlatform/Game/play");
+		}
 	}
 
 }

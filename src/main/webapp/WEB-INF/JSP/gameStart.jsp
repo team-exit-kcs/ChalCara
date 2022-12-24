@@ -39,23 +39,24 @@
 <div class="form-group">
   <h2>難易度選択</h2>
   <div class="form-check">
-    <input class="form-check-input" type="radio" name="level" id="level1" value="1" checked>
+    <input class="form-check-input" type="radio" name="level" id="level1" value="0" checked required>
     <label class="form-check-label" for="level1">Normal</label>
   </div>
   <div class="form-check">
-    <input class="form-check-input" type="radio" name="level" id="level2" value="2">
+    <input class="form-check-input" type="radio" name="level" id="level2" value="1">
     <label class="form-check-label" for="level2">Hard</label>
   </div>
   <div class="form-check">
-    <input class="form-check-input" type="radio" name="level" id="level3" value="3">
+    <input class="form-check-input" type="radio" name="level" id="level3" value="2">
     <label class="form-check-label" for="level3">Expert</label>
   </div>
   <div class="form-check">
-    <input class="form-check-input" type="radio" name="level" id="level4" value="4">
+    <input class="form-check-input" type="radio" name="level" id="level4" value="3">
     <label class="form-check-label" for="level4">Master</label>
   </div>
 </div>
 <input type="submit" class = "btn btn-outline-primary btn-block" value = "ゲーム開始" class = "ok" />
+<c:if test="${not empty msg}"><p class="errorMsg"><c:out value="${msg}"/></p></c:if>
 </form>
 </div>
 </div>
